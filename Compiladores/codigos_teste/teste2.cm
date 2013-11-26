@@ -1,0 +1,9 @@
+/* Teste Léxico das palavras chaves */
+
+else if		int 	string
+return   void while
+
+(if{else)int;stringId"string"string9return//void
+void*while String
+
+ifelse returnvoid whilestring

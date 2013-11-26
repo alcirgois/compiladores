@@ -1,0 +1,39 @@
+Package compiladorCMenos;
+
+Helpers
+
+	char = [0 .. 0xffff];
+	digito = ['0' .. '9'];
+	letra = [['a' .. 'z'] + ['A' .. 'Z']];
+	linha = 10 | 13 | 10 13;
+
+Tokens
+
+	branco = ([' ' + 9] | linha)+;
+	id = letra+;
+	num = digito+;
+	str = '"' [char - '"']* '"';
+	soma = '+';
+	sub = '-';
+	mult = '*';
+	div = '/';
+	menor = '<';
+	maior = '>';
+	menor_i = '<=';
+	maior_i = '>=';
+	igual = '==';
+	dif = '!=';
+	atrib = '=';
+	p_virg = ';';
+	virg = ',';
+	a_par = '(';
+	f_par = ')';
+	a_col = '[';
+	f_col = ']';
+	a_chave = '{';
+	f_chave = '}';
+	coment_linha = '//' [char - [10 + 13]]*;
+	coment_anin = '/*' ([char - '*']* '*'+ [char - ['*' + '/']])* [char - '*']* '*'+ '/';
+
+Ignored Tokens
+	branco, coment_linha, coment_anin;
