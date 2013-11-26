@@ -1,4 +1,18 @@
-/* hdhhd
-djdjjd
-dkkd
-*/
+/* Teste Léxico dos simbolos especiais */
++ - / * 	
+< <= >= > == != = ; ( ) [ ] { }
+/**/ /*/*/ /**/ /***/ /*/* */ /* /* /* /* /*/ /*////////////*/
+// este eh um comentário
+
++-*/<<=>=>==!==;(){}[]
+
+7+4-5*"jhjhjh"/8<9=gfg>=u}h(kjij)klk[lkk]mm{k
+jujuu//kkkjkj//okokok
+
+/*lklll//mkmkmkm
+kokoko	kikikk kmkm km[] {}
+""fcg' ' 57r87 @ # $ % §
+? /* */
+
+/* isso deve dar erro;
+
