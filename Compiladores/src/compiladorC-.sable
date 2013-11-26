@@ -12,7 +12,7 @@ Tokens
 	branco = ([' ' + 9] | linha)+;
 	id = letra+;
 	num = digito+;
-	str = '"' [char - '"']* '"';
+	str = '"' ([char - ['"' + '\'] ]* '\' char) * [char - ['"' + '\'] ]* '"';
 	soma = '+';
 	sub = '-';
 	mult = '*';

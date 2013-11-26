@@ -25,7 +25,7 @@ public class CompiladorCMenosTester {
 	
 	@Test
 //	@Ignore
-	public void testMain3() { // Teste Léxico das palavras chaves
+	public void testMain3() { // Teste Léxico dos simbolos especiais
 		Main tester = new Main();
 		tester.main(new String[] {"codigos_teste/teste3.cm"});
 	}
