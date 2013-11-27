@@ -36,6 +36,7 @@ public interface Analysis extends Switch
     void caseTFChave(TFChave node);
     void caseTComentLinha(TComentLinha node);
     void caseTComentAnin(TComentAnin node);
+    void caseTFComentAnin(TFComentAnin node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);
 }

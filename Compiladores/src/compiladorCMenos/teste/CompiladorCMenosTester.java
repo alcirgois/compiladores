@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import compiladorCMenos.implementacao.Main;
+import compiladorCMenos.main.Main;
 
 public class CompiladorCMenosTester {
 
@@ -28,6 +28,13 @@ public class CompiladorCMenosTester {
 	public void testMain3() { // Teste Léxico dos simbolos especiais
 		Main tester = new Main();
 		tester.main(new String[] {"codigos_teste/teste3.cm"});
+	}
+	
+	@Test
+//	@Ignore
+	public void testMain4() { // Código Java (compiladorCMenos.lexer.Lexer) editado
+		Main tester = new Main();
+		tester.main(new String[] {"codigos_teste/teste4.cm"});
 	}
 
 }
