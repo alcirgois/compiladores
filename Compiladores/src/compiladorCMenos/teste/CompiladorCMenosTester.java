@@ -29,5 +29,12 @@ public class CompiladorCMenosTester {
 		Main tester = new Main();
 		tester.main(new String[] {"codigos_teste/teste3.cm"});
 	}
+	
+	@Test
+//	@Ignore
+	public void testMain4() { // Código Java (compiladorCMenos.lexer.Lexer) editado
+		Main tester = new Main();
+		tester.main(new String[] {"codigos_teste/teste4.cm"});
+	}
 
 }

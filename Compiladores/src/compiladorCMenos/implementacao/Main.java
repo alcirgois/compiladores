@@ -23,7 +23,7 @@ public class Main {
 	            Token token = null;
 	            int linha = 0;
 	            while (!((token = lexer.next()) instanceof EOF)) {
-	            	if (!(token instanceof TBranco)) {
+	            	if (!(token instanceof TBranco)) { // Omitindo espaço em branco
 	            		if (linha == 0) {
 	            			linha = token.getLine();
 	            			System.out.print(linha + "-\t");
@@ -37,7 +37,7 @@ public class Main {
 	            }
 	         }
 	         catch (LexerException e) {
-	        	 System.err.println("\nSintaxe não reconhecida \"" + e.getToken().getText() + "\": linha "
+	        	 System.err.println("\nSequência de símbolos não reconhecida \"" + e.getToken().getText() + "\": linha "
 	        			 + e.getToken().getLine() + ", coluna " + e.getToken().getPos());
 	         }catch (Exception e) {
 	            System.out.println (e);
@@ -47,5 +47,4 @@ public class Main {
 	         System.exit(1);
 	      }
 	}
-
 }
