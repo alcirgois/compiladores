@@ -1,16 +1,16 @@
-package compiladorCMenos.implementacao;
+package compiladorCMenos.main.lexer;
 
 
 import java.io.PushbackReader;
 
 import compiladorCMenos.lexer.Lexer;
 import compiladorCMenos.lexer.LexerException;
+import compiladorCMenos.main.node.PalavraChave;
 import compiladorCMenos.node.EOF;
 import compiladorCMenos.node.InvalidToken;
 import compiladorCMenos.node.TComentAnin;
 import compiladorCMenos.node.TFComentAnin;
 import compiladorCMenos.node.TId;
-import compiladorCMenos.node.Token;
 
 public class CMenosLexer extends Lexer {
 	

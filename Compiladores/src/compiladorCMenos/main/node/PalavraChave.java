@@ -1,6 +1,5 @@
-package compiladorCMenos.implementacao;
+package compiladorCMenos.main.node;
 
-import compiladorCMenos.analysis.*;
 import compiladorCMenos.node.Switch;
 import compiladorCMenos.node.TId;
 import compiladorCMenos.node.Token;
