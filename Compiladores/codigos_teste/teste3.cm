@@ -9,10 +9,11 @@
 7+4-5*"jhjhjh"/8<9=gfg>=u}h(kjij)klk[lkk]mm{k
 jujuu//kkkjkj//okokok
 
+string nome = "fulano";
+
 /*lklll//mkmkmkm
-kokoko	kikikk kmkm km[] {}
+kokoko	kikikk kmkm km[] {} "\""
 ""fcg' ' 57r87 @ # $ % §
-? /* */
+? /* */ "\"Isso é uma string, " + nome + ".\nNão poderá negar\""
 
 /* isso deve dar erro;
-
