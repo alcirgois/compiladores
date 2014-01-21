@@ -13,6 +13,13 @@ States
 Tokens
 
 	{normal} branco = ([' ' + 9] | linha)+;
+	{normal} p_chave_else = 'else';
+	{normal} p_chave_if = 'if';
+	{normal} p_chave_int = 'int';
+	{normal} p_chave_string = 'string';
+	{normal} p_chave_return = 'return';
+	{normal} p_chave_void = 'void';
+	{normal} p_chave_while = 'while';
 	{normal} id = letra+;
 	{normal} num = digito+;
 	{normal} str = '"' ([char - ['"' + '\'] ]* '\' char) * [char - ['"' + '\'] ]* '"';
@@ -41,3 +48,113 @@ Tokens
 
 Ignored Tokens
 	branco, coment_linha, coment_anin;
+
+Productions
+	programa = seq_declaracao? decl_funcao_main;
+
+	seq_declaracao = declaracao+;
+
+	decl_funcao_main = tipo_avalorado id a_par p_chave_void f_par bloco;
+
+	declaracao =
+		{variavel} decl_variavel p_virg |
+		{funcao}   decl_funcao;
+
+	decl_variavel =
+		{variavel} tipo_valorado id |
+		{matriz}   tipo_valorado id a_col seq_parametro f_col;
+
+	decl_funcao =
+		{normal}        tipo id a_par seq_decl_parametro? f_par bloco |
+		{sem_parametro} tipo id a_par tipo_avalorado f_par bloco;
+
+	tipo =
+		{valorado}  tipo_valorado |
+		{avalorado} tipo_avalorado;
+
+	tipo_valorado =
+		{int}    p_chave_int |
+		{string} p_chave_string;
+	
+	tipo_avalorado = p_chave_void;
+
+	seq_decl_parametro = decl_parametro decl_parametro_lista* ;
+
+	decl_parametro_lista = virg decl_parametro;
+
+	decl_parametro =
+		{variavel} tipo_valorado id |
+		{matriz} tipo_valorado mult+ id;
+
+	bloco = a_chave seq_comando f_chave;
+
+	seq_comando = comando+;
+
+	comando =
+		{declaracao} decl_variavel p_virg |
+		{atribuicao} comando_atribuicao p_virg |
+		{repeticao}  comando_repeticao |
+		{condicao}   comando_condicao |
+		{funcao}     comando_funcao p_virg |
+		{retorno}    comando_retorno p_virg;
+
+	comando_atribuicao =
+		{variavel} id atrib exp_geral |
+		{matriz}   id a_col seq_parametro f_col atrib exp_geral;
+
+	comando_repeticao =
+		{bloco} p_chave_while a_par exp_geral f_par bloco |
+		{unico} p_chave_while a_par exp_geral f_par comando;
+
+	comando_condicao =
+		{bloco} p_chave_if a_par exp_geral f_par bloco else_part? |
+		{unico} p_chave_if a_par exp_geral f_par comando else_part?;
+
+	else_part =
+		{bloco} p_chave_else bloco |
+		{unico} p_chave_else comando;
+
+	comando_funcao = id a_par seq_parametro? f_par;
+
+	seq_parametro = exp_geral parametro_lista*;
+
+	parametro_lista = virg exp_geral;
+
+	comando_retorno = p_chave_return exp_geral;
+
+	exp_geral =
+		{op_bool} exp op_bool exp_linha |
+		{exp}     exp;
+
+	exp_linha = exp;
+
+	exp =
+		{op_soma} exp op_soma termo |
+		{termo}   termo;
+
+	termo =
+		{op_mult} termo op_mult fator |
+		{fator}   fator;
+
+	fator =
+		{id}     id |
+		{num}    num |
+		{str}    str |
+		{funcao} comando_funcao |
+		{par}    a_par exp_geral f_par;
+
+	op_bool =
+		{maior_que}      maior |
+		{maior_ou_igual} maior_i |
+		{menor_que}      menor |
+		{menor_ou_igual} menor_i |
+		{igual}          igual |
+		{diferente}      dif;
+
+	op_soma =
+		{soma} soma |
+		{sub}  sub;
+
+	op_mult =
+		{mult} mult |
+		{div}  div;

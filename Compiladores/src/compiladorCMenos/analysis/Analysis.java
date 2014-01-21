@@ -12,6 +12,13 @@ public interface Analysis extends Switch
     void setOut(Node node, Object o);
 
     void caseTBranco(TBranco node);
+    void caseTPChaveElse(TPChaveElse node);
+    void caseTPChaveIf(TPChaveIf node);
+    void caseTPChaveInt(TPChaveInt node);
+    void caseTPChaveString(TPChaveString node);
+    void caseTPChaveReturn(TPChaveReturn node);
+    void caseTPChaveVoid(TPChaveVoid node);
+    void caseTPChaveWhile(TPChaveWhile node);
     void caseTId(TId node);
     void caseTNum(TNum node);
     void caseTStr(TStr node);

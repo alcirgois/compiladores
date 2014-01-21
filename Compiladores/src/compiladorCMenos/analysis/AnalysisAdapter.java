@@ -75,6 +75,48 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTPChaveElse(TPChaveElse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTPChaveIf(TPChaveIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTPChaveInt(TPChaveInt node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTPChaveString(TPChaveString node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTPChaveReturn(TPChaveReturn node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTPChaveVoid(TPChaveVoid node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTPChaveWhile(TPChaveWhile node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTId(TId node)
     {
         defaultCase(node);
