@@ -86,15 +86,25 @@ Productions
 		{variavel} tipo_valorado id |
 		{matriz} tipo_valorado mult+ id;
 
-	bloco = a_chave seq_comando f_chave;
+	bloco = a_chave seq_comando? f_chave;
 
 	seq_comando = comando+;
 
 	comando =
+		{sem_sub_comando} sem_sub_comando |
+		{repeticao}       comando_repeticao |
+		{condicao}        comando_condicao |
+		{condicao_else}   comando_condicao_else;
+
+	comando_if_nao_curto =
+		{sem_sub_comando}            sem_sub_comando |
+		{repeticao_if_nao_curto}     comando_repeticao_if_nao_curto |
+		{condicao_else_if_nao_curto} comando_condicao_else_if_nao_curto;
+
+	sem_sub_comando = 
+	    {bloco}      bloco |
 		{declaracao} decl_variavel p_virg |
 		{atribuicao} comando_atribuicao p_virg |
-		{repeticao}  comando_repeticao |
-		{condicao}   comando_condicao |
 		{funcao}     comando_funcao p_virg |
 		{retorno}    comando_retorno p_virg;
 
@@ -102,17 +112,15 @@ Productions
 		{variavel} id atrib exp_geral |
 		{matriz}   id a_col seq_parametro f_col atrib exp_geral;
 
-	comando_repeticao =
-		{bloco} p_chave_while a_par exp_geral f_par bloco |
-		{unico} p_chave_while a_par exp_geral f_par comando;
+	comando_repeticao = p_chave_while a_par exp_geral f_par comando;
 
-	comando_condicao =
-		{bloco} p_chave_if a_par exp_geral f_par bloco else_part? |
-		{unico} p_chave_if a_par exp_geral f_par comando else_part?;
+	comando_condicao = p_chave_if a_par exp_geral f_par comando;
 
-	else_part =
-		{bloco} p_chave_else bloco |
-		{unico} p_chave_else comando;
+	comando_condicao_else = p_chave_if a_par exp_geral f_par comando_if_nao_curto p_chave_else [else]:comando;
+
+	comando_repeticao_if_nao_curto = p_chave_while a_par exp_geral f_par comando_if_nao_curto;
+
+	comando_condicao_else_if_nao_curto = p_chave_if a_par exp_geral f_par [then]:comando_if_nao_curto p_chave_else [else]:comando_if_nao_curto;
 
 	comando_funcao = id a_par seq_parametro? f_par;
 
@@ -123,10 +131,8 @@ Productions
 	comando_retorno = p_chave_return exp_geral;
 
 	exp_geral =
-		{op_bool} exp op_bool exp_linha |
+		{op_bool} [esq]:exp op_bool [dir]:exp |
 		{exp}     exp;
-
-	exp_linha = exp;
 
 	exp =
 		{op_soma} exp op_soma termo |
