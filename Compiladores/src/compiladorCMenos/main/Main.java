@@ -31,8 +31,12 @@ public class Main {
 	        			 + e.getToken().getLine() + ", coluna " + e.getToken().getPos());
 	         }
 	         catch (ParserException e) {
-	        	 System.err.println("\nSintáxe não aceita: \"" + e.getToken().getText() + "\" declarado quando se espera "
+	        	 if (e.getToken() instanceof EOF) {
+	        		 System.err.println("\nSintáxe não aceita: espera-se que a última declaração seja a função \"void main(void){...}\"");
+	        	 } else {
+	        		 System.err.println("\nSintáxe não aceita: \"" + e.getToken().getText() + "\" declarado quando se espera "
 	        			 + getTokensEsperados(e.getMessage()) + ", linha " + e.getToken().getLine() + ", coluna " + e.getToken().getPos());
+	        	 }
 	         }
 	         catch (Exception e) {
 	            System.out.println (e);
@@ -41,6 +45,7 @@ public class Main {
 	         System.err.println("Arquivo de entrada não informado.");
 	         System.exit(1);
 	      }
+		if (6 == 5 != true && false || true){}
 	}
 	
 	public void testeLexico(String[] args) {
@@ -69,8 +74,17 @@ public class Main {
 		String texto = "";
 		
 		for (String token : tokens) {
-			if (token.length() > 0)
-				texto = texto + "\"" + token + "\" ou ";
+			
+			if (token.length() > 0){
+				if(token.startsWith("id"))
+					texto = texto + "\"" + "variável" + "\" ou";
+				
+				else if(token.startsWith("EOF"))
+					texto = texto + "\"" + "Fim de Arquivo" + "\" ou";
+					
+				else
+					texto = texto + "\"" + token + "\" ou ";
+			}
 		}
 		
 		return texto.substring(0, texto.length() - 4);

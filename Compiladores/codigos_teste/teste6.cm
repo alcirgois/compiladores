@@ -1,0 +1,16 @@
+void nadademain (void) { // espero que seja um erro semântico
+
+{}
+
+ while (funcao()){}
+ while (12536) {
+ 	while ((v == 3) != "") {}
+ }
+ 
+ while (id == id >= id) {} // erro
+ 
+ while (identificador){{{}}{{}}} // isso é uma bagunça, o java aceita, agente também!
+ while (true){;} // passa no java (aqui não!)
+ while (true); // passa no java (aqui não!)
+
+}

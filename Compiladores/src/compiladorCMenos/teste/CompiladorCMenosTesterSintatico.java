@@ -34,4 +34,10 @@ public class CompiladorCMenosTesterSintatico {
 		tester.main(new String[] {"codigos_teste/teste4.cm"});
 	}
 
+	@Test
+//	@Ignore
+	public void testMain6() { // Código Java (compiladorCMenos.lexer.Lexer) editado
+		Main tester = new Main();
+		tester.main(new String[] {"codigos_teste/teste6.cm"});
+	}
 }
