@@ -45,7 +45,6 @@ public class Main {
 	         System.err.println("Arquivo de entrada não informado.");
 	         System.exit(1);
 	      }
-		if (6 == 5 != true && false || true){}
 	}
 	
 	public void testeLexico(String[] args) {

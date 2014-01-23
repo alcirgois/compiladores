@@ -14,3 +14,5 @@ void nadademain (void) { // espero que seja um erro semântico
  while (true); // passa no java (aqui não!)
 
 }
+
+while (false == 0){}
