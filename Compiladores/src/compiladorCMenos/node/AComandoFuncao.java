@@ -7,9 +7,9 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AComandoFuncao extends PComandoFuncao
 {
-    private TId _id_;
+    private TId _nome_;
     private TAPar _aPar_;
-    private PSeqParametro _seqParametro_;
+    private PSeqParametro _args_;
     private TFPar _fPar_;
 
     public AComandoFuncao()
@@ -18,17 +18,17 @@ public final class AComandoFuncao extends PComandoFuncao
     }
 
     public AComandoFuncao(
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") TAPar _aPar_,
-        @SuppressWarnings("hiding") PSeqParametro _seqParametro_,
+        @SuppressWarnings("hiding") PSeqParametro _args_,
         @SuppressWarnings("hiding") TFPar _fPar_)
     {
         // Constructor
-        setId(_id_);
+        setNome(_nome_);
 
         setAPar(_aPar_);
 
-        setSeqParametro(_seqParametro_);
+        setArgs(_args_);
 
         setFPar(_fPar_);
 
@@ -38,9 +38,9 @@ public final class AComandoFuncao extends PComandoFuncao
     public Object clone()
     {
         return new AComandoFuncao(
-            cloneNode(this._id_),
+            cloneNode(this._nome_),
             cloneNode(this._aPar_),
-            cloneNode(this._seqParametro_),
+            cloneNode(this._args_),
             cloneNode(this._fPar_));
     }
 
@@ -50,16 +50,16 @@ public final class AComandoFuncao extends PComandoFuncao
         ((Analysis) sw).caseAComandoFuncao(this);
     }
 
-    public TId getId()
+    public TId getNome()
     {
-        return this._id_;
+        return this._nome_;
     }
 
-    public void setId(TId node)
+    public void setNome(TId node)
     {
-        if(this._id_ != null)
+        if(this._nome_ != null)
         {
-            this._id_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -72,7 +72,7 @@ public final class AComandoFuncao extends PComandoFuncao
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._nome_ = node;
     }
 
     public TAPar getAPar()
@@ -100,16 +100,16 @@ public final class AComandoFuncao extends PComandoFuncao
         this._aPar_ = node;
     }
 
-    public PSeqParametro getSeqParametro()
+    public PSeqParametro getArgs()
     {
-        return this._seqParametro_;
+        return this._args_;
     }
 
-    public void setSeqParametro(PSeqParametro node)
+    public void setArgs(PSeqParametro node)
     {
-        if(this._seqParametro_ != null)
+        if(this._args_ != null)
         {
-            this._seqParametro_.parent(null);
+            this._args_.parent(null);
         }
 
         if(node != null)
@@ -122,7 +122,7 @@ public final class AComandoFuncao extends PComandoFuncao
             node.parent(this);
         }
 
-        this._seqParametro_ = node;
+        this._args_ = node;
     }
 
     public TFPar getFPar()
@@ -154,9 +154,9 @@ public final class AComandoFuncao extends PComandoFuncao
     public String toString()
     {
         return ""
-            + toString(this._id_)
+            + toString(this._nome_)
             + toString(this._aPar_)
-            + toString(this._seqParametro_)
+            + toString(this._args_)
             + toString(this._fPar_);
     }
 
@@ -164,9 +164,9 @@ public final class AComandoFuncao extends PComandoFuncao
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._id_ == child)
+        if(this._nome_ == child)
         {
-            this._id_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -176,9 +176,9 @@ public final class AComandoFuncao extends PComandoFuncao
             return;
         }
 
-        if(this._seqParametro_ == child)
+        if(this._args_ == child)
         {
-            this._seqParametro_ = null;
+            this._args_ = null;
             return;
         }
 
@@ -195,9 +195,9 @@ public final class AComandoFuncao extends PComandoFuncao
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._id_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setId((TId) newChild);
+            setNome((TId) newChild);
             return;
         }
 
@@ -207,9 +207,9 @@ public final class AComandoFuncao extends PComandoFuncao
             return;
         }
 
-        if(this._seqParametro_ == oldChild)
+        if(this._args_ == oldChild)
         {
-            setSeqParametro((PSeqParametro) newChild);
+            setArgs((PSeqParametro) newChild);
             return;
         }
 

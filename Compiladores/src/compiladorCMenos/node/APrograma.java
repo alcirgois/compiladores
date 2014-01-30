@@ -7,8 +7,8 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class APrograma extends PPrograma
 {
-    private PSeqDeclaracao _seqDeclaracao_;
-    private PDeclFuncaoMain _declFuncaoMain_;
+    private PSeqDeclaracao _decls_;
+    private PDeclFuncaoMain _funcMain_;
 
     public APrograma()
     {
@@ -16,13 +16,13 @@ public final class APrograma extends PPrograma
     }
 
     public APrograma(
-        @SuppressWarnings("hiding") PSeqDeclaracao _seqDeclaracao_,
-        @SuppressWarnings("hiding") PDeclFuncaoMain _declFuncaoMain_)
+        @SuppressWarnings("hiding") PSeqDeclaracao _decls_,
+        @SuppressWarnings("hiding") PDeclFuncaoMain _funcMain_)
     {
         // Constructor
-        setSeqDeclaracao(_seqDeclaracao_);
+        setDecls(_decls_);
 
-        setDeclFuncaoMain(_declFuncaoMain_);
+        setFuncMain(_funcMain_);
 
     }
 
@@ -30,8 +30,8 @@ public final class APrograma extends PPrograma
     public Object clone()
     {
         return new APrograma(
-            cloneNode(this._seqDeclaracao_),
-            cloneNode(this._declFuncaoMain_));
+            cloneNode(this._decls_),
+            cloneNode(this._funcMain_));
     }
 
     @Override
@@ -40,16 +40,16 @@ public final class APrograma extends PPrograma
         ((Analysis) sw).caseAPrograma(this);
     }
 
-    public PSeqDeclaracao getSeqDeclaracao()
+    public PSeqDeclaracao getDecls()
     {
-        return this._seqDeclaracao_;
+        return this._decls_;
     }
 
-    public void setSeqDeclaracao(PSeqDeclaracao node)
+    public void setDecls(PSeqDeclaracao node)
     {
-        if(this._seqDeclaracao_ != null)
+        if(this._decls_ != null)
         {
-            this._seqDeclaracao_.parent(null);
+            this._decls_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class APrograma extends PPrograma
             node.parent(this);
         }
 
-        this._seqDeclaracao_ = node;
+        this._decls_ = node;
     }
 
-    public PDeclFuncaoMain getDeclFuncaoMain()
+    public PDeclFuncaoMain getFuncMain()
     {
-        return this._declFuncaoMain_;
+        return this._funcMain_;
     }
 
-    public void setDeclFuncaoMain(PDeclFuncaoMain node)
+    public void setFuncMain(PDeclFuncaoMain node)
     {
-        if(this._declFuncaoMain_ != null)
+        if(this._funcMain_ != null)
         {
-            this._declFuncaoMain_.parent(null);
+            this._funcMain_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class APrograma extends PPrograma
             node.parent(this);
         }
 
-        this._declFuncaoMain_ = node;
+        this._funcMain_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._seqDeclaracao_)
-            + toString(this._declFuncaoMain_);
+            + toString(this._decls_)
+            + toString(this._funcMain_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._seqDeclaracao_ == child)
+        if(this._decls_ == child)
         {
-            this._seqDeclaracao_ = null;
+            this._decls_ = null;
             return;
         }
 
-        if(this._declFuncaoMain_ == child)
+        if(this._funcMain_ == child)
         {
-            this._declFuncaoMain_ = null;
+            this._funcMain_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class APrograma extends PPrograma
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._seqDeclaracao_ == oldChild)
+        if(this._decls_ == oldChild)
         {
-            setSeqDeclaracao((PSeqDeclaracao) newChild);
+            setDecls((PSeqDeclaracao) newChild);
             return;
         }
 
-        if(this._declFuncaoMain_ == oldChild)
+        if(this._funcMain_ == oldChild)
         {
-            setDeclFuncaoMain((PDeclFuncaoMain) newChild);
+            setFuncMain((PDeclFuncaoMain) newChild);
             return;
         }
 

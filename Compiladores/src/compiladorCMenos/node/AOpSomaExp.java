@@ -7,9 +7,9 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AOpSomaExp extends PExp
 {
-    private PExp _exp_;
+    private PExp _esq_;
     private POpSoma _opSoma_;
-    private PTermo _termo_;
+    private PTermo _dir_;
 
     public AOpSomaExp()
     {
@@ -17,16 +17,16 @@ public final class AOpSomaExp extends PExp
     }
 
     public AOpSomaExp(
-        @SuppressWarnings("hiding") PExp _exp_,
+        @SuppressWarnings("hiding") PExp _esq_,
         @SuppressWarnings("hiding") POpSoma _opSoma_,
-        @SuppressWarnings("hiding") PTermo _termo_)
+        @SuppressWarnings("hiding") PTermo _dir_)
     {
         // Constructor
-        setExp(_exp_);
+        setEsq(_esq_);
 
         setOpSoma(_opSoma_);
 
-        setTermo(_termo_);
+        setDir(_dir_);
 
     }
 
@@ -34,9 +34,9 @@ public final class AOpSomaExp extends PExp
     public Object clone()
     {
         return new AOpSomaExp(
-            cloneNode(this._exp_),
+            cloneNode(this._esq_),
             cloneNode(this._opSoma_),
-            cloneNode(this._termo_));
+            cloneNode(this._dir_));
     }
 
     @Override
@@ -45,16 +45,16 @@ public final class AOpSomaExp extends PExp
         ((Analysis) sw).caseAOpSomaExp(this);
     }
 
-    public PExp getExp()
+    public PExp getEsq()
     {
-        return this._exp_;
+        return this._esq_;
     }
 
-    public void setExp(PExp node)
+    public void setEsq(PExp node)
     {
-        if(this._exp_ != null)
+        if(this._esq_ != null)
         {
-            this._exp_.parent(null);
+            this._esq_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AOpSomaExp extends PExp
             node.parent(this);
         }
 
-        this._exp_ = node;
+        this._esq_ = node;
     }
 
     public POpSoma getOpSoma()
@@ -95,16 +95,16 @@ public final class AOpSomaExp extends PExp
         this._opSoma_ = node;
     }
 
-    public PTermo getTermo()
+    public PTermo getDir()
     {
-        return this._termo_;
+        return this._dir_;
     }
 
-    public void setTermo(PTermo node)
+    public void setDir(PTermo node)
     {
-        if(this._termo_ != null)
+        if(this._dir_ != null)
         {
-            this._termo_.parent(null);
+            this._dir_.parent(null);
         }
 
         if(node != null)
@@ -117,25 +117,25 @@ public final class AOpSomaExp extends PExp
             node.parent(this);
         }
 
-        this._termo_ = node;
+        this._dir_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._exp_)
+            + toString(this._esq_)
             + toString(this._opSoma_)
-            + toString(this._termo_);
+            + toString(this._dir_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._exp_ == child)
+        if(this._esq_ == child)
         {
-            this._exp_ = null;
+            this._esq_ = null;
             return;
         }
 
@@ -145,9 +145,9 @@ public final class AOpSomaExp extends PExp
             return;
         }
 
-        if(this._termo_ == child)
+        if(this._dir_ == child)
         {
-            this._termo_ = null;
+            this._dir_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AOpSomaExp extends PExp
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._exp_ == oldChild)
+        if(this._esq_ == oldChild)
         {
-            setExp((PExp) newChild);
+            setEsq((PExp) newChild);
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AOpSomaExp extends PExp
             return;
         }
 
-        if(this._termo_ == oldChild)
+        if(this._dir_ == oldChild)
         {
-            setTermo((PTermo) newChild);
+            setDir((PTermo) newChild);
             return;
         }
 

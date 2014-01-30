@@ -7,8 +7,8 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AVariavelDeclVariavel extends PDeclVariavel
 {
-    private PTipoValorado _tipoValorado_;
-    private TId _id_;
+    private PTipoValorado _tipo_;
+    private TId _nome_;
 
     public AVariavelDeclVariavel()
     {
@@ -16,13 +16,13 @@ public final class AVariavelDeclVariavel extends PDeclVariavel
     }
 
     public AVariavelDeclVariavel(
-        @SuppressWarnings("hiding") PTipoValorado _tipoValorado_,
-        @SuppressWarnings("hiding") TId _id_)
+        @SuppressWarnings("hiding") PTipoValorado _tipo_,
+        @SuppressWarnings("hiding") TId _nome_)
     {
         // Constructor
-        setTipoValorado(_tipoValorado_);
+        setTipo(_tipo_);
 
-        setId(_id_);
+        setNome(_nome_);
 
     }
 
@@ -30,8 +30,8 @@ public final class AVariavelDeclVariavel extends PDeclVariavel
     public Object clone()
     {
         return new AVariavelDeclVariavel(
-            cloneNode(this._tipoValorado_),
-            cloneNode(this._id_));
+            cloneNode(this._tipo_),
+            cloneNode(this._nome_));
     }
 
     @Override
@@ -40,16 +40,16 @@ public final class AVariavelDeclVariavel extends PDeclVariavel
         ((Analysis) sw).caseAVariavelDeclVariavel(this);
     }
 
-    public PTipoValorado getTipoValorado()
+    public PTipoValorado getTipo()
     {
-        return this._tipoValorado_;
+        return this._tipo_;
     }
 
-    public void setTipoValorado(PTipoValorado node)
+    public void setTipo(PTipoValorado node)
     {
-        if(this._tipoValorado_ != null)
+        if(this._tipo_ != null)
         {
-            this._tipoValorado_.parent(null);
+            this._tipo_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class AVariavelDeclVariavel extends PDeclVariavel
             node.parent(this);
         }
 
-        this._tipoValorado_ = node;
+        this._tipo_ = node;
     }
 
-    public TId getId()
+    public TId getNome()
     {
-        return this._id_;
+        return this._nome_;
     }
 
-    public void setId(TId node)
+    public void setNome(TId node)
     {
-        if(this._id_ != null)
+        if(this._nome_ != null)
         {
-            this._id_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class AVariavelDeclVariavel extends PDeclVariavel
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._nome_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._tipoValorado_)
-            + toString(this._id_);
+            + toString(this._tipo_)
+            + toString(this._nome_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._tipoValorado_ == child)
+        if(this._tipo_ == child)
         {
-            this._tipoValorado_ = null;
+            this._tipo_ = null;
             return;
         }
 
-        if(this._id_ == child)
+        if(this._nome_ == child)
         {
-            this._id_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class AVariavelDeclVariavel extends PDeclVariavel
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._tipoValorado_ == oldChild)
+        if(this._tipo_ == oldChild)
         {
-            setTipoValorado((PTipoValorado) newChild);
+            setTipo((PTipoValorado) newChild);
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setId((TId) newChild);
+            setNome((TId) newChild);
             return;
         }
 

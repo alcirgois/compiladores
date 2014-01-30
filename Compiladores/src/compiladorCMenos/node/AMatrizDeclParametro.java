@@ -8,9 +8,9 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AMatrizDeclParametro extends PDeclParametro
 {
-    private PTipoValorado _tipoValorado_;
-    private final LinkedList<TMult> _mult_ = new LinkedList<TMult>();
-    private TId _id_;
+    private PTipoValorado _tipo_;
+    private final LinkedList<TMult> _dimens_ = new LinkedList<TMult>();
+    private TId _nome_;
 
     public AMatrizDeclParametro()
     {
@@ -18,16 +18,16 @@ public final class AMatrizDeclParametro extends PDeclParametro
     }
 
     public AMatrizDeclParametro(
-        @SuppressWarnings("hiding") PTipoValorado _tipoValorado_,
-        @SuppressWarnings("hiding") List<?> _mult_,
-        @SuppressWarnings("hiding") TId _id_)
+        @SuppressWarnings("hiding") PTipoValorado _tipo_,
+        @SuppressWarnings("hiding") List<?> _dimens_,
+        @SuppressWarnings("hiding") TId _nome_)
     {
         // Constructor
-        setTipoValorado(_tipoValorado_);
+        setTipo(_tipo_);
 
-        setMult(_mult_);
+        setDimens(_dimens_);
 
-        setId(_id_);
+        setNome(_nome_);
 
     }
 
@@ -35,9 +35,9 @@ public final class AMatrizDeclParametro extends PDeclParametro
     public Object clone()
     {
         return new AMatrizDeclParametro(
-            cloneNode(this._tipoValorado_),
-            cloneList(this._mult_),
-            cloneNode(this._id_));
+            cloneNode(this._tipo_),
+            cloneList(this._dimens_),
+            cloneNode(this._nome_));
     }
 
     @Override
@@ -46,16 +46,16 @@ public final class AMatrizDeclParametro extends PDeclParametro
         ((Analysis) sw).caseAMatrizDeclParametro(this);
     }
 
-    public PTipoValorado getTipoValorado()
+    public PTipoValorado getTipo()
     {
-        return this._tipoValorado_;
+        return this._tipo_;
     }
 
-    public void setTipoValorado(PTipoValorado node)
+    public void setTipo(PTipoValorado node)
     {
-        if(this._tipoValorado_ != null)
+        if(this._tipo_ != null)
         {
-            this._tipoValorado_.parent(null);
+            this._tipo_.parent(null);
         }
 
         if(node != null)
@@ -68,21 +68,21 @@ public final class AMatrizDeclParametro extends PDeclParametro
             node.parent(this);
         }
 
-        this._tipoValorado_ = node;
+        this._tipo_ = node;
     }
 
-    public LinkedList<TMult> getMult()
+    public LinkedList<TMult> getDimens()
     {
-        return this._mult_;
+        return this._dimens_;
     }
 
-    public void setMult(List<?> list)
+    public void setDimens(List<?> list)
     {
-        for(TMult e : this._mult_)
+        for(TMult e : this._dimens_)
         {
             e.parent(null);
         }
-        this._mult_.clear();
+        this._dimens_.clear();
 
         for(Object obj_e : list)
         {
@@ -93,20 +93,20 @@ public final class AMatrizDeclParametro extends PDeclParametro
             }
 
             e.parent(this);
-            this._mult_.add(e);
+            this._dimens_.add(e);
         }
     }
 
-    public TId getId()
+    public TId getNome()
     {
-        return this._id_;
+        return this._nome_;
     }
 
-    public void setId(TId node)
+    public void setNome(TId node)
     {
-        if(this._id_ != null)
+        if(this._nome_ != null)
         {
-            this._id_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -119,36 +119,36 @@ public final class AMatrizDeclParametro extends PDeclParametro
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._nome_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._tipoValorado_)
-            + toString(this._mult_)
-            + toString(this._id_);
+            + toString(this._tipo_)
+            + toString(this._dimens_)
+            + toString(this._nome_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._tipoValorado_ == child)
+        if(this._tipo_ == child)
         {
-            this._tipoValorado_ = null;
+            this._tipo_ = null;
             return;
         }
 
-        if(this._mult_.remove(child))
+        if(this._dimens_.remove(child))
         {
             return;
         }
 
-        if(this._id_ == child)
+        if(this._nome_ == child)
         {
-            this._id_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -159,13 +159,13 @@ public final class AMatrizDeclParametro extends PDeclParametro
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._tipoValorado_ == oldChild)
+        if(this._tipo_ == oldChild)
         {
-            setTipoValorado((PTipoValorado) newChild);
+            setTipo((PTipoValorado) newChild);
             return;
         }
 
-        for(ListIterator<TMult> i = this._mult_.listIterator(); i.hasNext();)
+        for(ListIterator<TMult> i = this._dimens_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {
@@ -183,9 +183,9 @@ public final class AMatrizDeclParametro extends PDeclParametro
             }
         }
 
-        if(this._id_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setId((TId) newChild);
+            setNome((TId) newChild);
             return;
         }
 

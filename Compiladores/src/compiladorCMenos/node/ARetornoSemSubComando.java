@@ -7,7 +7,7 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class ARetornoSemSubComando extends PSemSubComando
 {
-    private PComandoRetorno _comandoRetorno_;
+    private PComandoRetorno _retrn_;
     private TPVirg _pVirg_;
 
     public ARetornoSemSubComando()
@@ -16,11 +16,11 @@ public final class ARetornoSemSubComando extends PSemSubComando
     }
 
     public ARetornoSemSubComando(
-        @SuppressWarnings("hiding") PComandoRetorno _comandoRetorno_,
+        @SuppressWarnings("hiding") PComandoRetorno _retrn_,
         @SuppressWarnings("hiding") TPVirg _pVirg_)
     {
         // Constructor
-        setComandoRetorno(_comandoRetorno_);
+        setRetrn(_retrn_);
 
         setPVirg(_pVirg_);
 
@@ -30,7 +30,7 @@ public final class ARetornoSemSubComando extends PSemSubComando
     public Object clone()
     {
         return new ARetornoSemSubComando(
-            cloneNode(this._comandoRetorno_),
+            cloneNode(this._retrn_),
             cloneNode(this._pVirg_));
     }
 
@@ -40,16 +40,16 @@ public final class ARetornoSemSubComando extends PSemSubComando
         ((Analysis) sw).caseARetornoSemSubComando(this);
     }
 
-    public PComandoRetorno getComandoRetorno()
+    public PComandoRetorno getRetrn()
     {
-        return this._comandoRetorno_;
+        return this._retrn_;
     }
 
-    public void setComandoRetorno(PComandoRetorno node)
+    public void setRetrn(PComandoRetorno node)
     {
-        if(this._comandoRetorno_ != null)
+        if(this._retrn_ != null)
         {
-            this._comandoRetorno_.parent(null);
+            this._retrn_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class ARetornoSemSubComando extends PSemSubComando
             node.parent(this);
         }
 
-        this._comandoRetorno_ = node;
+        this._retrn_ = node;
     }
 
     public TPVirg getPVirg()
@@ -94,7 +94,7 @@ public final class ARetornoSemSubComando extends PSemSubComando
     public String toString()
     {
         return ""
-            + toString(this._comandoRetorno_)
+            + toString(this._retrn_)
             + toString(this._pVirg_);
     }
 
@@ -102,9 +102,9 @@ public final class ARetornoSemSubComando extends PSemSubComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoRetorno_ == child)
+        if(this._retrn_ == child)
         {
-            this._comandoRetorno_ = null;
+            this._retrn_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class ARetornoSemSubComando extends PSemSubComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoRetorno_ == oldChild)
+        if(this._retrn_ == oldChild)
         {
-            setComandoRetorno((PComandoRetorno) newChild);
+            setRetrn((PComandoRetorno) newChild);
             return;
         }
 

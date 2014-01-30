@@ -5,39 +5,69 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AParametroLista extends PParametroLista
+public final class AListaSeqParametro extends PSeqParametro
 {
+    private PSeqParametro _args_;
     private TVirg _virg_;
-    private PExpGeral _expGeral_;
+    private PExpGeral _arg_;
 
-    public AParametroLista()
+    public AListaSeqParametro()
     {
         // Constructor
     }
 
-    public AParametroLista(
+    public AListaSeqParametro(
+        @SuppressWarnings("hiding") PSeqParametro _args_,
         @SuppressWarnings("hiding") TVirg _virg_,
-        @SuppressWarnings("hiding") PExpGeral _expGeral_)
+        @SuppressWarnings("hiding") PExpGeral _arg_)
     {
         // Constructor
+        setArgs(_args_);
+
         setVirg(_virg_);
 
-        setExpGeral(_expGeral_);
+        setArg(_arg_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AParametroLista(
+        return new AListaSeqParametro(
+            cloneNode(this._args_),
             cloneNode(this._virg_),
-            cloneNode(this._expGeral_));
+            cloneNode(this._arg_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAParametroLista(this);
+        ((Analysis) sw).caseAListaSeqParametro(this);
+    }
+
+    public PSeqParametro getArgs()
+    {
+        return this._args_;
+    }
+
+    public void setArgs(PSeqParametro node)
+    {
+        if(this._args_ != null)
+        {
+            this._args_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._args_ = node;
     }
 
     public TVirg getVirg()
@@ -65,16 +95,16 @@ public final class AParametroLista extends PParametroLista
         this._virg_ = node;
     }
 
-    public PExpGeral getExpGeral()
+    public PExpGeral getArg()
     {
-        return this._expGeral_;
+        return this._arg_;
     }
 
-    public void setExpGeral(PExpGeral node)
+    public void setArg(PExpGeral node)
     {
-        if(this._expGeral_ != null)
+        if(this._arg_ != null)
         {
-            this._expGeral_.parent(null);
+            this._arg_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +117,37 @@ public final class AParametroLista extends PParametroLista
             node.parent(this);
         }
 
-        this._expGeral_ = node;
+        this._arg_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
+            + toString(this._args_)
             + toString(this._virg_)
-            + toString(this._expGeral_);
+            + toString(this._arg_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._args_ == child)
+        {
+            this._args_ = null;
+            return;
+        }
+
         if(this._virg_ == child)
         {
             this._virg_ = null;
             return;
         }
 
-        if(this._expGeral_ == child)
+        if(this._arg_ == child)
         {
-            this._expGeral_ = null;
+            this._arg_ = null;
             return;
         }
 
@@ -121,15 +158,21 @@ public final class AParametroLista extends PParametroLista
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._args_ == oldChild)
+        {
+            setArgs((PSeqParametro) newChild);
+            return;
+        }
+
         if(this._virg_ == oldChild)
         {
             setVirg((TVirg) newChild);
             return;
         }
 
-        if(this._expGeral_ == oldChild)
+        if(this._arg_ == oldChild)
         {
-            setExpGeral((PExpGeral) newChild);
+            setArg((PExpGeral) newChild);
             return;
         }
 

@@ -26,8 +26,8 @@ public interface Analysis extends Switch
     void caseAIntTipoValorado(AIntTipoValorado node);
     void caseAStringTipoValorado(AStringTipoValorado node);
     void caseATipoAvalorado(ATipoAvalorado node);
-    void caseASeqDeclParametro(ASeqDeclParametro node);
-    void caseADeclParametroLista(ADeclParametroLista node);
+    void caseAListaSeqDeclParametro(AListaSeqDeclParametro node);
+    void caseAUnicoSeqDeclParametro(AUnicoSeqDeclParametro node);
     void caseAVariavelDeclParametro(AVariavelDeclParametro node);
     void caseAMatrizDeclParametro(AMatrizDeclParametro node);
     void caseABloco(ABloco node);
@@ -52,8 +52,8 @@ public interface Analysis extends Switch
     void caseAComandoRepeticaoIfNaoCurto(AComandoRepeticaoIfNaoCurto node);
     void caseAComandoCondicaoElseIfNaoCurto(AComandoCondicaoElseIfNaoCurto node);
     void caseAComandoFuncao(AComandoFuncao node);
-    void caseASeqParametro(ASeqParametro node);
-    void caseAParametroLista(AParametroLista node);
+    void caseAListaSeqParametro(AListaSeqParametro node);
+    void caseAUnicoSeqParametro(AUnicoSeqParametro node);
     void caseAComandoRetorno(AComandoRetorno node);
     void caseAOpBoolExpGeral(AOpBoolExpGeral node);
     void caseAExpExpGeral(AExpExpGeral node);

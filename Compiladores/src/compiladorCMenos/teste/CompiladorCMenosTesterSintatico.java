@@ -40,4 +40,11 @@ public class CompiladorCMenosTesterSintatico {
 		Main tester = new Main();
 		tester.main(new String[] {"codigos_teste/teste6.cm"});
 	}
+	
+	@Test
+//	@Ignore
+	public void testMain7() { // Código while extressado
+		Main tester = new Main();
+		tester.main(new String[] {"codigos_teste/teste7.cm"});
+	}
 }

@@ -5,39 +5,69 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADeclParametroLista extends PDeclParametroLista
+public final class AListaSeqDeclParametro extends PSeqDeclParametro
 {
+    private PSeqDeclParametro _params_;
     private TVirg _virg_;
-    private PDeclParametro _declParametro_;
+    private PDeclParametro _param_;
 
-    public ADeclParametroLista()
+    public AListaSeqDeclParametro()
     {
         // Constructor
     }
 
-    public ADeclParametroLista(
+    public AListaSeqDeclParametro(
+        @SuppressWarnings("hiding") PSeqDeclParametro _params_,
         @SuppressWarnings("hiding") TVirg _virg_,
-        @SuppressWarnings("hiding") PDeclParametro _declParametro_)
+        @SuppressWarnings("hiding") PDeclParametro _param_)
     {
         // Constructor
+        setParams(_params_);
+
         setVirg(_virg_);
 
-        setDeclParametro(_declParametro_);
+        setParam(_param_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ADeclParametroLista(
+        return new AListaSeqDeclParametro(
+            cloneNode(this._params_),
             cloneNode(this._virg_),
-            cloneNode(this._declParametro_));
+            cloneNode(this._param_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseADeclParametroLista(this);
+        ((Analysis) sw).caseAListaSeqDeclParametro(this);
+    }
+
+    public PSeqDeclParametro getParams()
+    {
+        return this._params_;
+    }
+
+    public void setParams(PSeqDeclParametro node)
+    {
+        if(this._params_ != null)
+        {
+            this._params_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._params_ = node;
     }
 
     public TVirg getVirg()
@@ -65,16 +95,16 @@ public final class ADeclParametroLista extends PDeclParametroLista
         this._virg_ = node;
     }
 
-    public PDeclParametro getDeclParametro()
+    public PDeclParametro getParam()
     {
-        return this._declParametro_;
+        return this._param_;
     }
 
-    public void setDeclParametro(PDeclParametro node)
+    public void setParam(PDeclParametro node)
     {
-        if(this._declParametro_ != null)
+        if(this._param_ != null)
         {
-            this._declParametro_.parent(null);
+            this._param_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +117,37 @@ public final class ADeclParametroLista extends PDeclParametroLista
             node.parent(this);
         }
 
-        this._declParametro_ = node;
+        this._param_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
+            + toString(this._params_)
             + toString(this._virg_)
-            + toString(this._declParametro_);
+            + toString(this._param_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._params_ == child)
+        {
+            this._params_ = null;
+            return;
+        }
+
         if(this._virg_ == child)
         {
             this._virg_ = null;
             return;
         }
 
-        if(this._declParametro_ == child)
+        if(this._param_ == child)
         {
-            this._declParametro_ = null;
+            this._param_ = null;
             return;
         }
 
@@ -121,15 +158,21 @@ public final class ADeclParametroLista extends PDeclParametroLista
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._params_ == oldChild)
+        {
+            setParams((PSeqDeclParametro) newChild);
+            return;
+        }
+
         if(this._virg_ == oldChild)
         {
             setVirg((TVirg) newChild);
             return;
         }
 
-        if(this._declParametro_ == oldChild)
+        if(this._param_ == oldChild)
         {
-            setDeclParametro((PDeclParametro) newChild);
+            setParam((PDeclParametro) newChild);
             return;
         }
 

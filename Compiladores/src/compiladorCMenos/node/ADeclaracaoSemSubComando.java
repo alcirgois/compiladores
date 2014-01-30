@@ -7,7 +7,7 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class ADeclaracaoSemSubComando extends PSemSubComando
 {
-    private PDeclVariavel _declVariavel_;
+    private PDeclVariavel _decl_;
     private TPVirg _pVirg_;
 
     public ADeclaracaoSemSubComando()
@@ -16,11 +16,11 @@ public final class ADeclaracaoSemSubComando extends PSemSubComando
     }
 
     public ADeclaracaoSemSubComando(
-        @SuppressWarnings("hiding") PDeclVariavel _declVariavel_,
+        @SuppressWarnings("hiding") PDeclVariavel _decl_,
         @SuppressWarnings("hiding") TPVirg _pVirg_)
     {
         // Constructor
-        setDeclVariavel(_declVariavel_);
+        setDecl(_decl_);
 
         setPVirg(_pVirg_);
 
@@ -30,7 +30,7 @@ public final class ADeclaracaoSemSubComando extends PSemSubComando
     public Object clone()
     {
         return new ADeclaracaoSemSubComando(
-            cloneNode(this._declVariavel_),
+            cloneNode(this._decl_),
             cloneNode(this._pVirg_));
     }
 
@@ -40,16 +40,16 @@ public final class ADeclaracaoSemSubComando extends PSemSubComando
         ((Analysis) sw).caseADeclaracaoSemSubComando(this);
     }
 
-    public PDeclVariavel getDeclVariavel()
+    public PDeclVariavel getDecl()
     {
-        return this._declVariavel_;
+        return this._decl_;
     }
 
-    public void setDeclVariavel(PDeclVariavel node)
+    public void setDecl(PDeclVariavel node)
     {
-        if(this._declVariavel_ != null)
+        if(this._decl_ != null)
         {
-            this._declVariavel_.parent(null);
+            this._decl_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class ADeclaracaoSemSubComando extends PSemSubComando
             node.parent(this);
         }
 
-        this._declVariavel_ = node;
+        this._decl_ = node;
     }
 
     public TPVirg getPVirg()
@@ -94,7 +94,7 @@ public final class ADeclaracaoSemSubComando extends PSemSubComando
     public String toString()
     {
         return ""
-            + toString(this._declVariavel_)
+            + toString(this._decl_)
             + toString(this._pVirg_);
     }
 
@@ -102,9 +102,9 @@ public final class ADeclaracaoSemSubComando extends PSemSubComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._declVariavel_ == child)
+        if(this._decl_ == child)
         {
-            this._declVariavel_ = null;
+            this._decl_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class ADeclaracaoSemSubComando extends PSemSubComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._declVariavel_ == oldChild)
+        if(this._decl_ == oldChild)
         {
-            setDeclVariavel((PDeclVariavel) newChild);
+            setDecl((PDeclVariavel) newChild);
             return;
         }
 

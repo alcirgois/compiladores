@@ -8,7 +8,7 @@ import compiladorCMenos.analysis.*;
 public final class ASemParametroDeclFuncao extends PDeclFuncao
 {
     private PTipo _tipo_;
-    private TId _id_;
+    private TId _nome_;
     private TAPar _aPar_;
     private PTipoAvalorado _tipoAvalorado_;
     private TFPar _fPar_;
@@ -21,7 +21,7 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
 
     public ASemParametroDeclFuncao(
         @SuppressWarnings("hiding") PTipo _tipo_,
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") TAPar _aPar_,
         @SuppressWarnings("hiding") PTipoAvalorado _tipoAvalorado_,
         @SuppressWarnings("hiding") TFPar _fPar_,
@@ -30,7 +30,7 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
         // Constructor
         setTipo(_tipo_);
 
-        setId(_id_);
+        setNome(_nome_);
 
         setAPar(_aPar_);
 
@@ -47,7 +47,7 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
     {
         return new ASemParametroDeclFuncao(
             cloneNode(this._tipo_),
-            cloneNode(this._id_),
+            cloneNode(this._nome_),
             cloneNode(this._aPar_),
             cloneNode(this._tipoAvalorado_),
             cloneNode(this._fPar_),
@@ -85,16 +85,16 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
         this._tipo_ = node;
     }
 
-    public TId getId()
+    public TId getNome()
     {
-        return this._id_;
+        return this._nome_;
     }
 
-    public void setId(TId node)
+    public void setNome(TId node)
     {
-        if(this._id_ != null)
+        if(this._nome_ != null)
         {
-            this._id_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -107,7 +107,7 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._nome_ = node;
     }
 
     public TAPar getAPar()
@@ -215,7 +215,7 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
     {
         return ""
             + toString(this._tipo_)
-            + toString(this._id_)
+            + toString(this._nome_)
             + toString(this._aPar_)
             + toString(this._tipoAvalorado_)
             + toString(this._fPar_)
@@ -232,9 +232,9 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
             return;
         }
 
-        if(this._id_ == child)
+        if(this._nome_ == child)
         {
-            this._id_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -275,9 +275,9 @@ public final class ASemParametroDeclFuncao extends PDeclFuncao
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setId((TId) newChild);
+            setNome((TId) newChild);
             return;
         }
 

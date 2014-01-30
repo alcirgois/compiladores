@@ -7,10 +7,10 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AMatrizDeclVariavel extends PDeclVariavel
 {
-    private PTipoValorado _tipoValorado_;
-    private TId _id_;
+    private PTipoValorado _tipo_;
+    private TId _nome_;
     private TACol _aCol_;
-    private PSeqParametro _seqParametro_;
+    private PSeqParametro _dimens_;
     private TFCol _fCol_;
 
     public AMatrizDeclVariavel()
@@ -19,20 +19,20 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
     }
 
     public AMatrizDeclVariavel(
-        @SuppressWarnings("hiding") PTipoValorado _tipoValorado_,
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") PTipoValorado _tipo_,
+        @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") TACol _aCol_,
-        @SuppressWarnings("hiding") PSeqParametro _seqParametro_,
+        @SuppressWarnings("hiding") PSeqParametro _dimens_,
         @SuppressWarnings("hiding") TFCol _fCol_)
     {
         // Constructor
-        setTipoValorado(_tipoValorado_);
+        setTipo(_tipo_);
 
-        setId(_id_);
+        setNome(_nome_);
 
         setACol(_aCol_);
 
-        setSeqParametro(_seqParametro_);
+        setDimens(_dimens_);
 
         setFCol(_fCol_);
 
@@ -42,10 +42,10 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
     public Object clone()
     {
         return new AMatrizDeclVariavel(
-            cloneNode(this._tipoValorado_),
-            cloneNode(this._id_),
+            cloneNode(this._tipo_),
+            cloneNode(this._nome_),
             cloneNode(this._aCol_),
-            cloneNode(this._seqParametro_),
+            cloneNode(this._dimens_),
             cloneNode(this._fCol_));
     }
 
@@ -55,16 +55,16 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
         ((Analysis) sw).caseAMatrizDeclVariavel(this);
     }
 
-    public PTipoValorado getTipoValorado()
+    public PTipoValorado getTipo()
     {
-        return this._tipoValorado_;
+        return this._tipo_;
     }
 
-    public void setTipoValorado(PTipoValorado node)
+    public void setTipo(PTipoValorado node)
     {
-        if(this._tipoValorado_ != null)
+        if(this._tipo_ != null)
         {
-            this._tipoValorado_.parent(null);
+            this._tipo_.parent(null);
         }
 
         if(node != null)
@@ -77,19 +77,19 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
             node.parent(this);
         }
 
-        this._tipoValorado_ = node;
+        this._tipo_ = node;
     }
 
-    public TId getId()
+    public TId getNome()
     {
-        return this._id_;
+        return this._nome_;
     }
 
-    public void setId(TId node)
+    public void setNome(TId node)
     {
-        if(this._id_ != null)
+        if(this._nome_ != null)
         {
-            this._id_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -102,7 +102,7 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._nome_ = node;
     }
 
     public TACol getACol()
@@ -130,16 +130,16 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
         this._aCol_ = node;
     }
 
-    public PSeqParametro getSeqParametro()
+    public PSeqParametro getDimens()
     {
-        return this._seqParametro_;
+        return this._dimens_;
     }
 
-    public void setSeqParametro(PSeqParametro node)
+    public void setDimens(PSeqParametro node)
     {
-        if(this._seqParametro_ != null)
+        if(this._dimens_ != null)
         {
-            this._seqParametro_.parent(null);
+            this._dimens_.parent(null);
         }
 
         if(node != null)
@@ -152,7 +152,7 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
             node.parent(this);
         }
 
-        this._seqParametro_ = node;
+        this._dimens_ = node;
     }
 
     public TFCol getFCol()
@@ -184,10 +184,10 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
     public String toString()
     {
         return ""
-            + toString(this._tipoValorado_)
-            + toString(this._id_)
+            + toString(this._tipo_)
+            + toString(this._nome_)
             + toString(this._aCol_)
-            + toString(this._seqParametro_)
+            + toString(this._dimens_)
             + toString(this._fCol_);
     }
 
@@ -195,15 +195,15 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._tipoValorado_ == child)
+        if(this._tipo_ == child)
         {
-            this._tipoValorado_ = null;
+            this._tipo_ = null;
             return;
         }
 
-        if(this._id_ == child)
+        if(this._nome_ == child)
         {
-            this._id_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -213,9 +213,9 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
             return;
         }
 
-        if(this._seqParametro_ == child)
+        if(this._dimens_ == child)
         {
-            this._seqParametro_ = null;
+            this._dimens_ = null;
             return;
         }
 
@@ -232,15 +232,15 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._tipoValorado_ == oldChild)
+        if(this._tipo_ == oldChild)
         {
-            setTipoValorado((PTipoValorado) newChild);
+            setTipo((PTipoValorado) newChild);
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setId((TId) newChild);
+            setNome((TId) newChild);
             return;
         }
 
@@ -250,9 +250,9 @@ public final class AMatrizDeclVariavel extends PDeclVariavel
             return;
         }
 
-        if(this._seqParametro_ == oldChild)
+        if(this._dimens_ == oldChild)
         {
-            setSeqParametro((PSeqParametro) newChild);
+            setDimens((PSeqParametro) newChild);
             return;
         }
 

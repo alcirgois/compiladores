@@ -9,9 +9,9 @@ public final class AComandoCondicao extends PComandoCondicao
 {
     private TPChaveIf _pChaveIf_;
     private TAPar _aPar_;
-    private PExpGeral _expGeral_;
+    private PExpGeral _condicao_;
     private TFPar _fPar_;
-    private PComando _comando_;
+    private PComando _thenComandos_;
 
     public AComandoCondicao()
     {
@@ -21,20 +21,20 @@ public final class AComandoCondicao extends PComandoCondicao
     public AComandoCondicao(
         @SuppressWarnings("hiding") TPChaveIf _pChaveIf_,
         @SuppressWarnings("hiding") TAPar _aPar_,
-        @SuppressWarnings("hiding") PExpGeral _expGeral_,
+        @SuppressWarnings("hiding") PExpGeral _condicao_,
         @SuppressWarnings("hiding") TFPar _fPar_,
-        @SuppressWarnings("hiding") PComando _comando_)
+        @SuppressWarnings("hiding") PComando _thenComandos_)
     {
         // Constructor
         setPChaveIf(_pChaveIf_);
 
         setAPar(_aPar_);
 
-        setExpGeral(_expGeral_);
+        setCondicao(_condicao_);
 
         setFPar(_fPar_);
 
-        setComando(_comando_);
+        setThenComandos(_thenComandos_);
 
     }
 
@@ -44,9 +44,9 @@ public final class AComandoCondicao extends PComandoCondicao
         return new AComandoCondicao(
             cloneNode(this._pChaveIf_),
             cloneNode(this._aPar_),
-            cloneNode(this._expGeral_),
+            cloneNode(this._condicao_),
             cloneNode(this._fPar_),
-            cloneNode(this._comando_));
+            cloneNode(this._thenComandos_));
     }
 
     @Override
@@ -105,16 +105,16 @@ public final class AComandoCondicao extends PComandoCondicao
         this._aPar_ = node;
     }
 
-    public PExpGeral getExpGeral()
+    public PExpGeral getCondicao()
     {
-        return this._expGeral_;
+        return this._condicao_;
     }
 
-    public void setExpGeral(PExpGeral node)
+    public void setCondicao(PExpGeral node)
     {
-        if(this._expGeral_ != null)
+        if(this._condicao_ != null)
         {
-            this._expGeral_.parent(null);
+            this._condicao_.parent(null);
         }
 
         if(node != null)
@@ -127,7 +127,7 @@ public final class AComandoCondicao extends PComandoCondicao
             node.parent(this);
         }
 
-        this._expGeral_ = node;
+        this._condicao_ = node;
     }
 
     public TFPar getFPar()
@@ -155,16 +155,16 @@ public final class AComandoCondicao extends PComandoCondicao
         this._fPar_ = node;
     }
 
-    public PComando getComando()
+    public PComando getThenComandos()
     {
-        return this._comando_;
+        return this._thenComandos_;
     }
 
-    public void setComando(PComando node)
+    public void setThenComandos(PComando node)
     {
-        if(this._comando_ != null)
+        if(this._thenComandos_ != null)
         {
-            this._comando_.parent(null);
+            this._thenComandos_.parent(null);
         }
 
         if(node != null)
@@ -177,7 +177,7 @@ public final class AComandoCondicao extends PComandoCondicao
             node.parent(this);
         }
 
-        this._comando_ = node;
+        this._thenComandos_ = node;
     }
 
     @Override
@@ -186,9 +186,9 @@ public final class AComandoCondicao extends PComandoCondicao
         return ""
             + toString(this._pChaveIf_)
             + toString(this._aPar_)
-            + toString(this._expGeral_)
+            + toString(this._condicao_)
             + toString(this._fPar_)
-            + toString(this._comando_);
+            + toString(this._thenComandos_);
     }
 
     @Override
@@ -207,9 +207,9 @@ public final class AComandoCondicao extends PComandoCondicao
             return;
         }
 
-        if(this._expGeral_ == child)
+        if(this._condicao_ == child)
         {
-            this._expGeral_ = null;
+            this._condicao_ = null;
             return;
         }
 
@@ -219,9 +219,9 @@ public final class AComandoCondicao extends PComandoCondicao
             return;
         }
 
-        if(this._comando_ == child)
+        if(this._thenComandos_ == child)
         {
-            this._comando_ = null;
+            this._thenComandos_ = null;
             return;
         }
 
@@ -244,9 +244,9 @@ public final class AComandoCondicao extends PComandoCondicao
             return;
         }
 
-        if(this._expGeral_ == oldChild)
+        if(this._condicao_ == oldChild)
         {
-            setExpGeral((PExpGeral) newChild);
+            setCondicao((PExpGeral) newChild);
             return;
         }
 
@@ -256,9 +256,9 @@ public final class AComandoCondicao extends PComandoCondicao
             return;
         }
 
-        if(this._comando_ == oldChild)
+        if(this._thenComandos_ == oldChild)
         {
-            setComando((PComando) newChild);
+            setThenComandos((PComando) newChild);
             return;
         }
 

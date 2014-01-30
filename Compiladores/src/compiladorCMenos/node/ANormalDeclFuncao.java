@@ -8,9 +8,9 @@ import compiladorCMenos.analysis.*;
 public final class ANormalDeclFuncao extends PDeclFuncao
 {
     private PTipo _tipo_;
-    private TId _id_;
+    private TId _nome_;
     private TAPar _aPar_;
-    private PSeqDeclParametro _seqDeclParametro_;
+    private PSeqDeclParametro _params_;
     private TFPar _fPar_;
     private PBloco _bloco_;
 
@@ -21,20 +21,20 @@ public final class ANormalDeclFuncao extends PDeclFuncao
 
     public ANormalDeclFuncao(
         @SuppressWarnings("hiding") PTipo _tipo_,
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") TAPar _aPar_,
-        @SuppressWarnings("hiding") PSeqDeclParametro _seqDeclParametro_,
+        @SuppressWarnings("hiding") PSeqDeclParametro _params_,
         @SuppressWarnings("hiding") TFPar _fPar_,
         @SuppressWarnings("hiding") PBloco _bloco_)
     {
         // Constructor
         setTipo(_tipo_);
 
-        setId(_id_);
+        setNome(_nome_);
 
         setAPar(_aPar_);
 
-        setSeqDeclParametro(_seqDeclParametro_);
+        setParams(_params_);
 
         setFPar(_fPar_);
 
@@ -47,9 +47,9 @@ public final class ANormalDeclFuncao extends PDeclFuncao
     {
         return new ANormalDeclFuncao(
             cloneNode(this._tipo_),
-            cloneNode(this._id_),
+            cloneNode(this._nome_),
             cloneNode(this._aPar_),
-            cloneNode(this._seqDeclParametro_),
+            cloneNode(this._params_),
             cloneNode(this._fPar_),
             cloneNode(this._bloco_));
     }
@@ -85,16 +85,16 @@ public final class ANormalDeclFuncao extends PDeclFuncao
         this._tipo_ = node;
     }
 
-    public TId getId()
+    public TId getNome()
     {
-        return this._id_;
+        return this._nome_;
     }
 
-    public void setId(TId node)
+    public void setNome(TId node)
     {
-        if(this._id_ != null)
+        if(this._nome_ != null)
         {
-            this._id_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -107,7 +107,7 @@ public final class ANormalDeclFuncao extends PDeclFuncao
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._nome_ = node;
     }
 
     public TAPar getAPar()
@@ -135,16 +135,16 @@ public final class ANormalDeclFuncao extends PDeclFuncao
         this._aPar_ = node;
     }
 
-    public PSeqDeclParametro getSeqDeclParametro()
+    public PSeqDeclParametro getParams()
     {
-        return this._seqDeclParametro_;
+        return this._params_;
     }
 
-    public void setSeqDeclParametro(PSeqDeclParametro node)
+    public void setParams(PSeqDeclParametro node)
     {
-        if(this._seqDeclParametro_ != null)
+        if(this._params_ != null)
         {
-            this._seqDeclParametro_.parent(null);
+            this._params_.parent(null);
         }
 
         if(node != null)
@@ -157,7 +157,7 @@ public final class ANormalDeclFuncao extends PDeclFuncao
             node.parent(this);
         }
 
-        this._seqDeclParametro_ = node;
+        this._params_ = node;
     }
 
     public TFPar getFPar()
@@ -215,9 +215,9 @@ public final class ANormalDeclFuncao extends PDeclFuncao
     {
         return ""
             + toString(this._tipo_)
-            + toString(this._id_)
+            + toString(this._nome_)
             + toString(this._aPar_)
-            + toString(this._seqDeclParametro_)
+            + toString(this._params_)
             + toString(this._fPar_)
             + toString(this._bloco_);
     }
@@ -232,9 +232,9 @@ public final class ANormalDeclFuncao extends PDeclFuncao
             return;
         }
 
-        if(this._id_ == child)
+        if(this._nome_ == child)
         {
-            this._id_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -244,9 +244,9 @@ public final class ANormalDeclFuncao extends PDeclFuncao
             return;
         }
 
-        if(this._seqDeclParametro_ == child)
+        if(this._params_ == child)
         {
-            this._seqDeclParametro_ = null;
+            this._params_ = null;
             return;
         }
 
@@ -275,9 +275,9 @@ public final class ANormalDeclFuncao extends PDeclFuncao
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setId((TId) newChild);
+            setNome((TId) newChild);
             return;
         }
 
@@ -287,9 +287,9 @@ public final class ANormalDeclFuncao extends PDeclFuncao
             return;
         }
 
-        if(this._seqDeclParametro_ == oldChild)
+        if(this._params_ == oldChild)
         {
-            setSeqDeclParametro((PSeqDeclParametro) newChild);
+            setParams((PSeqDeclParametro) newChild);
             return;
         }
 

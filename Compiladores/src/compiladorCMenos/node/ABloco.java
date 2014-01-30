@@ -8,7 +8,7 @@ import compiladorCMenos.analysis.*;
 public final class ABloco extends PBloco
 {
     private TAChave _aChave_;
-    private PSeqComando _seqComando_;
+    private PSeqComando _comandos_;
     private TFChave _fChave_;
 
     public ABloco()
@@ -18,13 +18,13 @@ public final class ABloco extends PBloco
 
     public ABloco(
         @SuppressWarnings("hiding") TAChave _aChave_,
-        @SuppressWarnings("hiding") PSeqComando _seqComando_,
+        @SuppressWarnings("hiding") PSeqComando _comandos_,
         @SuppressWarnings("hiding") TFChave _fChave_)
     {
         // Constructor
         setAChave(_aChave_);
 
-        setSeqComando(_seqComando_);
+        setComandos(_comandos_);
 
         setFChave(_fChave_);
 
@@ -35,7 +35,7 @@ public final class ABloco extends PBloco
     {
         return new ABloco(
             cloneNode(this._aChave_),
-            cloneNode(this._seqComando_),
+            cloneNode(this._comandos_),
             cloneNode(this._fChave_));
     }
 
@@ -70,16 +70,16 @@ public final class ABloco extends PBloco
         this._aChave_ = node;
     }
 
-    public PSeqComando getSeqComando()
+    public PSeqComando getComandos()
     {
-        return this._seqComando_;
+        return this._comandos_;
     }
 
-    public void setSeqComando(PSeqComando node)
+    public void setComandos(PSeqComando node)
     {
-        if(this._seqComando_ != null)
+        if(this._comandos_ != null)
         {
-            this._seqComando_.parent(null);
+            this._comandos_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class ABloco extends PBloco
             node.parent(this);
         }
 
-        this._seqComando_ = node;
+        this._comandos_ = node;
     }
 
     public TFChave getFChave()
@@ -125,7 +125,7 @@ public final class ABloco extends PBloco
     {
         return ""
             + toString(this._aChave_)
-            + toString(this._seqComando_)
+            + toString(this._comandos_)
             + toString(this._fChave_);
     }
 
@@ -139,9 +139,9 @@ public final class ABloco extends PBloco
             return;
         }
 
-        if(this._seqComando_ == child)
+        if(this._comandos_ == child)
         {
-            this._seqComando_ = null;
+            this._comandos_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class ABloco extends PBloco
             return;
         }
 
-        if(this._seqComando_ == oldChild)
+        if(this._comandos_ == oldChild)
         {
-            setSeqComando((PSeqComando) newChild);
+            setComandos((PSeqComando) newChild);
             return;
         }
 

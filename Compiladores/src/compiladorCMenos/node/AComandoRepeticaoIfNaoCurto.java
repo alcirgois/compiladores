@@ -9,9 +9,9 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
 {
     private TPChaveWhile _pChaveWhile_;
     private TAPar _aPar_;
-    private PExpGeral _expGeral_;
+    private PExpGeral _condicao_;
     private TFPar _fPar_;
-    private PComandoIfNaoCurto _comandoIfNaoCurto_;
+    private PComandoIfNaoCurto _comandos_;
 
     public AComandoRepeticaoIfNaoCurto()
     {
@@ -21,20 +21,20 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
     public AComandoRepeticaoIfNaoCurto(
         @SuppressWarnings("hiding") TPChaveWhile _pChaveWhile_,
         @SuppressWarnings("hiding") TAPar _aPar_,
-        @SuppressWarnings("hiding") PExpGeral _expGeral_,
+        @SuppressWarnings("hiding") PExpGeral _condicao_,
         @SuppressWarnings("hiding") TFPar _fPar_,
-        @SuppressWarnings("hiding") PComandoIfNaoCurto _comandoIfNaoCurto_)
+        @SuppressWarnings("hiding") PComandoIfNaoCurto _comandos_)
     {
         // Constructor
         setPChaveWhile(_pChaveWhile_);
 
         setAPar(_aPar_);
 
-        setExpGeral(_expGeral_);
+        setCondicao(_condicao_);
 
         setFPar(_fPar_);
 
-        setComandoIfNaoCurto(_comandoIfNaoCurto_);
+        setComandos(_comandos_);
 
     }
 
@@ -44,9 +44,9 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
         return new AComandoRepeticaoIfNaoCurto(
             cloneNode(this._pChaveWhile_),
             cloneNode(this._aPar_),
-            cloneNode(this._expGeral_),
+            cloneNode(this._condicao_),
             cloneNode(this._fPar_),
-            cloneNode(this._comandoIfNaoCurto_));
+            cloneNode(this._comandos_));
     }
 
     @Override
@@ -105,16 +105,16 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
         this._aPar_ = node;
     }
 
-    public PExpGeral getExpGeral()
+    public PExpGeral getCondicao()
     {
-        return this._expGeral_;
+        return this._condicao_;
     }
 
-    public void setExpGeral(PExpGeral node)
+    public void setCondicao(PExpGeral node)
     {
-        if(this._expGeral_ != null)
+        if(this._condicao_ != null)
         {
-            this._expGeral_.parent(null);
+            this._condicao_.parent(null);
         }
 
         if(node != null)
@@ -127,7 +127,7 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
             node.parent(this);
         }
 
-        this._expGeral_ = node;
+        this._condicao_ = node;
     }
 
     public TFPar getFPar()
@@ -155,16 +155,16 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
         this._fPar_ = node;
     }
 
-    public PComandoIfNaoCurto getComandoIfNaoCurto()
+    public PComandoIfNaoCurto getComandos()
     {
-        return this._comandoIfNaoCurto_;
+        return this._comandos_;
     }
 
-    public void setComandoIfNaoCurto(PComandoIfNaoCurto node)
+    public void setComandos(PComandoIfNaoCurto node)
     {
-        if(this._comandoIfNaoCurto_ != null)
+        if(this._comandos_ != null)
         {
-            this._comandoIfNaoCurto_.parent(null);
+            this._comandos_.parent(null);
         }
 
         if(node != null)
@@ -177,7 +177,7 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
             node.parent(this);
         }
 
-        this._comandoIfNaoCurto_ = node;
+        this._comandos_ = node;
     }
 
     @Override
@@ -186,9 +186,9 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
         return ""
             + toString(this._pChaveWhile_)
             + toString(this._aPar_)
-            + toString(this._expGeral_)
+            + toString(this._condicao_)
             + toString(this._fPar_)
-            + toString(this._comandoIfNaoCurto_);
+            + toString(this._comandos_);
     }
 
     @Override
@@ -207,9 +207,9 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
             return;
         }
 
-        if(this._expGeral_ == child)
+        if(this._condicao_ == child)
         {
-            this._expGeral_ = null;
+            this._condicao_ = null;
             return;
         }
 
@@ -219,9 +219,9 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
             return;
         }
 
-        if(this._comandoIfNaoCurto_ == child)
+        if(this._comandos_ == child)
         {
-            this._comandoIfNaoCurto_ = null;
+            this._comandos_ = null;
             return;
         }
 
@@ -244,9 +244,9 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
             return;
         }
 
-        if(this._expGeral_ == oldChild)
+        if(this._condicao_ == oldChild)
         {
-            setExpGeral((PExpGeral) newChild);
+            setCondicao((PExpGeral) newChild);
             return;
         }
 
@@ -256,9 +256,9 @@ public final class AComandoRepeticaoIfNaoCurto extends PComandoRepeticaoIfNaoCur
             return;
         }
 
-        if(this._comandoIfNaoCurto_ == oldChild)
+        if(this._comandos_ == oldChild)
         {
-            setComandoIfNaoCurto((PComandoIfNaoCurto) newChild);
+            setComandos((PComandoIfNaoCurto) newChild);
             return;
         }
 

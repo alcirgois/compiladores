@@ -7,12 +7,12 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
 {
-    private TId _id_;
+    private TId _nome_;
     private TACol _aCol_;
-    private PSeqParametro _seqParametro_;
+    private PSeqParametro _indices_;
     private TFCol _fCol_;
     private TAtrib _atrib_;
-    private PExpGeral _expGeral_;
+    private PExpGeral _valor_;
 
     public AMatrizComandoAtribuicao()
     {
@@ -20,25 +20,25 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
     }
 
     public AMatrizComandoAtribuicao(
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") TACol _aCol_,
-        @SuppressWarnings("hiding") PSeqParametro _seqParametro_,
+        @SuppressWarnings("hiding") PSeqParametro _indices_,
         @SuppressWarnings("hiding") TFCol _fCol_,
         @SuppressWarnings("hiding") TAtrib _atrib_,
-        @SuppressWarnings("hiding") PExpGeral _expGeral_)
+        @SuppressWarnings("hiding") PExpGeral _valor_)
     {
         // Constructor
-        setId(_id_);
+        setNome(_nome_);
 
         setACol(_aCol_);
 
-        setSeqParametro(_seqParametro_);
+        setIndices(_indices_);
 
         setFCol(_fCol_);
 
         setAtrib(_atrib_);
 
-        setExpGeral(_expGeral_);
+        setValor(_valor_);
 
     }
 
@@ -46,12 +46,12 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
     public Object clone()
     {
         return new AMatrizComandoAtribuicao(
-            cloneNode(this._id_),
+            cloneNode(this._nome_),
             cloneNode(this._aCol_),
-            cloneNode(this._seqParametro_),
+            cloneNode(this._indices_),
             cloneNode(this._fCol_),
             cloneNode(this._atrib_),
-            cloneNode(this._expGeral_));
+            cloneNode(this._valor_));
     }
 
     @Override
@@ -60,16 +60,16 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
         ((Analysis) sw).caseAMatrizComandoAtribuicao(this);
     }
 
-    public TId getId()
+    public TId getNome()
     {
-        return this._id_;
+        return this._nome_;
     }
 
-    public void setId(TId node)
+    public void setNome(TId node)
     {
-        if(this._id_ != null)
+        if(this._nome_ != null)
         {
-            this._id_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -82,7 +82,7 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._nome_ = node;
     }
 
     public TACol getACol()
@@ -110,16 +110,16 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
         this._aCol_ = node;
     }
 
-    public PSeqParametro getSeqParametro()
+    public PSeqParametro getIndices()
     {
-        return this._seqParametro_;
+        return this._indices_;
     }
 
-    public void setSeqParametro(PSeqParametro node)
+    public void setIndices(PSeqParametro node)
     {
-        if(this._seqParametro_ != null)
+        if(this._indices_ != null)
         {
-            this._seqParametro_.parent(null);
+            this._indices_.parent(null);
         }
 
         if(node != null)
@@ -132,7 +132,7 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
             node.parent(this);
         }
 
-        this._seqParametro_ = node;
+        this._indices_ = node;
     }
 
     public TFCol getFCol()
@@ -185,16 +185,16 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
         this._atrib_ = node;
     }
 
-    public PExpGeral getExpGeral()
+    public PExpGeral getValor()
     {
-        return this._expGeral_;
+        return this._valor_;
     }
 
-    public void setExpGeral(PExpGeral node)
+    public void setValor(PExpGeral node)
     {
-        if(this._expGeral_ != null)
+        if(this._valor_ != null)
         {
-            this._expGeral_.parent(null);
+            this._valor_.parent(null);
         }
 
         if(node != null)
@@ -207,28 +207,28 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
             node.parent(this);
         }
 
-        this._expGeral_ = node;
+        this._valor_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._id_)
+            + toString(this._nome_)
             + toString(this._aCol_)
-            + toString(this._seqParametro_)
+            + toString(this._indices_)
             + toString(this._fCol_)
             + toString(this._atrib_)
-            + toString(this._expGeral_);
+            + toString(this._valor_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._id_ == child)
+        if(this._nome_ == child)
         {
-            this._id_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -238,9 +238,9 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
             return;
         }
 
-        if(this._seqParametro_ == child)
+        if(this._indices_ == child)
         {
-            this._seqParametro_ = null;
+            this._indices_ = null;
             return;
         }
 
@@ -256,9 +256,9 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
             return;
         }
 
-        if(this._expGeral_ == child)
+        if(this._valor_ == child)
         {
-            this._expGeral_ = null;
+            this._valor_ = null;
             return;
         }
 
@@ -269,9 +269,9 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._id_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setId((TId) newChild);
+            setNome((TId) newChild);
             return;
         }
 
@@ -281,9 +281,9 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
             return;
         }
 
-        if(this._seqParametro_ == oldChild)
+        if(this._indices_ == oldChild)
         {
-            setSeqParametro((PSeqParametro) newChild);
+            setIndices((PSeqParametro) newChild);
             return;
         }
 
@@ -299,9 +299,9 @@ public final class AMatrizComandoAtribuicao extends PComandoAtribuicao
             return;
         }
 
-        if(this._expGeral_ == oldChild)
+        if(this._valor_ == oldChild)
         {
-            setExpGeral((PExpGeral) newChild);
+            setValor((PExpGeral) newChild);
             return;
         }
 

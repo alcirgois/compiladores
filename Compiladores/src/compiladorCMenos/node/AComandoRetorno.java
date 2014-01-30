@@ -8,7 +8,7 @@ import compiladorCMenos.analysis.*;
 public final class AComandoRetorno extends PComandoRetorno
 {
     private TPChaveReturn _pChaveReturn_;
-    private PExpGeral _expGeral_;
+    private PExpGeral _valor_;
 
     public AComandoRetorno()
     {
@@ -17,12 +17,12 @@ public final class AComandoRetorno extends PComandoRetorno
 
     public AComandoRetorno(
         @SuppressWarnings("hiding") TPChaveReturn _pChaveReturn_,
-        @SuppressWarnings("hiding") PExpGeral _expGeral_)
+        @SuppressWarnings("hiding") PExpGeral _valor_)
     {
         // Constructor
         setPChaveReturn(_pChaveReturn_);
 
-        setExpGeral(_expGeral_);
+        setValor(_valor_);
 
     }
 
@@ -31,7 +31,7 @@ public final class AComandoRetorno extends PComandoRetorno
     {
         return new AComandoRetorno(
             cloneNode(this._pChaveReturn_),
-            cloneNode(this._expGeral_));
+            cloneNode(this._valor_));
     }
 
     @Override
@@ -65,16 +65,16 @@ public final class AComandoRetorno extends PComandoRetorno
         this._pChaveReturn_ = node;
     }
 
-    public PExpGeral getExpGeral()
+    public PExpGeral getValor()
     {
-        return this._expGeral_;
+        return this._valor_;
     }
 
-    public void setExpGeral(PExpGeral node)
+    public void setValor(PExpGeral node)
     {
-        if(this._expGeral_ != null)
+        if(this._valor_ != null)
         {
-            this._expGeral_.parent(null);
+            this._valor_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +87,7 @@ public final class AComandoRetorno extends PComandoRetorno
             node.parent(this);
         }
 
-        this._expGeral_ = node;
+        this._valor_ = node;
     }
 
     @Override
@@ -95,7 +95,7 @@ public final class AComandoRetorno extends PComandoRetorno
     {
         return ""
             + toString(this._pChaveReturn_)
-            + toString(this._expGeral_);
+            + toString(this._valor_);
     }
 
     @Override
@@ -108,9 +108,9 @@ public final class AComandoRetorno extends PComandoRetorno
             return;
         }
 
-        if(this._expGeral_ == child)
+        if(this._valor_ == child)
         {
-            this._expGeral_ = null;
+            this._valor_ = null;
             return;
         }
 
@@ -127,9 +127,9 @@ public final class AComandoRetorno extends PComandoRetorno
             return;
         }
 
-        if(this._expGeral_ == oldChild)
+        if(this._valor_ == oldChild)
         {
-            setExpGeral((PExpGeral) newChild);
+            setValor((PExpGeral) newChild);
             return;
         }
 

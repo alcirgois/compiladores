@@ -7,7 +7,7 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AFuncaoSemSubComando extends PSemSubComando
 {
-    private PComandoFuncao _comandoFuncao_;
+    private PComandoFuncao _func_;
     private TPVirg _pVirg_;
 
     public AFuncaoSemSubComando()
@@ -16,11 +16,11 @@ public final class AFuncaoSemSubComando extends PSemSubComando
     }
 
     public AFuncaoSemSubComando(
-        @SuppressWarnings("hiding") PComandoFuncao _comandoFuncao_,
+        @SuppressWarnings("hiding") PComandoFuncao _func_,
         @SuppressWarnings("hiding") TPVirg _pVirg_)
     {
         // Constructor
-        setComandoFuncao(_comandoFuncao_);
+        setFunc(_func_);
 
         setPVirg(_pVirg_);
 
@@ -30,7 +30,7 @@ public final class AFuncaoSemSubComando extends PSemSubComando
     public Object clone()
     {
         return new AFuncaoSemSubComando(
-            cloneNode(this._comandoFuncao_),
+            cloneNode(this._func_),
             cloneNode(this._pVirg_));
     }
 
@@ -40,16 +40,16 @@ public final class AFuncaoSemSubComando extends PSemSubComando
         ((Analysis) sw).caseAFuncaoSemSubComando(this);
     }
 
-    public PComandoFuncao getComandoFuncao()
+    public PComandoFuncao getFunc()
     {
-        return this._comandoFuncao_;
+        return this._func_;
     }
 
-    public void setComandoFuncao(PComandoFuncao node)
+    public void setFunc(PComandoFuncao node)
     {
-        if(this._comandoFuncao_ != null)
+        if(this._func_ != null)
         {
-            this._comandoFuncao_.parent(null);
+            this._func_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class AFuncaoSemSubComando extends PSemSubComando
             node.parent(this);
         }
 
-        this._comandoFuncao_ = node;
+        this._func_ = node;
     }
 
     public TPVirg getPVirg()
@@ -94,7 +94,7 @@ public final class AFuncaoSemSubComando extends PSemSubComando
     public String toString()
     {
         return ""
-            + toString(this._comandoFuncao_)
+            + toString(this._func_)
             + toString(this._pVirg_);
     }
 
@@ -102,9 +102,9 @@ public final class AFuncaoSemSubComando extends PSemSubComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoFuncao_ == child)
+        if(this._func_ == child)
         {
-            this._comandoFuncao_ = null;
+            this._func_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class AFuncaoSemSubComando extends PSemSubComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoFuncao_ == oldChild)
+        if(this._func_ == oldChild)
         {
-            setComandoFuncao((PComandoFuncao) newChild);
+            setFunc((PComandoFuncao) newChild);
             return;
         }
 

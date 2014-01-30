@@ -8,7 +8,7 @@ import compiladorCMenos.analysis.*;
 public final class AParFator extends PFator
 {
     private TAPar _aPar_;
-    private PExpGeral _expGeral_;
+    private PExpGeral _exp_;
     private TFPar _fPar_;
 
     public AParFator()
@@ -18,13 +18,13 @@ public final class AParFator extends PFator
 
     public AParFator(
         @SuppressWarnings("hiding") TAPar _aPar_,
-        @SuppressWarnings("hiding") PExpGeral _expGeral_,
+        @SuppressWarnings("hiding") PExpGeral _exp_,
         @SuppressWarnings("hiding") TFPar _fPar_)
     {
         // Constructor
         setAPar(_aPar_);
 
-        setExpGeral(_expGeral_);
+        setExp(_exp_);
 
         setFPar(_fPar_);
 
@@ -35,7 +35,7 @@ public final class AParFator extends PFator
     {
         return new AParFator(
             cloneNode(this._aPar_),
-            cloneNode(this._expGeral_),
+            cloneNode(this._exp_),
             cloneNode(this._fPar_));
     }
 
@@ -70,16 +70,16 @@ public final class AParFator extends PFator
         this._aPar_ = node;
     }
 
-    public PExpGeral getExpGeral()
+    public PExpGeral getExp()
     {
-        return this._expGeral_;
+        return this._exp_;
     }
 
-    public void setExpGeral(PExpGeral node)
+    public void setExp(PExpGeral node)
     {
-        if(this._expGeral_ != null)
+        if(this._exp_ != null)
         {
-            this._expGeral_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AParFator extends PFator
             node.parent(this);
         }
 
-        this._expGeral_ = node;
+        this._exp_ = node;
     }
 
     public TFPar getFPar()
@@ -125,7 +125,7 @@ public final class AParFator extends PFator
     {
         return ""
             + toString(this._aPar_)
-            + toString(this._expGeral_)
+            + toString(this._exp_)
             + toString(this._fPar_);
     }
 
@@ -139,9 +139,9 @@ public final class AParFator extends PFator
             return;
         }
 
-        if(this._expGeral_ == child)
+        if(this._exp_ == child)
         {
-            this._expGeral_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AParFator extends PFator
             return;
         }
 
-        if(this._expGeral_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpGeral((PExpGeral) newChild);
+            setExp((PExpGeral) newChild);
             return;
         }
 

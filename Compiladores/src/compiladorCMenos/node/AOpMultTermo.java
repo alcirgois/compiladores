@@ -7,9 +7,9 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AOpMultTermo extends PTermo
 {
-    private PTermo _termo_;
+    private PTermo _esq_;
     private POpMult _opMult_;
-    private PFator _fator_;
+    private PFator _dir_;
 
     public AOpMultTermo()
     {
@@ -17,16 +17,16 @@ public final class AOpMultTermo extends PTermo
     }
 
     public AOpMultTermo(
-        @SuppressWarnings("hiding") PTermo _termo_,
+        @SuppressWarnings("hiding") PTermo _esq_,
         @SuppressWarnings("hiding") POpMult _opMult_,
-        @SuppressWarnings("hiding") PFator _fator_)
+        @SuppressWarnings("hiding") PFator _dir_)
     {
         // Constructor
-        setTermo(_termo_);
+        setEsq(_esq_);
 
         setOpMult(_opMult_);
 
-        setFator(_fator_);
+        setDir(_dir_);
 
     }
 
@@ -34,9 +34,9 @@ public final class AOpMultTermo extends PTermo
     public Object clone()
     {
         return new AOpMultTermo(
-            cloneNode(this._termo_),
+            cloneNode(this._esq_),
             cloneNode(this._opMult_),
-            cloneNode(this._fator_));
+            cloneNode(this._dir_));
     }
 
     @Override
@@ -45,16 +45,16 @@ public final class AOpMultTermo extends PTermo
         ((Analysis) sw).caseAOpMultTermo(this);
     }
 
-    public PTermo getTermo()
+    public PTermo getEsq()
     {
-        return this._termo_;
+        return this._esq_;
     }
 
-    public void setTermo(PTermo node)
+    public void setEsq(PTermo node)
     {
-        if(this._termo_ != null)
+        if(this._esq_ != null)
         {
-            this._termo_.parent(null);
+            this._esq_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AOpMultTermo extends PTermo
             node.parent(this);
         }
 
-        this._termo_ = node;
+        this._esq_ = node;
     }
 
     public POpMult getOpMult()
@@ -95,16 +95,16 @@ public final class AOpMultTermo extends PTermo
         this._opMult_ = node;
     }
 
-    public PFator getFator()
+    public PFator getDir()
     {
-        return this._fator_;
+        return this._dir_;
     }
 
-    public void setFator(PFator node)
+    public void setDir(PFator node)
     {
-        if(this._fator_ != null)
+        if(this._dir_ != null)
         {
-            this._fator_.parent(null);
+            this._dir_.parent(null);
         }
 
         if(node != null)
@@ -117,25 +117,25 @@ public final class AOpMultTermo extends PTermo
             node.parent(this);
         }
 
-        this._fator_ = node;
+        this._dir_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._termo_)
+            + toString(this._esq_)
             + toString(this._opMult_)
-            + toString(this._fator_);
+            + toString(this._dir_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._termo_ == child)
+        if(this._esq_ == child)
         {
-            this._termo_ = null;
+            this._esq_ = null;
             return;
         }
 
@@ -145,9 +145,9 @@ public final class AOpMultTermo extends PTermo
             return;
         }
 
-        if(this._fator_ == child)
+        if(this._dir_ == child)
         {
-            this._fator_ = null;
+            this._dir_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AOpMultTermo extends PTermo
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._termo_ == oldChild)
+        if(this._esq_ == oldChild)
         {
-            setTermo((PTermo) newChild);
+            setEsq((PTermo) newChild);
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AOpMultTermo extends PTermo
             return;
         }
 
-        if(this._fator_ == oldChild)
+        if(this._dir_ == oldChild)
         {
-            setFator((PFator) newChild);
+            setDir((PFator) newChild);
             return;
         }
 

@@ -159,13 +159,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseASeqDeclParametro(ASeqDeclParametro node)
+    public void caseAListaSeqDeclParametro(AListaSeqDeclParametro node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADeclParametroLista(ADeclParametroLista node)
+    public void caseAUnicoSeqDeclParametro(AUnicoSeqDeclParametro node)
     {
         defaultCase(node);
     }
@@ -315,13 +315,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseASeqParametro(ASeqParametro node)
+    public void caseAListaSeqParametro(AListaSeqParametro node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParametroLista(AParametroLista node)
+    public void caseAUnicoSeqParametro(AUnicoSeqParametro node)
     {
         defaultCase(node);
     }

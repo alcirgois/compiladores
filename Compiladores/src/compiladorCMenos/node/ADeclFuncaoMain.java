@@ -7,8 +7,8 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class ADeclFuncaoMain extends PDeclFuncaoMain
 {
-    private PTipoAvalorado _tipoAvalorado_;
-    private TId _id_;
+    private PTipoAvalorado _void_;
+    private TId _main_;
     private TAPar _aPar_;
     private TPChaveVoid _pChaveVoid_;
     private TFPar _fPar_;
@@ -20,17 +20,17 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
     }
 
     public ADeclFuncaoMain(
-        @SuppressWarnings("hiding") PTipoAvalorado _tipoAvalorado_,
-        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") PTipoAvalorado _void_,
+        @SuppressWarnings("hiding") TId _main_,
         @SuppressWarnings("hiding") TAPar _aPar_,
         @SuppressWarnings("hiding") TPChaveVoid _pChaveVoid_,
         @SuppressWarnings("hiding") TFPar _fPar_,
         @SuppressWarnings("hiding") PBloco _bloco_)
     {
         // Constructor
-        setTipoAvalorado(_tipoAvalorado_);
+        setVoid(_void_);
 
-        setId(_id_);
+        setMain(_main_);
 
         setAPar(_aPar_);
 
@@ -46,8 +46,8 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
     public Object clone()
     {
         return new ADeclFuncaoMain(
-            cloneNode(this._tipoAvalorado_),
-            cloneNode(this._id_),
+            cloneNode(this._void_),
+            cloneNode(this._main_),
             cloneNode(this._aPar_),
             cloneNode(this._pChaveVoid_),
             cloneNode(this._fPar_),
@@ -60,16 +60,16 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
         ((Analysis) sw).caseADeclFuncaoMain(this);
     }
 
-    public PTipoAvalorado getTipoAvalorado()
+    public PTipoAvalorado getVoid()
     {
-        return this._tipoAvalorado_;
+        return this._void_;
     }
 
-    public void setTipoAvalorado(PTipoAvalorado node)
+    public void setVoid(PTipoAvalorado node)
     {
-        if(this._tipoAvalorado_ != null)
+        if(this._void_ != null)
         {
-            this._tipoAvalorado_.parent(null);
+            this._void_.parent(null);
         }
 
         if(node != null)
@@ -82,19 +82,19 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
             node.parent(this);
         }
 
-        this._tipoAvalorado_ = node;
+        this._void_ = node;
     }
 
-    public TId getId()
+    public TId getMain()
     {
-        return this._id_;
+        return this._main_;
     }
 
-    public void setId(TId node)
+    public void setMain(TId node)
     {
-        if(this._id_ != null)
+        if(this._main_ != null)
         {
-            this._id_.parent(null);
+            this._main_.parent(null);
         }
 
         if(node != null)
@@ -107,7 +107,7 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._main_ = node;
     }
 
     public TAPar getAPar()
@@ -214,8 +214,8 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
     public String toString()
     {
         return ""
-            + toString(this._tipoAvalorado_)
-            + toString(this._id_)
+            + toString(this._void_)
+            + toString(this._main_)
             + toString(this._aPar_)
             + toString(this._pChaveVoid_)
             + toString(this._fPar_)
@@ -226,15 +226,15 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._tipoAvalorado_ == child)
+        if(this._void_ == child)
         {
-            this._tipoAvalorado_ = null;
+            this._void_ = null;
             return;
         }
 
-        if(this._id_ == child)
+        if(this._main_ == child)
         {
-            this._id_ = null;
+            this._main_ = null;
             return;
         }
 
@@ -269,15 +269,15 @@ public final class ADeclFuncaoMain extends PDeclFuncaoMain
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._tipoAvalorado_ == oldChild)
+        if(this._void_ == oldChild)
         {
-            setTipoAvalorado((PTipoAvalorado) newChild);
+            setVoid((PTipoAvalorado) newChild);
             return;
         }
 
-        if(this._id_ == oldChild)
+        if(this._main_ == oldChild)
         {
-            setId((TId) newChild);
+            setMain((TId) newChild);
             return;
         }
 

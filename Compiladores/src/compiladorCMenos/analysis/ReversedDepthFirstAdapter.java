@@ -50,13 +50,13 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAPrograma(APrograma node)
     {
         inAPrograma(node);
-        if(node.getDeclFuncaoMain() != null)
+        if(node.getFuncMain() != null)
         {
-            node.getDeclFuncaoMain().apply(this);
+            node.getFuncMain().apply(this);
         }
-        if(node.getSeqDeclaracao() != null)
+        if(node.getDecls() != null)
         {
-            node.getSeqDeclaracao().apply(this);
+            node.getDecls().apply(this);
         }
         outAPrograma(node);
     }
@@ -116,13 +116,13 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getAPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getMain() != null)
         {
-            node.getId().apply(this);
+            node.getMain().apply(this);
         }
-        if(node.getTipoAvalorado() != null)
+        if(node.getVoid() != null)
         {
-            node.getTipoAvalorado().apply(this);
+            node.getVoid().apply(this);
         }
         outADeclFuncaoMain(node);
     }
@@ -187,13 +187,13 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAVariavelDeclVariavel(AVariavelDeclVariavel node)
     {
         inAVariavelDeclVariavel(node);
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
-        if(node.getTipoValorado() != null)
+        if(node.getTipo() != null)
         {
-            node.getTipoValorado().apply(this);
+            node.getTipo().apply(this);
         }
         outAVariavelDeclVariavel(node);
     }
@@ -216,21 +216,21 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getFCol().apply(this);
         }
-        if(node.getSeqParametro() != null)
+        if(node.getDimens() != null)
         {
-            node.getSeqParametro().apply(this);
+            node.getDimens().apply(this);
         }
         if(node.getACol() != null)
         {
             node.getACol().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
-        if(node.getTipoValorado() != null)
+        if(node.getTipo() != null)
         {
-            node.getTipoValorado().apply(this);
+            node.getTipo().apply(this);
         }
         outAMatrizDeclVariavel(node);
     }
@@ -257,17 +257,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getFPar().apply(this);
         }
-        if(node.getSeqDeclParametro() != null)
+        if(node.getParams() != null)
         {
-            node.getSeqDeclParametro().apply(this);
+            node.getParams().apply(this);
         }
         if(node.getAPar() != null)
         {
             node.getAPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
         if(node.getTipo() != null)
         {
@@ -306,9 +306,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getAPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
         if(node.getTipo() != null)
         {
@@ -422,58 +422,54 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outATipoAvalorado(node);
     }
 
-    public void inASeqDeclParametro(ASeqDeclParametro node)
+    public void inAListaSeqDeclParametro(AListaSeqDeclParametro node)
     {
         defaultIn(node);
     }
 
-    public void outASeqDeclParametro(ASeqDeclParametro node)
+    public void outAListaSeqDeclParametro(AListaSeqDeclParametro node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseASeqDeclParametro(ASeqDeclParametro node)
+    public void caseAListaSeqDeclParametro(AListaSeqDeclParametro node)
     {
-        inASeqDeclParametro(node);
+        inAListaSeqDeclParametro(node);
+        if(node.getParam() != null)
         {
-            List<PDeclParametroLista> copy = new ArrayList<PDeclParametroLista>(node.getDeclParametroLista());
-            Collections.reverse(copy);
-            for(PDeclParametroLista e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getDeclParametro() != null)
-        {
-            node.getDeclParametro().apply(this);
-        }
-        outASeqDeclParametro(node);
-    }
-
-    public void inADeclParametroLista(ADeclParametroLista node)
-    {
-        defaultIn(node);
-    }
-
-    public void outADeclParametroLista(ADeclParametroLista node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseADeclParametroLista(ADeclParametroLista node)
-    {
-        inADeclParametroLista(node);
-        if(node.getDeclParametro() != null)
-        {
-            node.getDeclParametro().apply(this);
+            node.getParam().apply(this);
         }
         if(node.getVirg() != null)
         {
             node.getVirg().apply(this);
         }
-        outADeclParametroLista(node);
+        if(node.getParams() != null)
+        {
+            node.getParams().apply(this);
+        }
+        outAListaSeqDeclParametro(node);
+    }
+
+    public void inAUnicoSeqDeclParametro(AUnicoSeqDeclParametro node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAUnicoSeqDeclParametro(AUnicoSeqDeclParametro node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAUnicoSeqDeclParametro(AUnicoSeqDeclParametro node)
+    {
+        inAUnicoSeqDeclParametro(node);
+        if(node.getParam() != null)
+        {
+            node.getParam().apply(this);
+        }
+        outAUnicoSeqDeclParametro(node);
     }
 
     public void inAVariavelDeclParametro(AVariavelDeclParametro node)
@@ -490,13 +486,13 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAVariavelDeclParametro(AVariavelDeclParametro node)
     {
         inAVariavelDeclParametro(node);
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
-        if(node.getTipoValorado() != null)
+        if(node.getTipo() != null)
         {
-            node.getTipoValorado().apply(this);
+            node.getTipo().apply(this);
         }
         outAVariavelDeclParametro(node);
     }
@@ -515,21 +511,21 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAMatrizDeclParametro(AMatrizDeclParametro node)
     {
         inAMatrizDeclParametro(node);
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
         {
-            List<TMult> copy = new ArrayList<TMult>(node.getMult());
+            List<TMult> copy = new ArrayList<TMult>(node.getDimens());
             Collections.reverse(copy);
             for(TMult e : copy)
             {
                 e.apply(this);
             }
         }
-        if(node.getTipoValorado() != null)
+        if(node.getTipo() != null)
         {
-            node.getTipoValorado().apply(this);
+            node.getTipo().apply(this);
         }
         outAMatrizDeclParametro(node);
     }
@@ -552,9 +548,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getFChave().apply(this);
         }
-        if(node.getSeqComando() != null)
+        if(node.getComandos() != null)
         {
-            node.getSeqComando().apply(this);
+            node.getComandos().apply(this);
         }
         if(node.getAChave() != null)
         {
@@ -774,9 +770,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPVirg().apply(this);
         }
-        if(node.getDeclVariavel() != null)
+        if(node.getDecl() != null)
         {
-            node.getDeclVariavel().apply(this);
+            node.getDecl().apply(this);
         }
         outADeclaracaoSemSubComando(node);
     }
@@ -799,9 +795,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPVirg().apply(this);
         }
-        if(node.getComandoAtribuicao() != null)
+        if(node.getAtrib() != null)
         {
-            node.getComandoAtribuicao().apply(this);
+            node.getAtrib().apply(this);
         }
         outAAtribuicaoSemSubComando(node);
     }
@@ -824,9 +820,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPVirg().apply(this);
         }
-        if(node.getComandoFuncao() != null)
+        if(node.getFunc() != null)
         {
-            node.getComandoFuncao().apply(this);
+            node.getFunc().apply(this);
         }
         outAFuncaoSemSubComando(node);
     }
@@ -849,9 +845,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getPVirg().apply(this);
         }
-        if(node.getComandoRetorno() != null)
+        if(node.getRetrn() != null)
         {
-            node.getComandoRetorno().apply(this);
+            node.getRetrn().apply(this);
         }
         outARetornoSemSubComando(node);
     }
@@ -870,17 +866,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAVariavelComandoAtribuicao(AVariavelComandoAtribuicao node)
     {
         inAVariavelComandoAtribuicao(node);
-        if(node.getExpGeral() != null)
+        if(node.getValor() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getValor().apply(this);
         }
         if(node.getAtrib() != null)
         {
             node.getAtrib().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
         outAVariavelComandoAtribuicao(node);
     }
@@ -899,9 +895,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAMatrizComandoAtribuicao(AMatrizComandoAtribuicao node)
     {
         inAMatrizComandoAtribuicao(node);
-        if(node.getExpGeral() != null)
+        if(node.getValor() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getValor().apply(this);
         }
         if(node.getAtrib() != null)
         {
@@ -911,17 +907,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getFCol().apply(this);
         }
-        if(node.getSeqParametro() != null)
+        if(node.getIndices() != null)
         {
-            node.getSeqParametro().apply(this);
+            node.getIndices().apply(this);
         }
         if(node.getACol() != null)
         {
             node.getACol().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
         outAMatrizComandoAtribuicao(node);
     }
@@ -940,17 +936,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAComandoRepeticao(AComandoRepeticao node)
     {
         inAComandoRepeticao(node);
-        if(node.getComando() != null)
+        if(node.getComandos() != null)
         {
-            node.getComando().apply(this);
+            node.getComandos().apply(this);
         }
         if(node.getFPar() != null)
         {
             node.getFPar().apply(this);
         }
-        if(node.getExpGeral() != null)
+        if(node.getCondicao() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getCondicao().apply(this);
         }
         if(node.getAPar() != null)
         {
@@ -977,17 +973,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAComandoCondicao(AComandoCondicao node)
     {
         inAComandoCondicao(node);
-        if(node.getComando() != null)
+        if(node.getThenComandos() != null)
         {
-            node.getComando().apply(this);
+            node.getThenComandos().apply(this);
         }
         if(node.getFPar() != null)
         {
             node.getFPar().apply(this);
         }
-        if(node.getExpGeral() != null)
+        if(node.getCondicao() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getCondicao().apply(this);
         }
         if(node.getAPar() != null)
         {
@@ -1014,25 +1010,25 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAComandoCondicaoElse(AComandoCondicaoElse node)
     {
         inAComandoCondicaoElse(node);
-        if(node.getElse() != null)
+        if(node.getElseComandos() != null)
         {
-            node.getElse().apply(this);
+            node.getElseComandos().apply(this);
         }
         if(node.getPChaveElse() != null)
         {
             node.getPChaveElse().apply(this);
         }
-        if(node.getComandoIfNaoCurto() != null)
+        if(node.getThenComandos() != null)
         {
-            node.getComandoIfNaoCurto().apply(this);
+            node.getThenComandos().apply(this);
         }
         if(node.getFPar() != null)
         {
             node.getFPar().apply(this);
         }
-        if(node.getExpGeral() != null)
+        if(node.getCondicao() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getCondicao().apply(this);
         }
         if(node.getAPar() != null)
         {
@@ -1059,17 +1055,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAComandoRepeticaoIfNaoCurto(AComandoRepeticaoIfNaoCurto node)
     {
         inAComandoRepeticaoIfNaoCurto(node);
-        if(node.getComandoIfNaoCurto() != null)
+        if(node.getComandos() != null)
         {
-            node.getComandoIfNaoCurto().apply(this);
+            node.getComandos().apply(this);
         }
         if(node.getFPar() != null)
         {
             node.getFPar().apply(this);
         }
-        if(node.getExpGeral() != null)
+        if(node.getCondicao() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getCondicao().apply(this);
         }
         if(node.getAPar() != null)
         {
@@ -1096,25 +1092,25 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAComandoCondicaoElseIfNaoCurto(AComandoCondicaoElseIfNaoCurto node)
     {
         inAComandoCondicaoElseIfNaoCurto(node);
-        if(node.getElse() != null)
+        if(node.getElseComandos() != null)
         {
-            node.getElse().apply(this);
+            node.getElseComandos().apply(this);
         }
         if(node.getPChaveElse() != null)
         {
             node.getPChaveElse().apply(this);
         }
-        if(node.getThen() != null)
+        if(node.getThenComandos() != null)
         {
-            node.getThen().apply(this);
+            node.getThenComandos().apply(this);
         }
         if(node.getFPar() != null)
         {
             node.getFPar().apply(this);
         }
-        if(node.getExpGeral() != null)
+        if(node.getCondicao() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getCondicao().apply(this);
         }
         if(node.getAPar() != null)
         {
@@ -1145,73 +1141,69 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getFPar().apply(this);
         }
-        if(node.getSeqParametro() != null)
+        if(node.getArgs() != null)
         {
-            node.getSeqParametro().apply(this);
+            node.getArgs().apply(this);
         }
         if(node.getAPar() != null)
         {
             node.getAPar().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getNome() != null)
         {
-            node.getId().apply(this);
+            node.getNome().apply(this);
         }
         outAComandoFuncao(node);
     }
 
-    public void inASeqParametro(ASeqParametro node)
+    public void inAListaSeqParametro(AListaSeqParametro node)
     {
         defaultIn(node);
     }
 
-    public void outASeqParametro(ASeqParametro node)
+    public void outAListaSeqParametro(AListaSeqParametro node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseASeqParametro(ASeqParametro node)
+    public void caseAListaSeqParametro(AListaSeqParametro node)
     {
-        inASeqParametro(node);
+        inAListaSeqParametro(node);
+        if(node.getArg() != null)
         {
-            List<PParametroLista> copy = new ArrayList<PParametroLista>(node.getParametroLista());
-            Collections.reverse(copy);
-            for(PParametroLista e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getExpGeral() != null)
-        {
-            node.getExpGeral().apply(this);
-        }
-        outASeqParametro(node);
-    }
-
-    public void inAParametroLista(AParametroLista node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAParametroLista(AParametroLista node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAParametroLista(AParametroLista node)
-    {
-        inAParametroLista(node);
-        if(node.getExpGeral() != null)
-        {
-            node.getExpGeral().apply(this);
+            node.getArg().apply(this);
         }
         if(node.getVirg() != null)
         {
             node.getVirg().apply(this);
         }
-        outAParametroLista(node);
+        if(node.getArgs() != null)
+        {
+            node.getArgs().apply(this);
+        }
+        outAListaSeqParametro(node);
+    }
+
+    public void inAUnicoSeqParametro(AUnicoSeqParametro node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAUnicoSeqParametro(AUnicoSeqParametro node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAUnicoSeqParametro(AUnicoSeqParametro node)
+    {
+        inAUnicoSeqParametro(node);
+        if(node.getArg() != null)
+        {
+            node.getArg().apply(this);
+        }
+        outAUnicoSeqParametro(node);
     }
 
     public void inAComandoRetorno(AComandoRetorno node)
@@ -1228,9 +1220,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAComandoRetorno(AComandoRetorno node)
     {
         inAComandoRetorno(node);
-        if(node.getExpGeral() != null)
+        if(node.getValor() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getValor().apply(this);
         }
         if(node.getPChaveReturn() != null)
         {
@@ -1303,17 +1295,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAOpSomaExp(AOpSomaExp node)
     {
         inAOpSomaExp(node);
-        if(node.getTermo() != null)
+        if(node.getDir() != null)
         {
-            node.getTermo().apply(this);
+            node.getDir().apply(this);
         }
         if(node.getOpSoma() != null)
         {
             node.getOpSoma().apply(this);
         }
-        if(node.getExp() != null)
+        if(node.getEsq() != null)
         {
-            node.getExp().apply(this);
+            node.getEsq().apply(this);
         }
         outAOpSomaExp(node);
     }
@@ -1353,17 +1345,17 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAOpMultTermo(AOpMultTermo node)
     {
         inAOpMultTermo(node);
-        if(node.getFator() != null)
+        if(node.getDir() != null)
         {
-            node.getFator().apply(this);
+            node.getDir().apply(this);
         }
         if(node.getOpMult() != null)
         {
             node.getOpMult().apply(this);
         }
-        if(node.getTermo() != null)
+        if(node.getEsq() != null)
         {
-            node.getTermo().apply(this);
+            node.getEsq().apply(this);
         }
         outAOpMultTermo(node);
     }
@@ -1491,9 +1483,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getFPar().apply(this);
         }
-        if(node.getExpGeral() != null)
+        if(node.getExp() != null)
         {
-            node.getExpGeral().apply(this);
+            node.getExp().apply(this);
         }
         if(node.getAPar() != null)
         {

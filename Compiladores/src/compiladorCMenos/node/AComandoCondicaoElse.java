@@ -9,11 +9,11 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
 {
     private TPChaveIf _pChaveIf_;
     private TAPar _aPar_;
-    private PExpGeral _expGeral_;
+    private PExpGeral _condicao_;
     private TFPar _fPar_;
-    private PComandoIfNaoCurto _comandoIfNaoCurto_;
+    private PComandoIfNaoCurto _thenComandos_;
     private TPChaveElse _pChaveElse_;
-    private PComando _else_;
+    private PComando _elseComandos_;
 
     public AComandoCondicaoElse()
     {
@@ -23,26 +23,26 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
     public AComandoCondicaoElse(
         @SuppressWarnings("hiding") TPChaveIf _pChaveIf_,
         @SuppressWarnings("hiding") TAPar _aPar_,
-        @SuppressWarnings("hiding") PExpGeral _expGeral_,
+        @SuppressWarnings("hiding") PExpGeral _condicao_,
         @SuppressWarnings("hiding") TFPar _fPar_,
-        @SuppressWarnings("hiding") PComandoIfNaoCurto _comandoIfNaoCurto_,
+        @SuppressWarnings("hiding") PComandoIfNaoCurto _thenComandos_,
         @SuppressWarnings("hiding") TPChaveElse _pChaveElse_,
-        @SuppressWarnings("hiding") PComando _else_)
+        @SuppressWarnings("hiding") PComando _elseComandos_)
     {
         // Constructor
         setPChaveIf(_pChaveIf_);
 
         setAPar(_aPar_);
 
-        setExpGeral(_expGeral_);
+        setCondicao(_condicao_);
 
         setFPar(_fPar_);
 
-        setComandoIfNaoCurto(_comandoIfNaoCurto_);
+        setThenComandos(_thenComandos_);
 
         setPChaveElse(_pChaveElse_);
 
-        setElse(_else_);
+        setElseComandos(_elseComandos_);
 
     }
 
@@ -52,11 +52,11 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
         return new AComandoCondicaoElse(
             cloneNode(this._pChaveIf_),
             cloneNode(this._aPar_),
-            cloneNode(this._expGeral_),
+            cloneNode(this._condicao_),
             cloneNode(this._fPar_),
-            cloneNode(this._comandoIfNaoCurto_),
+            cloneNode(this._thenComandos_),
             cloneNode(this._pChaveElse_),
-            cloneNode(this._else_));
+            cloneNode(this._elseComandos_));
     }
 
     @Override
@@ -115,16 +115,16 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
         this._aPar_ = node;
     }
 
-    public PExpGeral getExpGeral()
+    public PExpGeral getCondicao()
     {
-        return this._expGeral_;
+        return this._condicao_;
     }
 
-    public void setExpGeral(PExpGeral node)
+    public void setCondicao(PExpGeral node)
     {
-        if(this._expGeral_ != null)
+        if(this._condicao_ != null)
         {
-            this._expGeral_.parent(null);
+            this._condicao_.parent(null);
         }
 
         if(node != null)
@@ -137,7 +137,7 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             node.parent(this);
         }
 
-        this._expGeral_ = node;
+        this._condicao_ = node;
     }
 
     public TFPar getFPar()
@@ -165,16 +165,16 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
         this._fPar_ = node;
     }
 
-    public PComandoIfNaoCurto getComandoIfNaoCurto()
+    public PComandoIfNaoCurto getThenComandos()
     {
-        return this._comandoIfNaoCurto_;
+        return this._thenComandos_;
     }
 
-    public void setComandoIfNaoCurto(PComandoIfNaoCurto node)
+    public void setThenComandos(PComandoIfNaoCurto node)
     {
-        if(this._comandoIfNaoCurto_ != null)
+        if(this._thenComandos_ != null)
         {
-            this._comandoIfNaoCurto_.parent(null);
+            this._thenComandos_.parent(null);
         }
 
         if(node != null)
@@ -187,7 +187,7 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             node.parent(this);
         }
 
-        this._comandoIfNaoCurto_ = node;
+        this._thenComandos_ = node;
     }
 
     public TPChaveElse getPChaveElse()
@@ -215,16 +215,16 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
         this._pChaveElse_ = node;
     }
 
-    public PComando getElse()
+    public PComando getElseComandos()
     {
-        return this._else_;
+        return this._elseComandos_;
     }
 
-    public void setElse(PComando node)
+    public void setElseComandos(PComando node)
     {
-        if(this._else_ != null)
+        if(this._elseComandos_ != null)
         {
-            this._else_.parent(null);
+            this._elseComandos_.parent(null);
         }
 
         if(node != null)
@@ -237,7 +237,7 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             node.parent(this);
         }
 
-        this._else_ = node;
+        this._elseComandos_ = node;
     }
 
     @Override
@@ -246,11 +246,11 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
         return ""
             + toString(this._pChaveIf_)
             + toString(this._aPar_)
-            + toString(this._expGeral_)
+            + toString(this._condicao_)
             + toString(this._fPar_)
-            + toString(this._comandoIfNaoCurto_)
+            + toString(this._thenComandos_)
             + toString(this._pChaveElse_)
-            + toString(this._else_);
+            + toString(this._elseComandos_);
     }
 
     @Override
@@ -269,9 +269,9 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             return;
         }
 
-        if(this._expGeral_ == child)
+        if(this._condicao_ == child)
         {
-            this._expGeral_ = null;
+            this._condicao_ = null;
             return;
         }
 
@@ -281,9 +281,9 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             return;
         }
 
-        if(this._comandoIfNaoCurto_ == child)
+        if(this._thenComandos_ == child)
         {
-            this._comandoIfNaoCurto_ = null;
+            this._thenComandos_ = null;
             return;
         }
 
@@ -293,9 +293,9 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             return;
         }
 
-        if(this._else_ == child)
+        if(this._elseComandos_ == child)
         {
-            this._else_ = null;
+            this._elseComandos_ = null;
             return;
         }
 
@@ -318,9 +318,9 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             return;
         }
 
-        if(this._expGeral_ == oldChild)
+        if(this._condicao_ == oldChild)
         {
-            setExpGeral((PExpGeral) newChild);
+            setCondicao((PExpGeral) newChild);
             return;
         }
 
@@ -330,9 +330,9 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             return;
         }
 
-        if(this._comandoIfNaoCurto_ == oldChild)
+        if(this._thenComandos_ == oldChild)
         {
-            setComandoIfNaoCurto((PComandoIfNaoCurto) newChild);
+            setThenComandos((PComandoIfNaoCurto) newChild);
             return;
         }
 
@@ -342,9 +342,9 @@ public final class AComandoCondicaoElse extends PComandoCondicaoElse
             return;
         }
 
-        if(this._else_ == oldChild)
+        if(this._elseComandos_ == oldChild)
         {
-            setElse((PComando) newChild);
+            setElseComandos((PComando) newChild);
             return;
         }
 

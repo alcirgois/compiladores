@@ -7,7 +7,7 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class AAtribuicaoSemSubComando extends PSemSubComando
 {
-    private PComandoAtribuicao _comandoAtribuicao_;
+    private PComandoAtribuicao _atrib_;
     private TPVirg _pVirg_;
 
     public AAtribuicaoSemSubComando()
@@ -16,11 +16,11 @@ public final class AAtribuicaoSemSubComando extends PSemSubComando
     }
 
     public AAtribuicaoSemSubComando(
-        @SuppressWarnings("hiding") PComandoAtribuicao _comandoAtribuicao_,
+        @SuppressWarnings("hiding") PComandoAtribuicao _atrib_,
         @SuppressWarnings("hiding") TPVirg _pVirg_)
     {
         // Constructor
-        setComandoAtribuicao(_comandoAtribuicao_);
+        setAtrib(_atrib_);
 
         setPVirg(_pVirg_);
 
@@ -30,7 +30,7 @@ public final class AAtribuicaoSemSubComando extends PSemSubComando
     public Object clone()
     {
         return new AAtribuicaoSemSubComando(
-            cloneNode(this._comandoAtribuicao_),
+            cloneNode(this._atrib_),
             cloneNode(this._pVirg_));
     }
 
@@ -40,16 +40,16 @@ public final class AAtribuicaoSemSubComando extends PSemSubComando
         ((Analysis) sw).caseAAtribuicaoSemSubComando(this);
     }
 
-    public PComandoAtribuicao getComandoAtribuicao()
+    public PComandoAtribuicao getAtrib()
     {
-        return this._comandoAtribuicao_;
+        return this._atrib_;
     }
 
-    public void setComandoAtribuicao(PComandoAtribuicao node)
+    public void setAtrib(PComandoAtribuicao node)
     {
-        if(this._comandoAtribuicao_ != null)
+        if(this._atrib_ != null)
         {
-            this._comandoAtribuicao_.parent(null);
+            this._atrib_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class AAtribuicaoSemSubComando extends PSemSubComando
             node.parent(this);
         }
 
-        this._comandoAtribuicao_ = node;
+        this._atrib_ = node;
     }
 
     public TPVirg getPVirg()
@@ -94,7 +94,7 @@ public final class AAtribuicaoSemSubComando extends PSemSubComando
     public String toString()
     {
         return ""
-            + toString(this._comandoAtribuicao_)
+            + toString(this._atrib_)
             + toString(this._pVirg_);
     }
 
@@ -102,9 +102,9 @@ public final class AAtribuicaoSemSubComando extends PSemSubComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoAtribuicao_ == child)
+        if(this._atrib_ == child)
         {
-            this._comandoAtribuicao_ = null;
+            this._atrib_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class AAtribuicaoSemSubComando extends PSemSubComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoAtribuicao_ == oldChild)
+        if(this._atrib_ == oldChild)
         {
-            setComandoAtribuicao((PComandoAtribuicao) newChild);
+            setAtrib((PComandoAtribuicao) newChild);
             return;
         }
 
