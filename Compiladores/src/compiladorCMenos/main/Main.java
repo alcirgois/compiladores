@@ -3,13 +3,11 @@ package compiladorCMenos.main;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
-import java.util.ArrayList;
 
 import compiladorCMenos.lexer.Lexer;
 import compiladorCMenos.lexer.LexerException;
 import compiladorCMenos.main.lexer.CMenosLexer;
 import compiladorCMenos.node.EOF;
-import compiladorCMenos.node.Start;
 import compiladorCMenos.node.TBranco;
 import compiladorCMenos.node.Token;
 import compiladorCMenos.parser.Parser;

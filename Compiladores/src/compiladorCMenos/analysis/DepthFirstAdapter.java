@@ -146,7 +146,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
             }
         }
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             for(PComando e : copy)
             {
                 e.apply(this);
@@ -181,7 +181,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
             }
         }
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             for(PComando e : copy)
             {
                 e.apply(this);
@@ -216,7 +216,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
             }
         }
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             for(PComando e : copy)
             {
                 e.apply(this);
@@ -244,7 +244,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getNome().apply(this);
         }
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             for(PComando e : copy)
             {
                 e.apply(this);
@@ -513,9 +513,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getTeste().apply(this);
         }
-        if(node.getBlocoThe() != null)
+        if(node.getBlocoThen() != null)
         {
-            node.getBlocoThe().apply(this);
+            node.getBlocoThen().apply(this);
         }
         outACondicaoComando(node);
     }

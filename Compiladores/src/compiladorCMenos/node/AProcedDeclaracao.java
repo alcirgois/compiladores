@@ -10,7 +10,7 @@ public final class AProcedDeclaracao extends PDeclaracao
 {
     private TId _nome_;
     private final LinkedList<PParametro> _pars_ = new LinkedList<PParametro>();
-    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
+    private final LinkedList<PComando> _bloco_ = new LinkedList<PComando>();
 
     public AProcedDeclaracao()
     {
@@ -20,14 +20,14 @@ public final class AProcedDeclaracao extends PDeclaracao
     public AProcedDeclaracao(
         @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") List<?> _pars_,
-        @SuppressWarnings("hiding") List<?> _comando_)
+        @SuppressWarnings("hiding") List<?> _bloco_)
     {
         // Constructor
         setNome(_nome_);
 
         setPars(_pars_);
 
-        setComando(_comando_);
+        setBloco(_bloco_);
 
     }
 
@@ -37,7 +37,7 @@ public final class AProcedDeclaracao extends PDeclaracao
         return new AProcedDeclaracao(
             cloneNode(this._nome_),
             cloneList(this._pars_),
-            cloneList(this._comando_));
+            cloneList(this._bloco_));
     }
 
     @Override
@@ -97,18 +97,18 @@ public final class AProcedDeclaracao extends PDeclaracao
         }
     }
 
-    public LinkedList<PComando> getComando()
+    public LinkedList<PComando> getBloco()
     {
-        return this._comando_;
+        return this._bloco_;
     }
 
-    public void setComando(List<?> list)
+    public void setBloco(List<?> list)
     {
-        for(PComando e : this._comando_)
+        for(PComando e : this._bloco_)
         {
             e.parent(null);
         }
-        this._comando_.clear();
+        this._bloco_.clear();
 
         for(Object obj_e : list)
         {
@@ -119,7 +119,7 @@ public final class AProcedDeclaracao extends PDeclaracao
             }
 
             e.parent(this);
-            this._comando_.add(e);
+            this._bloco_.add(e);
         }
     }
 
@@ -129,7 +129,7 @@ public final class AProcedDeclaracao extends PDeclaracao
         return ""
             + toString(this._nome_)
             + toString(this._pars_)
-            + toString(this._comando_);
+            + toString(this._bloco_);
     }
 
     @Override
@@ -147,7 +147,7 @@ public final class AProcedDeclaracao extends PDeclaracao
             return;
         }
 
-        if(this._comando_.remove(child))
+        if(this._bloco_.remove(child))
         {
             return;
         }
@@ -183,7 +183,7 @@ public final class AProcedDeclaracao extends PDeclaracao
             }
         }
 
-        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
+        for(ListIterator<PComando> i = this._bloco_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {

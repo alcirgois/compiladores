@@ -138,7 +138,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inAProcedDeclaracao(node);
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             Collections.reverse(copy);
             for(PComando e : copy)
             {
@@ -175,7 +175,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inAFuncaoIntDeclaracao(node);
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             Collections.reverse(copy);
             for(PComando e : copy)
             {
@@ -212,7 +212,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inAFuncaoStrDeclaracao(node);
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             Collections.reverse(copy);
             for(PComando e : copy)
             {
@@ -249,7 +249,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inAFuncaoMain(node);
         {
-            List<PComando> copy = new ArrayList<PComando>(node.getComando());
+            List<PComando> copy = new ArrayList<PComando>(node.getBloco());
             Collections.reverse(copy);
             for(PComando e : copy)
             {
@@ -526,9 +526,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseACondicaoComando(ACondicaoComando node)
     {
         inACondicaoComando(node);
-        if(node.getBlocoThe() != null)
+        if(node.getBlocoThen() != null)
         {
-            node.getBlocoThe().apply(this);
+            node.getBlocoThen().apply(this);
         }
         if(node.getTeste() != null)
         {
