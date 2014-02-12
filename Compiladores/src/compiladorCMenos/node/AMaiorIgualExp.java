@@ -5,51 +5,51 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ACondicaoComando extends PComando
+public final class AMaiorIgualExp extends PExp
 {
-    private PExp _teste_;
-    private PComando _blocoThe_;
+    private PExp _esq_;
+    private PExp _dir_;
 
-    public ACondicaoComando()
+    public AMaiorIgualExp()
     {
         // Constructor
     }
 
-    public ACondicaoComando(
-        @SuppressWarnings("hiding") PExp _teste_,
-        @SuppressWarnings("hiding") PComando _blocoThe_)
+    public AMaiorIgualExp(
+        @SuppressWarnings("hiding") PExp _esq_,
+        @SuppressWarnings("hiding") PExp _dir_)
     {
         // Constructor
-        setTeste(_teste_);
+        setEsq(_esq_);
 
-        setBlocoThe(_blocoThe_);
+        setDir(_dir_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ACondicaoComando(
-            cloneNode(this._teste_),
-            cloneNode(this._blocoThe_));
+        return new AMaiorIgualExp(
+            cloneNode(this._esq_),
+            cloneNode(this._dir_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseACondicaoComando(this);
+        ((Analysis) sw).caseAMaiorIgualExp(this);
     }
 
-    public PExp getTeste()
+    public PExp getEsq()
     {
-        return this._teste_;
+        return this._esq_;
     }
 
-    public void setTeste(PExp node)
+    public void setEsq(PExp node)
     {
-        if(this._teste_ != null)
+        if(this._esq_ != null)
         {
-            this._teste_.parent(null);
+            this._esq_.parent(null);
         }
 
         if(node != null)
@@ -62,19 +62,19 @@ public final class ACondicaoComando extends PComando
             node.parent(this);
         }
 
-        this._teste_ = node;
+        this._esq_ = node;
     }
 
-    public PComando getBlocoThe()
+    public PExp getDir()
     {
-        return this._blocoThe_;
+        return this._dir_;
     }
 
-    public void setBlocoThe(PComando node)
+    public void setDir(PExp node)
     {
-        if(this._blocoThe_ != null)
+        if(this._dir_ != null)
         {
-            this._blocoThe_.parent(null);
+            this._dir_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +87,30 @@ public final class ACondicaoComando extends PComando
             node.parent(this);
         }
 
-        this._blocoThe_ = node;
+        this._dir_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._teste_)
-            + toString(this._blocoThe_);
+            + toString(this._esq_)
+            + toString(this._dir_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._teste_ == child)
+        if(this._esq_ == child)
         {
-            this._teste_ = null;
+            this._esq_ = null;
             return;
         }
 
-        if(this._blocoThe_ == child)
+        if(this._dir_ == child)
         {
-            this._blocoThe_ = null;
+            this._dir_ = null;
             return;
         }
 
@@ -121,15 +121,15 @@ public final class ACondicaoComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._teste_ == oldChild)
+        if(this._esq_ == oldChild)
         {
-            setTeste((PExp) newChild);
+            setEsq((PExp) newChild);
             return;
         }
 
-        if(this._blocoThe_ == oldChild)
+        if(this._dir_ == oldChild)
         {
-            setBlocoThe((PComando) newChild);
+            setDir((PExp) newChild);
             return;
         }
 

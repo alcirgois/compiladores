@@ -5,39 +5,44 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ACondicaoComando extends PComando
+public final class ACondicaoIfElseComando extends PComando
 {
     private PExp _teste_;
-    private PComando _blocoThe_;
+    private PComando _blocoThen_;
+    private PComando _blocoElse_;
 
-    public ACondicaoComando()
+    public ACondicaoIfElseComando()
     {
         // Constructor
     }
 
-    public ACondicaoComando(
+    public ACondicaoIfElseComando(
         @SuppressWarnings("hiding") PExp _teste_,
-        @SuppressWarnings("hiding") PComando _blocoThe_)
+        @SuppressWarnings("hiding") PComando _blocoThen_,
+        @SuppressWarnings("hiding") PComando _blocoElse_)
     {
         // Constructor
         setTeste(_teste_);
 
-        setBlocoThe(_blocoThe_);
+        setBlocoThen(_blocoThen_);
+
+        setBlocoElse(_blocoElse_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ACondicaoComando(
+        return new ACondicaoIfElseComando(
             cloneNode(this._teste_),
-            cloneNode(this._blocoThe_));
+            cloneNode(this._blocoThen_),
+            cloneNode(this._blocoElse_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseACondicaoComando(this);
+        ((Analysis) sw).caseACondicaoIfElseComando(this);
     }
 
     public PExp getTeste()
@@ -65,16 +70,16 @@ public final class ACondicaoComando extends PComando
         this._teste_ = node;
     }
 
-    public PComando getBlocoThe()
+    public PComando getBlocoThen()
     {
-        return this._blocoThe_;
+        return this._blocoThen_;
     }
 
-    public void setBlocoThe(PComando node)
+    public void setBlocoThen(PComando node)
     {
-        if(this._blocoThe_ != null)
+        if(this._blocoThen_ != null)
         {
-            this._blocoThe_.parent(null);
+            this._blocoThen_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +92,32 @@ public final class ACondicaoComando extends PComando
             node.parent(this);
         }
 
-        this._blocoThe_ = node;
+        this._blocoThen_ = node;
+    }
+
+    public PComando getBlocoElse()
+    {
+        return this._blocoElse_;
+    }
+
+    public void setBlocoElse(PComando node)
+    {
+        if(this._blocoElse_ != null)
+        {
+            this._blocoElse_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._blocoElse_ = node;
     }
 
     @Override
@@ -95,7 +125,8 @@ public final class ACondicaoComando extends PComando
     {
         return ""
             + toString(this._teste_)
-            + toString(this._blocoThe_);
+            + toString(this._blocoThen_)
+            + toString(this._blocoElse_);
     }
 
     @Override
@@ -108,9 +139,15 @@ public final class ACondicaoComando extends PComando
             return;
         }
 
-        if(this._blocoThe_ == child)
+        if(this._blocoThen_ == child)
         {
-            this._blocoThe_ = null;
+            this._blocoThen_ = null;
+            return;
+        }
+
+        if(this._blocoElse_ == child)
+        {
+            this._blocoElse_ = null;
             return;
         }
 
@@ -127,9 +164,15 @@ public final class ACondicaoComando extends PComando
             return;
         }
 
-        if(this._blocoThe_ == oldChild)
+        if(this._blocoThen_ == oldChild)
         {
-            setBlocoThe((PComando) newChild);
+            setBlocoThen((PComando) newChild);
+            return;
+        }
+
+        if(this._blocoElse_ == oldChild)
+        {
+            setBlocoElse((PComando) newChild);
             return;
         }
 

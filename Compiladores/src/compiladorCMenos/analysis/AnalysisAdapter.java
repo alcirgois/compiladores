@@ -81,121 +81,85 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseASeqDeclaracao(ASeqDeclaracao node)
+    public void caseAVarIntDeclaracao(AVarIntDeclaracao node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADeclFuncaoMain(ADeclFuncaoMain node)
+    public void caseAVarStrDeclaracao(AVarStrDeclaracao node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVariavelDeclaracao(AVariavelDeclaracao node)
+    public void caseAProcedDeclaracao(AProcedDeclaracao node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFuncaoDeclaracao(AFuncaoDeclaracao node)
+    public void caseAFuncaoIntDeclaracao(AFuncaoIntDeclaracao node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVariavelDeclVariavel(AVariavelDeclVariavel node)
+    public void caseAFuncaoStrDeclaracao(AFuncaoStrDeclaracao node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMatrizDeclVariavel(AMatrizDeclVariavel node)
+    public void caseAFuncaoMain(AFuncaoMain node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseANormalDeclFuncao(ANormalDeclFuncao node)
+    public void caseAParamIntParametro(AParamIntParametro node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseASemParametroDeclFuncao(ASemParametroDeclFuncao node)
+    public void caseAParamStrParametro(AParamStrParametro node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAValoradoTipo(AValoradoTipo node)
+    public void caseABlocoComando(ABlocoComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAvaloradoTipo(AAvaloradoTipo node)
+    public void caseADeclVarIntComando(ADeclVarIntComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAIntTipoValorado(AIntTipoValorado node)
+    public void caseADeclVarStrComando(ADeclVarStrComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAStringTipoValorado(AStringTipoValorado node)
+    public void caseAAtribuicaoComando(AAtribuicaoComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATipoAvalorado(ATipoAvalorado node)
+    public void caseAFuncaoComando(AFuncaoComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAListaSeqDeclParametro(AListaSeqDeclParametro node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAUnicoSeqDeclParametro(AUnicoSeqDeclParametro node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAVariavelDeclParametro(AVariavelDeclParametro node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAMatrizDeclParametro(AMatrizDeclParametro node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABloco(ABloco node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseASeqComando(ASeqComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseASemSubComandoComando(ASemSubComandoComando node)
+    public void caseARetornoComando(ARetornoComando node)
     {
         defaultCase(node);
     }
@@ -213,247 +177,91 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseACondicaoElseComando(ACondicaoElseComando node)
+    public void caseACondicaoIfElseComando(ACondicaoIfElseComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseASemSubComandoComandoIfNaoCurto(ASemSubComandoComandoIfNaoCurto node)
+    public void caseAMaiorQueExp(AMaiorQueExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseARepeticaoIfNaoCurtoComandoIfNaoCurto(ARepeticaoIfNaoCurtoComandoIfNaoCurto node)
+    public void caseAMaiorIgualExp(AMaiorIgualExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseACondicaoElseIfNaoCurtoComandoIfNaoCurto(ACondicaoElseIfNaoCurtoComandoIfNaoCurto node)
+    public void caseAMenorQueExp(AMenorQueExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABlocoSemSubComando(ABlocoSemSubComando node)
+    public void caseAMenorIgualExp(AMenorIgualExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADeclaracaoSemSubComando(ADeclaracaoSemSubComando node)
+    public void caseAIgualExp(AIgualExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAtribuicaoSemSubComando(AAtribuicaoSemSubComando node)
+    public void caseADiferenteExp(ADiferenteExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFuncaoSemSubComando(AFuncaoSemSubComando node)
+    public void caseASomaExp(ASomaExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseARetornoSemSubComando(ARetornoSemSubComando node)
+    public void caseASubExp(ASubExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVariavelComandoAtribuicao(AVariavelComandoAtribuicao node)
+    public void caseAMultExp(AMultExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMatrizComandoAtribuicao(AMatrizComandoAtribuicao node)
+    public void caseADivExp(ADivExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoRepeticao(AComandoRepeticao node)
+    public void caseAVarExp(AVarExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoCondicao(AComandoCondicao node)
+    public void caseANumExp(ANumExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoCondicaoElse(AComandoCondicaoElse node)
+    public void caseAStrExp(AStrExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoRepeticaoIfNaoCurto(AComandoRepeticaoIfNaoCurto node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoCondicaoElseIfNaoCurto(AComandoCondicaoElseIfNaoCurto node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoFuncao(AComandoFuncao node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAListaSeqParametro(AListaSeqParametro node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAUnicoSeqParametro(AUnicoSeqParametro node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoRetorno(AComandoRetorno node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAOpBoolExpGeral(AOpBoolExpGeral node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAExpExpGeral(AExpExpGeral node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAOpSomaExp(AOpSomaExp node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseATermoExp(ATermoExp node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAOpMultTermo(AOpMultTermo node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAFatorTermo(AFatorTermo node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAIdFator(AIdFator node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseANumFator(ANumFator node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAStrFator(AStrFator node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAFuncaoFator(AFuncaoFator node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAParFator(AParFator node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAMaiorQueOpBool(AMaiorQueOpBool node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAMaiorOuIgualOpBool(AMaiorOuIgualOpBool node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAMenorQueOpBool(AMenorQueOpBool node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAMenorOuIgualOpBool(AMenorOuIgualOpBool node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAIgualOpBool(AIgualOpBool node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseADiferenteOpBool(ADiferenteOpBool node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseASomaOpSoma(ASomaOpSoma node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseASubOpSoma(ASubOpSoma node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAMultOpMult(AMultOpMult node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseADivOpMult(ADivOpMult node)
+    public void caseAFuncaoExp(AFuncaoExp node)
     {
         defaultCase(node);
     }

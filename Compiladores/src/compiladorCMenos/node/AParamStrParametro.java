@@ -6,77 +6,77 @@ import java.util.*;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class APrograma extends PPrograma
+public final class AParamStrParametro extends PParametro
 {
-    private final LinkedList<PDeclaracao> _decls_ = new LinkedList<PDeclaracao>();
-    private PFuncaoMain _funcMain_;
+    private final LinkedList<TMult> _dimens_ = new LinkedList<TMult>();
+    private TId _nome_;
 
-    public APrograma()
+    public AParamStrParametro()
     {
         // Constructor
     }
 
-    public APrograma(
-        @SuppressWarnings("hiding") List<?> _decls_,
-        @SuppressWarnings("hiding") PFuncaoMain _funcMain_)
+    public AParamStrParametro(
+        @SuppressWarnings("hiding") List<?> _dimens_,
+        @SuppressWarnings("hiding") TId _nome_)
     {
         // Constructor
-        setDecls(_decls_);
+        setDimens(_dimens_);
 
-        setFuncMain(_funcMain_);
+        setNome(_nome_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new APrograma(
-            cloneList(this._decls_),
-            cloneNode(this._funcMain_));
+        return new AParamStrParametro(
+            cloneList(this._dimens_),
+            cloneNode(this._nome_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAPrograma(this);
+        ((Analysis) sw).caseAParamStrParametro(this);
     }
 
-    public LinkedList<PDeclaracao> getDecls()
+    public LinkedList<TMult> getDimens()
     {
-        return this._decls_;
+        return this._dimens_;
     }
 
-    public void setDecls(List<?> list)
+    public void setDimens(List<?> list)
     {
-        for(PDeclaracao e : this._decls_)
+        for(TMult e : this._dimens_)
         {
             e.parent(null);
         }
-        this._decls_.clear();
+        this._dimens_.clear();
 
         for(Object obj_e : list)
         {
-            PDeclaracao e = (PDeclaracao) obj_e;
+            TMult e = (TMult) obj_e;
             if(e.parent() != null)
             {
                 e.parent().removeChild(e);
             }
 
             e.parent(this);
-            this._decls_.add(e);
+            this._dimens_.add(e);
         }
     }
 
-    public PFuncaoMain getFuncMain()
+    public TId getNome()
     {
-        return this._funcMain_;
+        return this._nome_;
     }
 
-    public void setFuncMain(PFuncaoMain node)
+    public void setNome(TId node)
     {
-        if(this._funcMain_ != null)
+        if(this._nome_ != null)
         {
-            this._funcMain_.parent(null);
+            this._nome_.parent(null);
         }
 
         if(node != null)
@@ -89,29 +89,29 @@ public final class APrograma extends PPrograma
             node.parent(this);
         }
 
-        this._funcMain_ = node;
+        this._nome_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._decls_)
-            + toString(this._funcMain_);
+            + toString(this._dimens_)
+            + toString(this._nome_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._decls_.remove(child))
+        if(this._dimens_.remove(child))
         {
             return;
         }
 
-        if(this._funcMain_ == child)
+        if(this._nome_ == child)
         {
-            this._funcMain_ = null;
+            this._nome_ = null;
             return;
         }
 
@@ -122,13 +122,13 @@ public final class APrograma extends PPrograma
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        for(ListIterator<PDeclaracao> i = this._decls_.listIterator(); i.hasNext();)
+        for(ListIterator<TMult> i = this._dimens_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {
                 if(newChild != null)
                 {
-                    i.set((PDeclaracao) newChild);
+                    i.set((TMult) newChild);
                     newChild.parent(this);
                     oldChild.parent(null);
                     return;
@@ -140,9 +140,9 @@ public final class APrograma extends PPrograma
             }
         }
 
-        if(this._funcMain_ == oldChild)
+        if(this._nome_ == oldChild)
         {
-            setFuncMain((PFuncaoMain) newChild);
+            setNome((TId) newChild);
             return;
         }
 

@@ -7,7 +7,8 @@ import compiladorCMenos.analysis.*;
 @SuppressWarnings("nls")
 public final class ARepeticaoComando extends PComando
 {
-    private PComandoRepeticao _comandoRepeticao_;
+    private PExp _teste_;
+    private PComando _bloco_;
 
     public ARepeticaoComando()
     {
@@ -15,10 +16,13 @@ public final class ARepeticaoComando extends PComando
     }
 
     public ARepeticaoComando(
-        @SuppressWarnings("hiding") PComandoRepeticao _comandoRepeticao_)
+        @SuppressWarnings("hiding") PExp _teste_,
+        @SuppressWarnings("hiding") PComando _bloco_)
     {
         // Constructor
-        setComandoRepeticao(_comandoRepeticao_);
+        setTeste(_teste_);
+
+        setBloco(_bloco_);
 
     }
 
@@ -26,7 +30,8 @@ public final class ARepeticaoComando extends PComando
     public Object clone()
     {
         return new ARepeticaoComando(
-            cloneNode(this._comandoRepeticao_));
+            cloneNode(this._teste_),
+            cloneNode(this._bloco_));
     }
 
     @Override
@@ -35,16 +40,16 @@ public final class ARepeticaoComando extends PComando
         ((Analysis) sw).caseARepeticaoComando(this);
     }
 
-    public PComandoRepeticao getComandoRepeticao()
+    public PExp getTeste()
     {
-        return this._comandoRepeticao_;
+        return this._teste_;
     }
 
-    public void setComandoRepeticao(PComandoRepeticao node)
+    public void setTeste(PExp node)
     {
-        if(this._comandoRepeticao_ != null)
+        if(this._teste_ != null)
         {
-            this._comandoRepeticao_.parent(null);
+            this._teste_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +62,55 @@ public final class ARepeticaoComando extends PComando
             node.parent(this);
         }
 
-        this._comandoRepeticao_ = node;
+        this._teste_ = node;
+    }
+
+    public PComando getBloco()
+    {
+        return this._bloco_;
+    }
+
+    public void setBloco(PComando node)
+    {
+        if(this._bloco_ != null)
+        {
+            this._bloco_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._bloco_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._comandoRepeticao_);
+            + toString(this._teste_)
+            + toString(this._bloco_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoRepeticao_ == child)
+        if(this._teste_ == child)
         {
-            this._comandoRepeticao_ = null;
+            this._teste_ = null;
+            return;
+        }
+
+        if(this._bloco_ == child)
+        {
+            this._bloco_ = null;
             return;
         }
 
@@ -84,9 +121,15 @@ public final class ARepeticaoComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoRepeticao_ == oldChild)
+        if(this._teste_ == oldChild)
         {
-            setComandoRepeticao((PComandoRepeticao) newChild);
+            setTeste((PExp) newChild);
+            return;
+        }
+
+        if(this._bloco_ == oldChild)
+        {
+            setBloco((PComando) newChild);
             return;
         }
 
