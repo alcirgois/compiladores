@@ -50,117 +50,151 @@ Ignored Tokens
 	branco, coment_linha, coment_anin;
 
 Productions
-	programa = [decls]:seq_declaracao? [func_main]:decl_funcao_main;
+	programa = [decls]:seq_declaracao? [func_main]:decl_funcao_main {-> New programa([decls.declaracao], func_main.funcao_main)};
 
-	seq_declaracao = declaracao+;
+	seq_declaracao {-> declaracao*} =
+		  {unico} [decl]:declaracao {-> [decl.declaracao]}
+		| {lista} [decl]:declaracao [resto]:seq_declaracao {-> [decl.declaracao, resto.declaracao]};
 
-	decl_funcao_main = [void]:tipo_avalorado [main]:id a_par p_chave_void f_par [bloco]:bloco;
+	decl_funcao_main {-> funcao_main} = [nome]:id a_par p_chave_void f_par a_chave [comando]:comando+ f_chave {-> New funcao_main(nome, [comando.comando])};
+
+	declaracao {-> declaracao} = 
+		  {variavel} decl_variavel p_virg {-> decl_variavel.declaracao}
+		| {funcao}   decl_funcao {-> decl_funcao.declaracao};
+
+	decl_variavel {-> declaracao} =
+		  {variavel_int} [tipo]:p_chave_int [nome]:id [dimens]:parametro_entre_colchete? {-> New declaracao.var_int(nome, [dimens.exp])}
+		| {variavel_str} [tipo]:p_chave_string [nome]:id [dimens]:parametro_entre_colchete? {-> New declaracao.var_str(nome, [dimens.exp])};
+
+	decl_funcao {-> declaracao} =
+		  {normal_int} [tipo]:p_chave_int [nome]:id a_par [params]:seq_decl_parametro? f_par [bloco]:bloco {-> New declaracao.funcao_int(nome, [params.parametro], [bloco.comando])}
+		| {normal_str} [tipo]:p_chave_string [nome]:id a_par [params]:seq_decl_parametro? f_par [bloco]:bloco {-> New declaracao.funcao_str(nome, [params.parametro], [bloco.comando])}
+		| {normal_void} [tipo]:p_chave_void [nome]:id a_par [params]:seq_decl_parametro? f_par [bloco]:bloco {-> New declaracao.proced(nome, [params.parametro], [bloco.comando])};
+		
+	parametro_entre_colchete {-> exp*} = a_col [dimens]:seq_parametro f_col{->[dimens.exp]};	
+
+	seq_decl_parametro {-> parametro*} =
+		  {lista} [params]:seq_decl_parametro virg [param]:decl_parametro {->[params.parametro, param.parametro]}
+		| {unico} [param]:decl_parametro {->[param.parametro]};
+
+	decl_parametro {-> parametro} =
+		  {variavel_int} [tipo]:p_chave_int [nome]:id  {-> New parametro.param_int([], nome)}
+		| {variavel_str} [tipo]:p_chave_string [nome]:id  {-> New parametro.param_str([], nome)}
+		| {matriz_int}   [tipo]:p_chave_int [dimens]:mult+ [nome]:id {-> New parametro.param_int([dimens], nome)}
+		| {matriz_str}   [tipo]:p_chave_string [dimens]:mult+ [nome]:id {-> New parametro.param_str([dimens], nome)};
+
+	bloco {-> comando*} = a_chave [comandos]:seq_comando? f_chave {-> [comandos.comando]};
+
+	seq_comando {-> comando*} = comando+ {-> [comando]};
+
+	comando {-> comando} =
+		  {sem_sub_comando} sem_sub_comando {-> sem_sub_comando.comando}
+		| {repeticao}       comando_repeticao {-> comando_repeticao.comando}
+		| {condicao}        comando_condicao  {-> comando_condicao.comando}
+		| {condicao_else}   comando_condicao_else {-> comando_condicao_else.comando};
+
+	comando_if_nao_curto {-> comando} =
+		  {sem_sub_comando}            sem_sub_comando {-> sem_sub_comando.comando}
+		| {repeticao_if_nao_curto}     comando_repeticao_if_nao_curto {-> comando_repeticao_if_nao_curto.comando}
+		| {condicao_else_if_nao_curto} comando_condicao_else_if_nao_curto {->comando_condicao_else_if_nao_curto.comando};
+
+	sem_sub_comando {-> comando} = 
+	      {bloco}      bloco {-> New comando.bloco ([bloco.comando])}
+	    | {declaracao_int} [decl]:p_chave_int [nome]:id p_virg [dimens]:parametro_entre_colchete? {-> New comando.decl_var_int(nome, [dimens.exp])}
+	    | {declaracao_str} [decl]:p_chave_string [nome]:id p_virg [dimens]:parametro_entre_colchete? {-> New comando.decl_var_str(nome, [dimens.exp])}
+	    | {atribuicao} [atrib]:comando_atribuicao p_virg {-> atrib.comando}
+	    | {funcao}     [func]:comando_funcao p_virg {-> func.comando}
+	    | {retorno}    [retrn]:comando_retorno p_virg {-> retrn.comando};
+
+	comando_atribuicao {-> comando} =
+		  {variavel} [nome]:id atrib [valor]:exp_geral {-> New comando.atribuicao(nome,[], valor.exp)}
+		| {matriz}   [nome]:id a_col [indices]:seq_parametro f_col atrib [valor]:exp_geral {-> New comando.atribuicao(nome, [indices.exp], valor.exp)};
+
+	comando_repeticao {-> comando} = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando {-> New comando.repeticao(condicao.exp, comandos.comando)};
+
+	comando_condicao {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando)};
+
+	comando_condicao_else {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando {-> New comando.condicao_if_else(condicao.exp, then_comandos.comando, else_comandos.comando)};
+
+	comando_repeticao_if_nao_curto {-> comando} = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, comandos.comando)};
+
+	comando_condicao_else_if_nao_curto {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando_if_nao_curto {-> New comando.condicao_if_else(condicao.exp, then_comandos.comando, else_comandos.comando)};
+ 
+	comando_funcao  {-> comando}= [nome]:id a_par [args]:seq_parametro? f_par {-> New comando.funcao(nome, [args.exp])};
+
+	seq_parametro {-> exp*} =
+		  {lista} [args]:seq_parametro virg [arg]:exp_geral {-> [args.exp, arg.exp]}
+		| {unico} [arg]:exp_geral {-> [arg.exp]};
+
+	comando_retorno {-> comando} = p_chave_return [valor]:exp_geral {-> New comando.retorno(valor.exp)};
+
+	exp_geral {-> exp} =
+	    {maior_que}      [esq]:exp maior [dir]:exp {-> New exp.maior_que(esq.exp, dir.exp)}
+	  | {maior_ou_igual} [esq]:exp maior_i [dir]:exp {-> New exp.maior_igual(esq.exp, dir.exp)}
+	  | {menor_que}      [esq]:exp menor [dir]:exp {-> New exp.menor_que(esq.exp, dir.exp)}
+	  | {menor_ou_igual} [esq]:exp menor_i [dir]:exp {-> New exp.menor_igual(esq.exp, dir.exp)}
+	  | {igual}          [esq]:exp igual [dir]:exp {-> New exp.igual(esq.exp, dir.exp)}
+	  | {diferente}      [esq]:exp dif [dir]:exp {-> New exp.diferente(esq.exp, dir.exp)}
+	  | {exp}            exp {-> exp};
+	
+	 exp {-> exp} =
+	    {soma} [esq]:exp soma [dir]:termo {-> New exp.soma(esq.exp, dir.exp)}
+	  | {sub} [esq]:exp sub [dir]:termo {-> New exp.sub(esq.exp, dir.exp)}
+	  | {termo}   termo {-> termo.exp};
+	
+	 termo {-> exp} =
+	    {mult}  [esq]:termo mult [dir]:fator {-> New exp.mult(esq.exp, dir.exp)}
+	  | {div}   [esq]:termo div [dir]:fator {-> New exp.div(esq.exp, dir.exp)}
+	  | {fator} fator {-> fator.exp};
+	
+	 fator {-> exp} =
+	    {id}     id {-> New exp.var(id, [])}
+	  | {matriz} [nome]:id a_col [indices]:seq_parametro f_col {-> New exp.var(nome, [indices.exp])}
+	  | {num}    num {-> New exp.num(num)}
+	  | {str}    str {-> New exp.str(str)}
+	  | {funcao} [nome]:id a_par [args]:seq_parametro? f_par {-> New exp.funcao(nome, [args.exp])}
+	  | {par}    a_par [exp]:exp_geral f_par {-> exp.exp};
+		
+Abstract Syntax Tree
+
+	programa = [decls]:declaracao* [func_main]:funcao_main;
 
 	declaracao =
-		  {variavel} decl_variavel p_virg
-		| {funcao}   decl_funcao;
-
-	decl_variavel =
-		  {variavel} [tipo]:tipo_valorado [nome]:id
-		| {matriz}   [tipo]:tipo_valorado [nome]:id a_col [dimens]:seq_parametro f_col;
-
-	decl_funcao =
-		  {normal}        [tipo]:tipo [nome]:id a_par [params]:seq_decl_parametro? f_par [bloco]:bloco
-		| {sem_parametro} [tipo]:tipo [nome]:id a_par tipo_avalorado f_par [bloco]:bloco;
-
-	tipo =
-		  {valorado}  tipo_valorado
-		| {avalorado} tipo_avalorado;
-
-	tipo_valorado =
-		  {int}    p_chave_int
-		| {string} p_chave_string;
+		  {var_int}    [nome]:id [dimens]:exp*
+		| {var_str}    [nome]:id [dimens]:exp*
+		| {proced}     [nome]:id [pars]:parametro* [comando]:comando*
+		| {funcao_int} [nome]:id [pars]:parametro* [comando]:comando*
+		| {funcao_str} [nome]:id [pars]:parametro* [comando]:comando*;
 	
-	tipo_avalorado = p_chave_void;
-
-	seq_decl_parametro =
-		  {lista} [params]:seq_decl_parametro virg [param]:decl_parametro
-		| {unico} [param]:decl_parametro;
-
-	decl_parametro =
-		  {variavel} [tipo]:tipo_valorado [nome]:id
-		| {matriz}   [tipo]:tipo_valorado [dimens]:mult+ [nome]:id;
-
-	bloco = a_chave [comandos]:seq_comando? f_chave;
-
-	seq_comando = comando+;
-
+	funcao_main =  [nome]:id [comando]:comando*;
+	
+	parametro = 
+		  {param_int} [dimens]:mult* [nome]:id
+		| {param_str} [dimens]:mult* [nome]:id;
+	
 	comando =
-		  {sem_sub_comando} sem_sub_comando
-		| {repeticao}       comando_repeticao
-		| {condicao}        comando_condicao
-		| {condicao_else}   comando_condicao_else;
-
-	comando_if_nao_curto =
-		  {sem_sub_comando}            sem_sub_comando
-		| {repeticao_if_nao_curto}     comando_repeticao_if_nao_curto
-		| {condicao_else_if_nao_curto} comando_condicao_else_if_nao_curto;
-
-	sem_sub_comando = 
-	      {bloco}      bloco
-	    | {declaracao} [decl]:decl_variavel p_virg
-	    | {atribuicao} [atrib]:comando_atribuicao p_virg
-	    | {funcao}     [func]:comando_funcao p_virg
-	    | {retorno}    [retrn]:comando_retorno p_virg;
-
-	comando_atribuicao =
-		  {variavel} [nome]:id atrib [valor]:exp_geral
-		| {matriz}   [nome]:id a_col [indices]:seq_parametro f_col atrib [valor]:exp_geral;
-
-	comando_repeticao = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando;
-
-	comando_condicao = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando;
-
-	comando_condicao_else = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando;
-
-	comando_repeticao_if_nao_curto = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando_if_nao_curto;
-
-	comando_condicao_else_if_nao_curto = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando_if_nao_curto;
-
-	comando_funcao = [nome]:id a_par [args]:seq_parametro? f_par;
-
-	seq_parametro =
-		  {lista} [args]:seq_parametro virg [arg]:exp_geral
-		| {unico} [arg]:exp_geral;
-
-	comando_retorno = p_chave_return [valor]:exp_geral;
-
-	exp_geral =
-		  {op_bool} [esq]:exp op_bool [dir]:exp
-		| {exp}     exp;
-
+		  {bloco}        comando*
+		| {decl_var_int} [nome]:id [dimens]:exp*
+		| {decl_var_str} [nome]:id [dimens]:exp*
+		| {atribuicao}   [nome]:id [indices]:exp* [valor]:exp
+		| {funcao}       [nome]:id [args]:exp*
+		| {retorno}      [valor]:exp
+		| {repeticao}    [teste]:exp [bloco]:comando
+		| {condicao}	 [teste]:exp [bloco_the]:comando
+		| {condicao_if_else}     [teste]:exp [bloco_then]:comando [bloco_else]:comando;
+	
 	exp =
-		  {op_soma} [esq]:exp op_soma [dir]:termo
-		| {termo}   termo;
-
-	termo =
-		  {op_mult} [esq]:termo op_mult [dir]:fator
-		| {fator}   fator;
-
-	fator =
-		  {id}     id
-		| {num}    num
-		| {str}    str
-		| {funcao} comando_funcao
-		| {par}    a_par [exp]:exp_geral f_par;
-
-	op_bool =
-		  {maior_que}      maior
-		| {maior_ou_igual} maior_i
-		| {menor_que}      menor
-		| {menor_ou_igual} menor_i
-		| {igual}          igual
-		| {diferente}      dif;
-
-	op_soma =
-		  {soma} soma
-		| {sub}  sub;
-
-	op_mult =
-		  {mult} mult
-		| {div}  div;
+		  {maior_que}   [esq]:exp [dir]:exp
+		| {maior_igual} [esq]:exp [dir]:exp
+		| {menor_que}   [esq]:exp [dir]:exp
+		| {menor_igual} [esq]:exp [dir]:exp
+		| {igual}       [esq]:exp [dir]:exp
+		| {diferente}   [esq]:exp [dir]:exp
+		| {soma}        [esq]:exp [dir]:exp
+		| {sub}         [esq]:exp [dir]:exp
+		| {mult}        [esq]:exp [dir]:exp
+		| {div}         [esq]:exp [dir]:exp
+		| {var}			[nome]:id [indices]:exp*
+		| {num}         num
+		| {str}			str
+		| {funcao}      [nome]:id [args]:exp*;
