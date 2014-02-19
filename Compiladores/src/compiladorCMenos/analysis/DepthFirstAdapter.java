@@ -82,13 +82,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getNome().apply(this);
         }
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         outAVarIntDeclaracao(node);
     }
 
@@ -110,14 +103,57 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getNome().apply(this);
         }
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         outAVarStrDeclaracao(node);
+    }
+
+    public void inAMatrizIntDeclaracao(AMatrizIntDeclaracao node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMatrizIntDeclaracao(AMatrizIntDeclaracao node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMatrizIntDeclaracao(AMatrizIntDeclaracao node)
+    {
+        inAMatrizIntDeclaracao(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        if(node.getDimen() != null)
+        {
+            node.getDimen().apply(this);
+        }
+        outAMatrizIntDeclaracao(node);
+    }
+
+    public void inAMatrizStrDeclaracao(AMatrizStrDeclaracao node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMatrizStrDeclaracao(AMatrizStrDeclaracao node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMatrizStrDeclaracao(AMatrizStrDeclaracao node)
+    {
+        inAMatrizStrDeclaracao(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        if(node.getDimen() != null)
+        {
+            node.getDimen().apply(this);
+        }
+        outAMatrizStrDeclaracao(node);
     }
 
     public void inAProcedDeclaracao(AProcedDeclaracao node)
@@ -253,60 +289,88 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAFuncaoMain(node);
     }
 
-    public void inAParamIntParametro(AParamIntParametro node)
+    public void inAParamVarIntParametro(AParamVarIntParametro node)
     {
         defaultIn(node);
     }
 
-    public void outAParamIntParametro(AParamIntParametro node)
+    public void outAParamVarIntParametro(AParamVarIntParametro node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAParamIntParametro(AParamIntParametro node)
+    public void caseAParamVarIntParametro(AParamVarIntParametro node)
     {
-        inAParamIntParametro(node);
-        {
-            List<TMult> copy = new ArrayList<TMult>(node.getDimens());
-            for(TMult e : copy)
-            {
-                e.apply(this);
-            }
-        }
+        inAParamVarIntParametro(node);
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
-        outAParamIntParametro(node);
+        outAParamVarIntParametro(node);
     }
 
-    public void inAParamStrParametro(AParamStrParametro node)
+    public void inAParamVarStrParametro(AParamVarStrParametro node)
     {
         defaultIn(node);
     }
 
-    public void outAParamStrParametro(AParamStrParametro node)
+    public void outAParamVarStrParametro(AParamVarStrParametro node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAParamStrParametro(AParamStrParametro node)
+    public void caseAParamVarStrParametro(AParamVarStrParametro node)
     {
-        inAParamStrParametro(node);
-        {
-            List<TMult> copy = new ArrayList<TMult>(node.getDimens());
-            for(TMult e : copy)
-            {
-                e.apply(this);
-            }
-        }
+        inAParamVarStrParametro(node);
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
-        outAParamStrParametro(node);
+        outAParamVarStrParametro(node);
+    }
+
+    public void inAParamMatrizIntParametro(AParamMatrizIntParametro node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAParamMatrizIntParametro(AParamMatrizIntParametro node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAParamMatrizIntParametro(AParamMatrizIntParametro node)
+    {
+        inAParamMatrizIntParametro(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAParamMatrizIntParametro(node);
+    }
+
+    public void inAParamMatrizStrParametro(AParamMatrizStrParametro node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAParamMatrizStrParametro(AParamMatrizStrParametro node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAParamMatrizStrParametro(AParamMatrizStrParametro node)
+    {
+        inAParamMatrizStrParametro(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAParamMatrizStrParametro(node);
     }
 
     public void inABlocoComando(ABlocoComando node)
@@ -351,13 +415,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getNome().apply(this);
         }
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         outADeclVarIntComando(node);
     }
 
@@ -379,46 +436,111 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getNome().apply(this);
         }
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         outADeclVarStrComando(node);
     }
 
-    public void inAAtribuicaoComando(AAtribuicaoComando node)
+    public void inADeclMatrizIntComando(ADeclMatrizIntComando node)
     {
         defaultIn(node);
     }
 
-    public void outAAtribuicaoComando(AAtribuicaoComando node)
+    public void outADeclMatrizIntComando(ADeclMatrizIntComando node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAtribuicaoComando(AAtribuicaoComando node)
+    public void caseADeclMatrizIntComando(ADeclMatrizIntComando node)
     {
-        inAAtribuicaoComando(node);
+        inADeclMatrizIntComando(node);
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
+        if(node.getDimen() != null)
         {
-            List<PExp> copy = new ArrayList<PExp>(node.getIndices());
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
+            node.getDimen().apply(this);
+        }
+        outADeclMatrizIntComando(node);
+    }
+
+    public void inADeclMatrizStrComando(ADeclMatrizStrComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADeclMatrizStrComando(ADeclMatrizStrComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADeclMatrizStrComando(ADeclMatrizStrComando node)
+    {
+        inADeclMatrizStrComando(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        if(node.getDimen() != null)
+        {
+            node.getDimen().apply(this);
+        }
+        outADeclMatrizStrComando(node);
+    }
+
+    public void inAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    {
+        inAAtribuicaoVarComando(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
         }
         if(node.getValor() != null)
         {
             node.getValor().apply(this);
         }
-        outAAtribuicaoComando(node);
+        outAAtribuicaoVarComando(node);
+    }
+
+    public void inAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
+    {
+        inAAtribuicaoMatrizComando(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        if(node.getIndice() != null)
+        {
+            node.getIndice().apply(this);
+        }
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        outAAtribuicaoMatrizComando(node);
     }
 
     public void inAFuncaoComando(AFuncaoComando node)
@@ -517,36 +639,11 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getBlocoThen().apply(this);
         }
-        outACondicaoComando(node);
-    }
-
-    public void inACondicaoIfElseComando(ACondicaoIfElseComando node)
-    {
-        defaultIn(node);
-    }
-
-    public void outACondicaoIfElseComando(ACondicaoIfElseComando node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseACondicaoIfElseComando(ACondicaoIfElseComando node)
-    {
-        inACondicaoIfElseComando(node);
-        if(node.getTeste() != null)
-        {
-            node.getTeste().apply(this);
-        }
-        if(node.getBlocoThen() != null)
-        {
-            node.getBlocoThen().apply(this);
-        }
         if(node.getBlocoElse() != null)
         {
             node.getBlocoElse().apply(this);
         }
-        outACondicaoIfElseComando(node);
+        outACondicaoComando(node);
     }
 
     public void inAMaiorQueExp(AMaiorQueExp node)
@@ -817,14 +914,32 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getNome().apply(this);
         }
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getIndices());
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         outAVarExp(node);
+    }
+
+    public void inAMatrizExp(AMatrizExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMatrizExp(AMatrizExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMatrizExp(AMatrizExp node)
+    {
+        inAMatrizExp(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        if(node.getIndice() != null)
+        {
+            node.getIndice().apply(this);
+        }
+        outAMatrizExp(node);
     }
 
     public void inANumExp(ANumExp node)

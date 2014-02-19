@@ -2,27 +2,22 @@
 
 package compiladorCMenos.node;
 
-import java.util.*;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AParamIntParametro extends PParametro
+public final class AParamMatrizStrParametro extends PParametro
 {
-    private final LinkedList<TMult> _dimens_ = new LinkedList<TMult>();
     private TId _nome_;
 
-    public AParamIntParametro()
+    public AParamMatrizStrParametro()
     {
         // Constructor
     }
 
-    public AParamIntParametro(
-        @SuppressWarnings("hiding") List<?> _dimens_,
+    public AParamMatrizStrParametro(
         @SuppressWarnings("hiding") TId _nome_)
     {
         // Constructor
-        setDimens(_dimens_);
-
         setNome(_nome_);
 
     }
@@ -30,41 +25,14 @@ public final class AParamIntParametro extends PParametro
     @Override
     public Object clone()
     {
-        return new AParamIntParametro(
-            cloneList(this._dimens_),
+        return new AParamMatrizStrParametro(
             cloneNode(this._nome_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAParamIntParametro(this);
-    }
-
-    public LinkedList<TMult> getDimens()
-    {
-        return this._dimens_;
-    }
-
-    public void setDimens(List<?> list)
-    {
-        for(TMult e : this._dimens_)
-        {
-            e.parent(null);
-        }
-        this._dimens_.clear();
-
-        for(Object obj_e : list)
-        {
-            TMult e = (TMult) obj_e;
-            if(e.parent() != null)
-            {
-                e.parent().removeChild(e);
-            }
-
-            e.parent(this);
-            this._dimens_.add(e);
-        }
+        ((Analysis) sw).caseAParamMatrizStrParametro(this);
     }
 
     public TId getNome()
@@ -96,7 +64,6 @@ public final class AParamIntParametro extends PParametro
     public String toString()
     {
         return ""
-            + toString(this._dimens_)
             + toString(this._nome_);
     }
 
@@ -104,11 +71,6 @@ public final class AParamIntParametro extends PParametro
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._dimens_.remove(child))
-        {
-            return;
-        }
-
         if(this._nome_ == child)
         {
             this._nome_ = null;
@@ -122,24 +84,6 @@ public final class AParamIntParametro extends PParametro
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        for(ListIterator<TMult> i = this._dimens_.listIterator(); i.hasNext();)
-        {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((TMult) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
-        }
-
         if(this._nome_ == oldChild)
         {
             setNome((TId) newChild);

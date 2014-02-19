@@ -79,14 +79,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAVarIntDeclaracao(AVarIntDeclaracao node)
     {
         inAVarIntDeclaracao(node);
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            Collections.reverse(copy);
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
@@ -108,19 +100,61 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAVarStrDeclaracao(AVarStrDeclaracao node)
     {
         inAVarStrDeclaracao(node);
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            Collections.reverse(copy);
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
         outAVarStrDeclaracao(node);
+    }
+
+    public void inAMatrizIntDeclaracao(AMatrizIntDeclaracao node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMatrizIntDeclaracao(AMatrizIntDeclaracao node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMatrizIntDeclaracao(AMatrizIntDeclaracao node)
+    {
+        inAMatrizIntDeclaracao(node);
+        if(node.getDimen() != null)
+        {
+            node.getDimen().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAMatrizIntDeclaracao(node);
+    }
+
+    public void inAMatrizStrDeclaracao(AMatrizStrDeclaracao node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMatrizStrDeclaracao(AMatrizStrDeclaracao node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMatrizStrDeclaracao(AMatrizStrDeclaracao node)
+    {
+        inAMatrizStrDeclaracao(node);
+        if(node.getDimen() != null)
+        {
+            node.getDimen().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAMatrizStrDeclaracao(node);
     }
 
     public void inAProcedDeclaracao(AProcedDeclaracao node)
@@ -263,62 +297,88 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAFuncaoMain(node);
     }
 
-    public void inAParamIntParametro(AParamIntParametro node)
+    public void inAParamVarIntParametro(AParamVarIntParametro node)
     {
         defaultIn(node);
     }
 
-    public void outAParamIntParametro(AParamIntParametro node)
+    public void outAParamVarIntParametro(AParamVarIntParametro node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAParamIntParametro(AParamIntParametro node)
+    public void caseAParamVarIntParametro(AParamVarIntParametro node)
     {
-        inAParamIntParametro(node);
+        inAParamVarIntParametro(node);
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
-        {
-            List<TMult> copy = new ArrayList<TMult>(node.getDimens());
-            Collections.reverse(copy);
-            for(TMult e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        outAParamIntParametro(node);
+        outAParamVarIntParametro(node);
     }
 
-    public void inAParamStrParametro(AParamStrParametro node)
+    public void inAParamVarStrParametro(AParamVarStrParametro node)
     {
         defaultIn(node);
     }
 
-    public void outAParamStrParametro(AParamStrParametro node)
+    public void outAParamVarStrParametro(AParamVarStrParametro node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAParamStrParametro(AParamStrParametro node)
+    public void caseAParamVarStrParametro(AParamVarStrParametro node)
     {
-        inAParamStrParametro(node);
+        inAParamVarStrParametro(node);
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
+        outAParamVarStrParametro(node);
+    }
+
+    public void inAParamMatrizIntParametro(AParamMatrizIntParametro node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAParamMatrizIntParametro(AParamMatrizIntParametro node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAParamMatrizIntParametro(AParamMatrizIntParametro node)
+    {
+        inAParamMatrizIntParametro(node);
+        if(node.getNome() != null)
         {
-            List<TMult> copy = new ArrayList<TMult>(node.getDimens());
-            Collections.reverse(copy);
-            for(TMult e : copy)
-            {
-                e.apply(this);
-            }
+            node.getNome().apply(this);
         }
-        outAParamStrParametro(node);
+        outAParamMatrizIntParametro(node);
+    }
+
+    public void inAParamMatrizStrParametro(AParamMatrizStrParametro node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAParamMatrizStrParametro(AParamMatrizStrParametro node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAParamMatrizStrParametro(AParamMatrizStrParametro node)
+    {
+        inAParamMatrizStrParametro(node);
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAParamMatrizStrParametro(node);
     }
 
     public void inABlocoComando(ABlocoComando node)
@@ -360,14 +420,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseADeclVarIntComando(ADeclVarIntComando node)
     {
         inADeclVarIntComando(node);
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            Collections.reverse(copy);
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
@@ -389,14 +441,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseADeclVarStrComando(ADeclVarStrComando node)
     {
         inADeclVarStrComando(node);
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getDimens());
-            Collections.reverse(copy);
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
@@ -404,37 +448,108 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outADeclVarStrComando(node);
     }
 
-    public void inAAtribuicaoComando(AAtribuicaoComando node)
+    public void inADeclMatrizIntComando(ADeclMatrizIntComando node)
     {
         defaultIn(node);
     }
 
-    public void outAAtribuicaoComando(AAtribuicaoComando node)
+    public void outADeclMatrizIntComando(ADeclMatrizIntComando node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAtribuicaoComando(AAtribuicaoComando node)
+    public void caseADeclMatrizIntComando(ADeclMatrizIntComando node)
     {
-        inAAtribuicaoComando(node);
-        if(node.getValor() != null)
+        inADeclMatrizIntComando(node);
+        if(node.getDimen() != null)
         {
-            node.getValor().apply(this);
-        }
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getIndices());
-            Collections.reverse(copy);
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
+            node.getDimen().apply(this);
         }
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
-        outAAtribuicaoComando(node);
+        outADeclMatrizIntComando(node);
+    }
+
+    public void inADeclMatrizStrComando(ADeclMatrizStrComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADeclMatrizStrComando(ADeclMatrizStrComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADeclMatrizStrComando(ADeclMatrizStrComando node)
+    {
+        inADeclMatrizStrComando(node);
+        if(node.getDimen() != null)
+        {
+            node.getDimen().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outADeclMatrizStrComando(node);
+    }
+
+    public void inAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    {
+        inAAtribuicaoVarComando(node);
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAAtribuicaoVarComando(node);
+    }
+
+    public void inAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
+    {
+        inAAtribuicaoMatrizComando(node);
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        if(node.getIndice() != null)
+        {
+            node.getIndice().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAAtribuicaoMatrizComando(node);
     }
 
     public void inAFuncaoComando(AFuncaoComando node)
@@ -526,31 +641,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseACondicaoComando(ACondicaoComando node)
     {
         inACondicaoComando(node);
-        if(node.getBlocoThen() != null)
-        {
-            node.getBlocoThen().apply(this);
-        }
-        if(node.getTeste() != null)
-        {
-            node.getTeste().apply(this);
-        }
-        outACondicaoComando(node);
-    }
-
-    public void inACondicaoIfElseComando(ACondicaoIfElseComando node)
-    {
-        defaultIn(node);
-    }
-
-    public void outACondicaoIfElseComando(ACondicaoIfElseComando node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseACondicaoIfElseComando(ACondicaoIfElseComando node)
-    {
-        inACondicaoIfElseComando(node);
         if(node.getBlocoElse() != null)
         {
             node.getBlocoElse().apply(this);
@@ -563,7 +653,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getTeste().apply(this);
         }
-        outACondicaoIfElseComando(node);
+        outACondicaoComando(node);
     }
 
     public void inAMaiorQueExp(AMaiorQueExp node)
@@ -830,19 +920,36 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAVarExp(AVarExp node)
     {
         inAVarExp(node);
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getIndices());
-            Collections.reverse(copy);
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
         if(node.getNome() != null)
         {
             node.getNome().apply(this);
         }
         outAVarExp(node);
+    }
+
+    public void inAMatrizExp(AMatrizExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMatrizExp(AMatrizExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMatrizExp(AMatrizExp node)
+    {
+        inAMatrizExp(node);
+        if(node.getIndice() != null)
+        {
+            node.getIndice().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAMatrizExp(node);
     }
 
     public void inANumExp(ANumExp node)

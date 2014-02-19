@@ -184,14 +184,8 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTFComentAnin(@SuppressWarnings("unused") TFComentAnin node)
-    {
-        this.index = 29;
-    }
-
-    @Override
     public void caseEOF(@SuppressWarnings("unused") EOF node)
     {
-        this.index = 30;
+        this.index = 29;
     }
 }

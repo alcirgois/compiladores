@@ -47,24 +47,26 @@ Tokens
 	{coment} f_coment_anin = '*'+ '/';
 
 Ignored Tokens
-	branco, coment_linha, coment_anin;
+	branco, coment_linha, coment_anin, f_coment_anin;
 
 Productions
 	programa = [decls]:seq_declaracao? [func_main]:decl_funcao_main {-> New programa([decls.declaracao], func_main.funcao_main)};
 
 	seq_declaracao {-> declaracao*} =
 		  {unico} [decl]:declaracao {-> [decl.declaracao]}
-		| {lista} [decl]:declaracao [resto]:seq_declaracao {-> [decl.declaracao, resto.declaracao]};
+		| {lista} [decls]:seq_declaracao [decl]:declaracao {-> [decls.declaracao, decl.declaracao]};
 
-	decl_funcao_main {-> funcao_main} = [nome]:id a_par p_chave_void f_par a_chave [bloco]:comando+ f_chave {-> New funcao_main(nome, [bloco.comando])};
+	decl_funcao_main {-> funcao_main} = [tipo]:p_chave_void [nome]:id a_par p_chave_void f_par [bloco]:bloco {-> New funcao_main(nome, [bloco.comando])};
 
 	declaracao {-> declaracao} =
 		  {variavel} decl_variavel p_virg {-> decl_variavel.declaracao}
 		| {funcao}   decl_funcao {-> decl_funcao.declaracao};
 
 	decl_variavel {-> declaracao} =
-		  {variavel_int} [tipo]:p_chave_int [nome]:id [dimens]:parametro_entre_colchete? {-> New declaracao.var_int(nome, [dimens.exp])}
-		| {variavel_str} [tipo]:p_chave_string [nome]:id [dimens]:parametro_entre_colchete? {-> New declaracao.var_str(nome, [dimens.exp])};
+		  {matriz_int}   [tipo]:p_chave_int [nome]:id a_col [dimen]:num f_col {-> New declaracao.matriz_int(nome, dimen)}
+		| {matriz_str}   [tipo]:p_chave_string [nome]:id a_col [dimen]:num f_col {-> New declaracao.matriz_str(nome, dimen)}
+		| {variavel_int} [tipo]:p_chave_int [nome]:id {-> New declaracao.var_int(nome)}
+		| {variavel_str} [tipo]:p_chave_string [nome]:id {-> New declaracao.var_str(nome)};
 
 	decl_funcao {-> declaracao} =
 		  {normal_int}     [tipo]:p_chave_int [nome]:id a_par [params]:seq_decl_parametro? f_par [bloco]:bloco {-> New declaracao.funcao_int(nome, [params.parametro], [bloco.comando])}
@@ -74,17 +76,15 @@ Productions
 		| {sem_param_str}  [tipo]:p_chave_string [nome]:id a_par p_chave_void f_par [bloco]:bloco {-> New declaracao.funcao_str(nome, [], [bloco.comando])}
 		| {sem_param_void} [tipo]:p_chave_void [nome]:id a_par p_chave_void f_par [bloco]:bloco {-> New declaracao.proced(nome, [], [bloco.comando])};
 
-	parametro_entre_colchete {-> exp*} = a_col [dimens]:seq_parametro f_col{-> [dimens.exp]};
-
 	seq_decl_parametro {-> parametro*} =
 		  {lista} [params]:seq_decl_parametro virg [param]:decl_parametro {->[params.parametro, param.parametro]}
 		| {unico} [param]:decl_parametro {->[param.parametro]};
 
 	decl_parametro {-> parametro} =
-		  {variavel_int} [tipo]:p_chave_int [nome]:id  {-> New parametro.param_int([], nome)}
-		| {variavel_str} [tipo]:p_chave_string [nome]:id  {-> New parametro.param_str([], nome)}
-		| {matriz_int}   [tipo]:p_chave_int [dimens]:mult+ [nome]:id {-> New parametro.param_int([dimens], nome)}
-		| {matriz_str}   [tipo]:p_chave_string [dimens]:mult+ [nome]:id {-> New parametro.param_str([dimens], nome)};
+		  {variavel_int} [tipo]:p_chave_int [nome]:id  {-> New parametro.param_var_int(nome)}
+		| {variavel_str} [tipo]:p_chave_string [nome]:id  {-> New parametro.param_var_str(nome)}
+		| {matriz_int}   [tipo]:p_chave_int [nome]:id a_col f_col {-> New parametro.param_matriz_int(nome)}
+		| {matriz_str}   [tipo]:p_chave_string [nome]:id a_col f_col {-> New parametro.param_matriz_str(nome)};
 
 	bloco {-> comando*} = a_chave [comandos]:seq_comando? f_chave {-> [comandos.comando]};
 
@@ -103,33 +103,35 @@ Productions
 
 	sem_sub_comando {-> comando} =
 	      {bloco}      bloco {-> New comando.bloco ([bloco.comando])}
-	    | {declaracao_int} [decl]:p_chave_int [nome]:id p_virg [dimens]:parametro_entre_colchete? {-> New comando.decl_var_int(nome, [dimens.exp])}
-	    | {declaracao_str} [decl]:p_chave_string [nome]:id p_virg [dimens]:parametro_entre_colchete? {-> New comando.decl_var_str(nome, [dimens.exp])}
+	    | {declaracao_matriz_int} [decl]:p_chave_int [nome]:id a_col [dimen]:num f_col p_virg {-> New comando.decl_matriz_int(nome, dimen)}
+	    | {declaracao_matriz_str} [decl]:p_chave_string [nome]:id a_col [dimen]:num f_col p_virg {-> New comando.decl_matriz_str(nome, dimen)}
+	    | {declaracao_var_int} [decl]:p_chave_int [nome]:id p_virg {-> New comando.decl_var_int(nome)}
+	    | {declaracao_var_str} [decl]:p_chave_string [nome]:id p_virg {-> New comando.decl_var_str(nome)}
 	    | {atribuicao} [atrib]:comando_atribuicao p_virg {-> atrib.comando}
 	    | {funcao}     [func]:comando_funcao p_virg {-> func.comando}
 	    | {retorno}    [retrn]:comando_retorno p_virg {-> retrn.comando};
 
 	comando_atribuicao {-> comando} =
-		  {variavel} [nome]:id atrib [valor]:exp_geral {-> New comando.atribuicao(nome,[], valor.exp)}
-		| {matriz}   [nome]:id a_col [indices]:seq_parametro f_col atrib [valor]:exp_geral {-> New comando.atribuicao(nome, [indices.exp], valor.exp)};
+		  {variavel} [nome]:id atrib [valor]:exp_geral {-> New comando.atribuicao_var(nome, valor.exp)}
+		| {matriz}   [nome]:id a_col [indice]:exp_geral f_col atrib [valor]:exp_geral {-> New comando.atribuicao_matriz(nome, indice.exp, valor.exp)};
 
 	comando_repeticao {-> comando} = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando {-> New comando.repeticao(condicao.exp, comandos.comando)};
 
-	comando_condicao {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando)};
+	comando_condicao {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando, Null)};
 
-	comando_condicao_else {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando {-> New comando.condicao_if_else(condicao.exp, then_comandos.comando, else_comandos.comando)};
+	comando_condicao_else {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando, else_comandos.comando)};
 
-	comando_repeticao_if_nao_curto {-> comando} = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, comandos.comando)};
+	comando_repeticao_if_nao_curto {-> comando} = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, comandos.comando, Null)};
 
-	comando_condicao_else_if_nao_curto {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando_if_nao_curto {-> New comando.condicao_if_else(condicao.exp, then_comandos.comando, else_comandos.comando)};
+	comando_condicao_else_if_nao_curto {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, then_comandos.comando, else_comandos.comando)};
  
-	comando_funcao  {-> comando} = [nome]:id a_par [args]:seq_parametro? f_par {-> New comando.funcao(nome, [args.exp])};
+	comando_funcao {-> comando} = [nome]:id a_par [args]:seq_parametro? f_par {-> New comando.funcao(nome, [args.exp])};
 
 	seq_parametro {-> exp*} =
 		  {lista} [args]:seq_parametro virg [arg]:exp_geral {-> [args.exp, arg.exp]}
 		| {unico} [arg]:exp_geral {-> [arg.exp]};
 
-	comando_retorno {-> comando} = p_chave_return [valor]:exp_geral {-> New comando.retorno(valor.exp)};
+	comando_retorno {-> comando} = p_chave_return [valor]:exp_geral? {-> New comando.retorno(valor.exp)};
 
 	exp_geral {-> exp} =
 	    {maior_que}      [esq]:exp maior [dir]:exp {-> New exp.maior_que(esq.exp, dir.exp)}
@@ -151,8 +153,8 @@ Productions
 	  | {fator} fator {-> fator.exp};
 
 	 fator {-> exp} =
-	    {id}     id {-> New exp.var(id, [])}
-	  | {matriz} [nome]:id a_col [indices]:seq_parametro f_col {-> New exp.var(nome, [indices.exp])}
+	    {id}     id {-> New exp.var(id)}
+	  | {matriz} [nome]:id a_col [indice]:exp_geral f_col {-> New exp.matriz(nome, indice.exp)}
 	  | {num}    num {-> New exp.num(num)}
 	  | {str}    str {-> New exp.str(str)}
 	  | {funcao} [nome]:id a_par [args]:seq_parametro? f_par {-> New exp.funcao(nome, [args.exp])}
@@ -163,8 +165,10 @@ Abstract Syntax Tree
 	programa = [decls]:declaracao* [func_main]:funcao_main;
 
 	declaracao =
-		  {var_int}    [nome]:id [dimens]:exp*
-		| {var_str}    [nome]:id [dimens]:exp*
+		  {var_int}    [nome]:id
+		| {var_str}    [nome]:id
+		| {matriz_int} [nome]:id [dimen]:num
+		| {matriz_str} [nome]:id [dimen]:num
 		| {proced}     [nome]:id [pars]:parametro* [bloco]:comando*
 		| {funcao_int} [nome]:id [pars]:parametro* [bloco]:comando*
 		| {funcao_str} [nome]:id [pars]:parametro* [bloco]:comando*;
@@ -172,19 +176,23 @@ Abstract Syntax Tree
 	funcao_main =  [nome]:id [bloco]:comando*;
 
 	parametro =
-		  {param_int} [dimens]:mult* [nome]:id
-		| {param_str} [dimens]:mult* [nome]:id;
+		  {param_var_int} [nome]:id
+		| {param_var_str} [nome]:id
+		| {param_matriz_int} [nome]:id
+		| {param_matriz_str} [nome]:id;
 
 	comando =
-		  {bloco}        comando*
-		| {decl_var_int} [nome]:id [dimens]:exp*
-		| {decl_var_str} [nome]:id [dimens]:exp*
-		| {atribuicao}   [nome]:id [indices]:exp* [valor]:exp
-		| {funcao}       [nome]:id [args]:exp*
-		| {retorno}      [valor]:exp
-		| {repeticao}    [teste]:exp [bloco]:comando
-		| {condicao}	 [teste]:exp [bloco_then]:comando
-		| {condicao_if_else}     [teste]:exp [bloco_then]:comando [bloco_else]:comando;
+		  {bloco}             comando*
+		| {decl_var_int}      [nome]:id
+		| {decl_var_str}      [nome]:id
+		| {decl_matriz_int}   [nome]:id [dimen]:num
+		| {decl_matriz_str}   [nome]:id [dimen]:num
+		| {atribuicao_var}    [nome]:id [valor]:exp
+		| {atribuicao_matriz} [nome]:id [indice]:exp [valor]:exp
+		| {funcao}            [nome]:id [args]:exp*
+		| {retorno}           [valor]:exp?
+		| {repeticao}         [teste]:exp [bloco]:comando
+		| {condicao}	      [teste]:exp [bloco_then]:comando [bloco_else]:comando?;
 
 	exp =
 		  {maior_que}   [esq]:exp [dir]:exp
@@ -197,7 +205,8 @@ Abstract Syntax Tree
 		| {sub}         [esq]:exp [dir]:exp
 		| {mult}        [esq]:exp [dir]:exp
 		| {div}         [esq]:exp [dir]:exp
-		| {var}			[nome]:id [indices]:exp*
+		| {var}  	    [nome]:id
+		| {matriz}  	[nome]:id [indice]:exp
 		| {num}         num
 		| {str}			str
 		| {funcao}      [nome]:id [args]:exp*;

@@ -5,34 +5,39 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADeclVarStrComando extends PComando
+public final class ADeclMatrizStrComando extends PComando
 {
     private TId _nome_;
+    private TNum _dimen_;
 
-    public ADeclVarStrComando()
+    public ADeclMatrizStrComando()
     {
         // Constructor
     }
 
-    public ADeclVarStrComando(
-        @SuppressWarnings("hiding") TId _nome_)
+    public ADeclMatrizStrComando(
+        @SuppressWarnings("hiding") TId _nome_,
+        @SuppressWarnings("hiding") TNum _dimen_)
     {
         // Constructor
         setNome(_nome_);
+
+        setDimen(_dimen_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ADeclVarStrComando(
-            cloneNode(this._nome_));
+        return new ADeclMatrizStrComando(
+            cloneNode(this._nome_),
+            cloneNode(this._dimen_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseADeclVarStrComando(this);
+        ((Analysis) sw).caseADeclMatrizStrComando(this);
     }
 
     public TId getNome()
@@ -60,11 +65,37 @@ public final class ADeclVarStrComando extends PComando
         this._nome_ = node;
     }
 
+    public TNum getDimen()
+    {
+        return this._dimen_;
+    }
+
+    public void setDimen(TNum node)
+    {
+        if(this._dimen_ != null)
+        {
+            this._dimen_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._dimen_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._nome_);
+            + toString(this._nome_)
+            + toString(this._dimen_);
     }
 
     @Override
@@ -74,6 +105,12 @@ public final class ADeclVarStrComando extends PComando
         if(this._nome_ == child)
         {
             this._nome_ = null;
+            return;
+        }
+
+        if(this._dimen_ == child)
+        {
+            this._dimen_ = null;
             return;
         }
 
@@ -87,6 +124,12 @@ public final class ADeclVarStrComando extends PComando
         if(this._nome_ == oldChild)
         {
             setNome((TId) newChild);
+            return;
+        }
+
+        if(this._dimen_ == oldChild)
+        {
+            setDimen((TNum) newChild);
             return;
         }
 

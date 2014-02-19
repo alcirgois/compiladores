@@ -43,7 +43,7 @@ public class CompiladorCMenosTesterSintatico {
 	
 	@Test
 //	@Ignore
-	public void testMain7() { // Código while extressado
+	public void testMain7() { // Código semanticamente errado
 		Main tester = new Main();
 		tester.main(new String[] {"codigos_teste/teste7.cm"});
 	}

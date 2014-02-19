@@ -2,14 +2,12 @@
 
 package compiladorCMenos.node;
 
-import java.util.*;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
 public final class AVarExp extends PExp
 {
     private TId _nome_;
-    private final LinkedList<PExp> _indices_ = new LinkedList<PExp>();
 
     public AVarExp()
     {
@@ -17,13 +15,10 @@ public final class AVarExp extends PExp
     }
 
     public AVarExp(
-        @SuppressWarnings("hiding") TId _nome_,
-        @SuppressWarnings("hiding") List<?> _indices_)
+        @SuppressWarnings("hiding") TId _nome_)
     {
         // Constructor
         setNome(_nome_);
-
-        setIndices(_indices_);
 
     }
 
@@ -31,8 +26,7 @@ public final class AVarExp extends PExp
     public Object clone()
     {
         return new AVarExp(
-            cloneNode(this._nome_),
-            cloneList(this._indices_));
+            cloneNode(this._nome_));
     }
 
     @Override
@@ -66,38 +60,11 @@ public final class AVarExp extends PExp
         this._nome_ = node;
     }
 
-    public LinkedList<PExp> getIndices()
-    {
-        return this._indices_;
-    }
-
-    public void setIndices(List<?> list)
-    {
-        for(PExp e : this._indices_)
-        {
-            e.parent(null);
-        }
-        this._indices_.clear();
-
-        for(Object obj_e : list)
-        {
-            PExp e = (PExp) obj_e;
-            if(e.parent() != null)
-            {
-                e.parent().removeChild(e);
-            }
-
-            e.parent(this);
-            this._indices_.add(e);
-        }
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._nome_)
-            + toString(this._indices_);
+            + toString(this._nome_);
     }
 
     @Override
@@ -107,11 +74,6 @@ public final class AVarExp extends PExp
         if(this._nome_ == child)
         {
             this._nome_ = null;
-            return;
-        }
-
-        if(this._indices_.remove(child))
-        {
             return;
         }
 
@@ -126,24 +88,6 @@ public final class AVarExp extends PExp
         {
             setNome((TId) newChild);
             return;
-        }
-
-        for(ListIterator<PExp> i = this._indices_.listIterator(); i.hasNext();)
-        {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PExp) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
         }
 
         throw new RuntimeException("Not a child.");

@@ -5,34 +5,39 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADeclVarStrComando extends PComando
+public final class AAtribuicaoVarComando extends PComando
 {
     private TId _nome_;
+    private PExp _valor_;
 
-    public ADeclVarStrComando()
+    public AAtribuicaoVarComando()
     {
         // Constructor
     }
 
-    public ADeclVarStrComando(
-        @SuppressWarnings("hiding") TId _nome_)
+    public AAtribuicaoVarComando(
+        @SuppressWarnings("hiding") TId _nome_,
+        @SuppressWarnings("hiding") PExp _valor_)
     {
         // Constructor
         setNome(_nome_);
+
+        setValor(_valor_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ADeclVarStrComando(
-            cloneNode(this._nome_));
+        return new AAtribuicaoVarComando(
+            cloneNode(this._nome_),
+            cloneNode(this._valor_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseADeclVarStrComando(this);
+        ((Analysis) sw).caseAAtribuicaoVarComando(this);
     }
 
     public TId getNome()
@@ -60,11 +65,37 @@ public final class ADeclVarStrComando extends PComando
         this._nome_ = node;
     }
 
+    public PExp getValor()
+    {
+        return this._valor_;
+    }
+
+    public void setValor(PExp node)
+    {
+        if(this._valor_ != null)
+        {
+            this._valor_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._valor_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._nome_);
+            + toString(this._nome_)
+            + toString(this._valor_);
     }
 
     @Override
@@ -74,6 +105,12 @@ public final class ADeclVarStrComando extends PComando
         if(this._nome_ == child)
         {
             this._nome_ = null;
+            return;
+        }
+
+        if(this._valor_ == child)
+        {
+            this._valor_ = null;
             return;
         }
 
@@ -87,6 +124,12 @@ public final class ADeclVarStrComando extends PComando
         if(this._nome_ == oldChild)
         {
             setNome((TId) newChild);
+            return;
+        }
+
+        if(this._valor_ == oldChild)
+        {
+            setValor((PExp) newChild);
             return;
         }
 

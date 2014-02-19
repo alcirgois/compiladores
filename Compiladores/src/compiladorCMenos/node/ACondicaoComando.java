@@ -9,6 +9,7 @@ public final class ACondicaoComando extends PComando
 {
     private PExp _teste_;
     private PComando _blocoThen_;
+    private PComando _blocoElse_;
 
     public ACondicaoComando()
     {
@@ -17,12 +18,15 @@ public final class ACondicaoComando extends PComando
 
     public ACondicaoComando(
         @SuppressWarnings("hiding") PExp _teste_,
-        @SuppressWarnings("hiding") PComando _blocoThen_)
+        @SuppressWarnings("hiding") PComando _blocoThen_,
+        @SuppressWarnings("hiding") PComando _blocoElse_)
     {
         // Constructor
         setTeste(_teste_);
 
         setBlocoThen(_blocoThen_);
+
+        setBlocoElse(_blocoElse_);
 
     }
 
@@ -31,7 +35,8 @@ public final class ACondicaoComando extends PComando
     {
         return new ACondicaoComando(
             cloneNode(this._teste_),
-            cloneNode(this._blocoThen_));
+            cloneNode(this._blocoThen_),
+            cloneNode(this._blocoElse_));
     }
 
     @Override
@@ -90,12 +95,38 @@ public final class ACondicaoComando extends PComando
         this._blocoThen_ = node;
     }
 
+    public PComando getBlocoElse()
+    {
+        return this._blocoElse_;
+    }
+
+    public void setBlocoElse(PComando node)
+    {
+        if(this._blocoElse_ != null)
+        {
+            this._blocoElse_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._blocoElse_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
             + toString(this._teste_)
-            + toString(this._blocoThen_);
+            + toString(this._blocoThen_)
+            + toString(this._blocoElse_);
     }
 
     @Override
@@ -111,6 +142,12 @@ public final class ACondicaoComando extends PComando
         if(this._blocoThen_ == child)
         {
             this._blocoThen_ = null;
+            return;
+        }
+
+        if(this._blocoElse_ == child)
+        {
+            this._blocoElse_ = null;
             return;
         }
 
@@ -130,6 +167,12 @@ public final class ACondicaoComando extends PComando
         if(this._blocoThen_ == oldChild)
         {
             setBlocoThen((PComando) newChild);
+            return;
+        }
+
+        if(this._blocoElse_ == oldChild)
+        {
+            setBlocoElse((PComando) newChild);
             return;
         }
 

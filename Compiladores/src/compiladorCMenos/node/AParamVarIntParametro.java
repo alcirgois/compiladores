@@ -5,16 +5,16 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADeclVarStrComando extends PComando
+public final class AParamVarIntParametro extends PParametro
 {
     private TId _nome_;
 
-    public ADeclVarStrComando()
+    public AParamVarIntParametro()
     {
         // Constructor
     }
 
-    public ADeclVarStrComando(
+    public AParamVarIntParametro(
         @SuppressWarnings("hiding") TId _nome_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class ADeclVarStrComando extends PComando
     @Override
     public Object clone()
     {
-        return new ADeclVarStrComando(
+        return new AParamVarIntParametro(
             cloneNode(this._nome_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseADeclVarStrComando(this);
+        ((Analysis) sw).caseAParamVarIntParametro(this);
     }
 
     public TId getNome()

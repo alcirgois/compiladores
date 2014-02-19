@@ -75,10 +75,10 @@ public class Main {
 			if (token.length() > 0){
 				if(token.startsWith("id"))
 					texto = texto + "\"" + "variável" + "\" ou ";
-				
 				else if(token.startsWith("EOF"))
-					texto = texto + "\"" + "Fim de Arquivo" + "\" ou ";
-					
+					texto = texto + "\"" + "fim de arquivo" + "\" ou ";
+				else if(token.startsWith("num"))
+					texto = texto + "\"" + "número" + "\" ou ";
 				else
 					texto = texto + "\"" + token + "\" ou ";
 			}

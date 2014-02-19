@@ -93,6 +93,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAMatrizIntDeclaracao(AMatrizIntDeclaracao node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMatrizStrDeclaracao(AMatrizStrDeclaracao node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAProcedDeclaracao(AProcedDeclaracao node)
     {
         defaultCase(node);
@@ -117,13 +129,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAParamIntParametro(AParamIntParametro node)
+    public void caseAParamVarIntParametro(AParamVarIntParametro node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAParamStrParametro(AParamStrParametro node)
+    public void caseAParamVarStrParametro(AParamVarStrParametro node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParamMatrizIntParametro(AParamMatrizIntParametro node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAParamMatrizStrParametro(AParamMatrizStrParametro node)
     {
         defaultCase(node);
     }
@@ -147,7 +171,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAtribuicaoComando(AAtribuicaoComando node)
+    public void caseADeclMatrizIntComando(ADeclMatrizIntComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADeclMatrizStrComando(ADeclMatrizStrComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
     {
         defaultCase(node);
     }
@@ -172,12 +214,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseACondicaoComando(ACondicaoComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseACondicaoIfElseComando(ACondicaoIfElseComando node)
     {
         defaultCase(node);
     }
@@ -244,6 +280,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAVarExp(AVarExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMatrizExp(AMatrizExp node)
     {
         defaultCase(node);
     }

@@ -2,30 +2,29 @@
 
 package compiladorCMenos.node;
 
-import java.util.*;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAtribuicaoComando extends PComando
+public final class AAtribuicaoMatrizComando extends PComando
 {
     private TId _nome_;
-    private final LinkedList<PExp> _indices_ = new LinkedList<PExp>();
+    private PExp _indice_;
     private PExp _valor_;
 
-    public AAtribuicaoComando()
+    public AAtribuicaoMatrizComando()
     {
         // Constructor
     }
 
-    public AAtribuicaoComando(
+    public AAtribuicaoMatrizComando(
         @SuppressWarnings("hiding") TId _nome_,
-        @SuppressWarnings("hiding") List<?> _indices_,
+        @SuppressWarnings("hiding") PExp _indice_,
         @SuppressWarnings("hiding") PExp _valor_)
     {
         // Constructor
         setNome(_nome_);
 
-        setIndices(_indices_);
+        setIndice(_indice_);
 
         setValor(_valor_);
 
@@ -34,16 +33,16 @@ public final class AAtribuicaoComando extends PComando
     @Override
     public Object clone()
     {
-        return new AAtribuicaoComando(
+        return new AAtribuicaoMatrizComando(
             cloneNode(this._nome_),
-            cloneList(this._indices_),
+            cloneNode(this._indice_),
             cloneNode(this._valor_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAtribuicaoComando(this);
+        ((Analysis) sw).caseAAtribuicaoMatrizComando(this);
     }
 
     public TId getNome()
@@ -71,30 +70,29 @@ public final class AAtribuicaoComando extends PComando
         this._nome_ = node;
     }
 
-    public LinkedList<PExp> getIndices()
+    public PExp getIndice()
     {
-        return this._indices_;
+        return this._indice_;
     }
 
-    public void setIndices(List<?> list)
+    public void setIndice(PExp node)
     {
-        for(PExp e : this._indices_)
+        if(this._indice_ != null)
         {
-            e.parent(null);
+            this._indice_.parent(null);
         }
-        this._indices_.clear();
 
-        for(Object obj_e : list)
+        if(node != null)
         {
-            PExp e = (PExp) obj_e;
-            if(e.parent() != null)
+            if(node.parent() != null)
             {
-                e.parent().removeChild(e);
+                node.parent().removeChild(node);
             }
 
-            e.parent(this);
-            this._indices_.add(e);
+            node.parent(this);
         }
+
+        this._indice_ = node;
     }
 
     public PExp getValor()
@@ -127,7 +125,7 @@ public final class AAtribuicaoComando extends PComando
     {
         return ""
             + toString(this._nome_)
-            + toString(this._indices_)
+            + toString(this._indice_)
             + toString(this._valor_);
     }
 
@@ -141,8 +139,9 @@ public final class AAtribuicaoComando extends PComando
             return;
         }
 
-        if(this._indices_.remove(child))
+        if(this._indice_ == child)
         {
+            this._indice_ = null;
             return;
         }
 
@@ -165,22 +164,10 @@ public final class AAtribuicaoComando extends PComando
             return;
         }
 
-        for(ListIterator<PExp> i = this._indices_.listIterator(); i.hasNext();)
+        if(this._indice_ == oldChild)
         {
-            if(i.next() == oldChild)
-            {
-                if(newChild != null)
-                {
-                    i.set((PExp) newChild);
-                    newChild.parent(this);
-                    oldChild.parent(null);
-                    return;
-                }
-
-                i.remove();
-                oldChild.parent(null);
-                return;
-            }
+            setIndice((PExp) newChild);
+            return;
         }
 
         if(this._valor_ == oldChild)
