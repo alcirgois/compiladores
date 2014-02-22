@@ -33,6 +33,13 @@ public class CompiladorCMenosTesterSintatico {
 		Main tester = new Main();
 		tester.main(new String[] {"codigos_teste/teste4.cm"});
 	}
+	
+	@Test
+//	@Ignore
+	public void testMain5() { // Programa teste livro de Louden (p. 498)
+		Main tester = new Main();
+		tester.main(new String[] {"codigos_teste/teste5.cm"});
+	}
 
 	@Test
 //	@Ignore

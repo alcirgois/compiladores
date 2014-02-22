@@ -30,12 +30,12 @@ public interface Analysis extends Switch
     void caseADeclVarStrComando(ADeclVarStrComando node);
     void caseADeclMatrizIntComando(ADeclMatrizIntComando node);
     void caseADeclMatrizStrComando(ADeclMatrizStrComando node);
-    void caseAAtribuicaoVarComando(AAtribuicaoVarComando node);
-    void caseAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node);
-    void caseAFuncaoComando(AFuncaoComando node);
+    void caseAAtribuicaoComando(AAtribuicaoComando node);
     void caseARetornoComando(ARetornoComando node);
     void caseARepeticaoComando(ARepeticaoComando node);
     void caseACondicaoComando(ACondicaoComando node);
+    void caseAAtribuicaoVarExp(AAtribuicaoVarExp node);
+    void caseAAtribuicaoMatrizExp(AAtribuicaoMatrizExp node);
     void caseAMaiorQueExp(AMaiorQueExp node);
     void caseAMaiorIgualExp(AMaiorIgualExp node);
     void caseAMenorQueExp(AMenorQueExp node);

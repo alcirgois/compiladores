@@ -102,36 +102,35 @@ Productions
 		| {condicao_else_if_nao_curto} comando_condicao_else_if_nao_curto {-> comando_condicao_else_if_nao_curto.comando};
 
 	sem_sub_comando {-> comando} =
-	      {bloco}      bloco {-> New comando.bloco ([bloco.comando])}
+	      {bloco}                 bloco {-> New comando.bloco ([bloco.comando])}
+	    | {nulo}                  p_virg {-> New comando.atribuicao(Null)}
 	    | {declaracao_matriz_int} [decl]:p_chave_int [nome]:id a_col [dimen]:num f_col p_virg {-> New comando.decl_matriz_int(nome, dimen)}
 	    | {declaracao_matriz_str} [decl]:p_chave_string [nome]:id a_col [dimen]:num f_col p_virg {-> New comando.decl_matriz_str(nome, dimen)}
-	    | {declaracao_var_int} [decl]:p_chave_int [nome]:id p_virg {-> New comando.decl_var_int(nome)}
-	    | {declaracao_var_str} [decl]:p_chave_string [nome]:id p_virg {-> New comando.decl_var_str(nome)}
-	    | {atribuicao} [atrib]:comando_atribuicao p_virg {-> atrib.comando}
-	    | {funcao}     [func]:comando_funcao p_virg {-> func.comando}
-	    | {retorno}    [retrn]:comando_retorno p_virg {-> retrn.comando};
+	    | {declaracao_var_int}    [decl]:p_chave_int [nome]:id p_virg {-> New comando.decl_var_int(nome)}
+	    | {declaracao_var_str}    [decl]:p_chave_string [nome]:id p_virg {-> New comando.decl_var_str(nome)}
+	    | {atribuicao}            [atrib]:exp_atribuicao p_virg {-> New comando.atribuicao(atrib.exp)}
+	    | {retorno}               [retrn]:comando_retorno p_virg {-> retrn.comando};
 
-	comando_atribuicao {-> comando} =
-		  {variavel} [nome]:id atrib [valor]:exp_geral {-> New comando.atribuicao_var(nome, valor.exp)}
-		| {matriz}   [nome]:id a_col [indice]:exp_geral f_col atrib [valor]:exp_geral {-> New comando.atribuicao_matriz(nome, indice.exp, valor.exp)};
+	exp_atribuicao {-> exp} =
+		  {variavel}    [nome]:id atrib [valor]:exp_atribuicao {-> New exp.atribuicao_var(nome, valor.exp)}
+		| {matriz}      [nome]:id a_col [indice]:exp_atribuicao f_col atrib [valor]:exp_atribuicao {-> New exp.atribuicao_matriz(nome, indice.exp, valor.exp)}
+		| {exp_simples} exp_geral {-> exp_geral.exp};
 
-	comando_repeticao {-> comando} = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando {-> New comando.repeticao(condicao.exp, comandos.comando)};
+	comando_repeticao {-> comando} = p_chave_while a_par [condicao]:exp_atribuicao f_par [comandos]:comando {-> New comando.repeticao(condicao.exp, comandos.comando)};
 
-	comando_condicao {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando, Null)};
+	comando_condicao {-> comando} = p_chave_if a_par [condicao]:exp_atribuicao f_par [then_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando, Null)};
 
-	comando_condicao_else {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando, else_comandos.comando)};
+	comando_condicao_else {-> comando} = p_chave_if a_par [condicao]:exp_atribuicao f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando {-> New comando.condicao(condicao.exp, then_comandos.comando, else_comandos.comando)};
 
-	comando_repeticao_if_nao_curto {-> comando} = p_chave_while a_par [condicao]:exp_geral f_par [comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, comandos.comando, Null)};
+	comando_repeticao_if_nao_curto {-> comando} = p_chave_while a_par [condicao]:exp_atribuicao f_par [comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, comandos.comando, Null)};
 
-	comando_condicao_else_if_nao_curto {-> comando} = p_chave_if a_par [condicao]:exp_geral f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, then_comandos.comando, else_comandos.comando)};
- 
-	comando_funcao {-> comando} = [nome]:id a_par [args]:seq_parametro? f_par {-> New comando.funcao(nome, [args.exp])};
+	comando_condicao_else_if_nao_curto {-> comando} = p_chave_if a_par [condicao]:exp_atribuicao f_par [then_comandos]:comando_if_nao_curto p_chave_else [else_comandos]:comando_if_nao_curto {-> New comando.condicao(condicao.exp, then_comandos.comando, else_comandos.comando)};
 
 	seq_parametro {-> exp*} =
-		  {lista} [args]:seq_parametro virg [arg]:exp_geral {-> [args.exp, arg.exp]}
-		| {unico} [arg]:exp_geral {-> [arg.exp]};
+		  {lista} [args]:seq_parametro virg [arg]:exp_atribuicao {-> [args.exp, arg.exp]}
+		| {unico} [arg]:exp_atribuicao {-> [arg.exp]};
 
-	comando_retorno {-> comando} = p_chave_return [valor]:exp_geral? {-> New comando.retorno(valor.exp)};
+	comando_retorno {-> comando} = p_chave_return [valor]:exp_atribuicao? {-> New comando.retorno(valor.exp)};
 
 	exp_geral {-> exp} =
 	    {maior_que}      [esq]:exp maior [dir]:exp {-> New exp.maior_que(esq.exp, dir.exp)}
@@ -154,11 +153,11 @@ Productions
 
 	 fator {-> exp} =
 	    {id}     id {-> New exp.var(id)}
-	  | {matriz} [nome]:id a_col [indice]:exp_geral f_col {-> New exp.matriz(nome, indice.exp)}
+	  | {matriz} [nome]:id a_col [indice]:exp_atribuicao f_col {-> New exp.matriz(nome, indice.exp)}
 	  | {num}    num {-> New exp.num(num)}
 	  | {str}    str {-> New exp.str(str)}
 	  | {funcao} [nome]:id a_par [args]:seq_parametro? f_par {-> New exp.funcao(nome, [args.exp])}
-	  | {par}    a_par [exp]:exp_geral f_par {-> exp.exp};
+	  | {par}    a_par [exp]:exp_atribuicao f_par {-> exp.exp};
 
 Abstract Syntax Tree
 
@@ -187,15 +186,15 @@ Abstract Syntax Tree
 		| {decl_var_str}      [nome]:id
 		| {decl_matriz_int}   [nome]:id [dimen]:num
 		| {decl_matriz_str}   [nome]:id [dimen]:num
-		| {atribuicao_var}    [nome]:id [valor]:exp
-		| {atribuicao_matriz} [nome]:id [indice]:exp [valor]:exp
-		| {funcao}            [nome]:id [args]:exp*
+		| {atribuicao}        [valor]:exp?
 		| {retorno}           [valor]:exp?
 		| {repeticao}         [teste]:exp [bloco]:comando
 		| {condicao}	      [teste]:exp [bloco_then]:comando [bloco_else]:comando?;
 
 	exp =
-		  {maior_que}   [esq]:exp [dir]:exp
+		  {atribuicao_var}    [nome]:id [valor]:exp
+		| {atribuicao_matriz} [nome]:id [indice]:exp [valor]:exp
+		| {maior_que}   [esq]:exp [dir]:exp
 		| {maior_igual} [esq]:exp [dir]:exp
 		| {menor_que}   [esq]:exp [dir]:exp
 		| {menor_igual} [esq]:exp [dir]:exp

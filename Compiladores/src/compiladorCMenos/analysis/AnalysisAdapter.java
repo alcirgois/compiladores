@@ -183,19 +183,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAtribuicaoVarComando(AAtribuicaoVarComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAFuncaoComando(AFuncaoComando node)
+    public void caseAAtribuicaoComando(AAtribuicaoComando node)
     {
         defaultCase(node);
     }
@@ -214,6 +202,18 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseACondicaoComando(ACondicaoComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoVarExp(AAtribuicaoVarExp node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoMatrizExp(AAtribuicaoMatrizExp node)
     {
         defaultCase(node);
     }

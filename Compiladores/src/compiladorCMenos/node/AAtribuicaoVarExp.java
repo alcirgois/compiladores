@@ -5,17 +5,17 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAtribuicaoVarComando extends PComando
+public final class AAtribuicaoVarExp extends PExp
 {
     private TId _nome_;
     private PExp _valor_;
 
-    public AAtribuicaoVarComando()
+    public AAtribuicaoVarExp()
     {
         // Constructor
     }
 
-    public AAtribuicaoVarComando(
+    public AAtribuicaoVarExp(
         @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") PExp _valor_)
     {
@@ -29,7 +29,7 @@ public final class AAtribuicaoVarComando extends PComando
     @Override
     public Object clone()
     {
-        return new AAtribuicaoVarComando(
+        return new AAtribuicaoVarExp(
             cloneNode(this._nome_),
             cloneNode(this._valor_));
     }
@@ -37,7 +37,7 @@ public final class AAtribuicaoVarComando extends PComando
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAtribuicaoVarComando(this);
+        ((Analysis) sw).caseAAtribuicaoVarExp(this);
     }
 
     public TId getNome()

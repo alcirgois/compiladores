@@ -33,5 +33,26 @@ public class CompiladorCMenosTesterLexico {
 		Main tester = new Main();
 		tester.testeLexico(new String[] {"codigos_teste/teste4.cm"});
 	}
+	
+	@Test
+//	@Ignore
+	public void testMain5() { // Programa teste livro de Louden (p. 498)
+		Main tester = new Main();
+		tester.testeLexico(new String[] {"codigos_teste/teste5.cm"});
+	}
+	
+	@Test
+//	@Ignore
+	public void testMain6() { // Código while extressado
+		Main tester = new Main();
+		tester.testeLexico(new String[] {"codigos_teste/teste6.cm"});
+	}
+	
+	@Test
+//	@Ignore
+	public void testMain7() { // Código semanticamente errado
+		Main tester = new Main();
+		tester.testeLexico(new String[] {"codigos_teste/teste7.cm"});
+	}
 
 }

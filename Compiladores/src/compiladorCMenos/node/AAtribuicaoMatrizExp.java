@@ -5,18 +5,18 @@ package compiladorCMenos.node;
 import compiladorCMenos.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAtribuicaoMatrizComando extends PComando
+public final class AAtribuicaoMatrizExp extends PExp
 {
     private TId _nome_;
     private PExp _indice_;
     private PExp _valor_;
 
-    public AAtribuicaoMatrizComando()
+    public AAtribuicaoMatrizExp()
     {
         // Constructor
     }
 
-    public AAtribuicaoMatrizComando(
+    public AAtribuicaoMatrizExp(
         @SuppressWarnings("hiding") TId _nome_,
         @SuppressWarnings("hiding") PExp _indice_,
         @SuppressWarnings("hiding") PExp _valor_)
@@ -33,7 +33,7 @@ public final class AAtribuicaoMatrizComando extends PComando
     @Override
     public Object clone()
     {
-        return new AAtribuicaoMatrizComando(
+        return new AAtribuicaoMatrizExp(
             cloneNode(this._nome_),
             cloneNode(this._indice_),
             cloneNode(this._valor_));
@@ -42,7 +42,7 @@ public final class AAtribuicaoMatrizComando extends PComando
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAtribuicaoMatrizComando(this);
+        ((Analysis) sw).caseAAtribuicaoMatrizExp(this);
     }
 
     public TId getNome()

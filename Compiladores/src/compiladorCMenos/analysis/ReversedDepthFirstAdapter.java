@@ -498,87 +498,25 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outADeclMatrizStrComando(node);
     }
 
-    public void inAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    public void inAAtribuicaoComando(AAtribuicaoComando node)
     {
         defaultIn(node);
     }
 
-    public void outAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    public void outAAtribuicaoComando(AAtribuicaoComando node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAtribuicaoVarComando(AAtribuicaoVarComando node)
+    public void caseAAtribuicaoComando(AAtribuicaoComando node)
     {
-        inAAtribuicaoVarComando(node);
+        inAAtribuicaoComando(node);
         if(node.getValor() != null)
         {
             node.getValor().apply(this);
         }
-        if(node.getNome() != null)
-        {
-            node.getNome().apply(this);
-        }
-        outAAtribuicaoVarComando(node);
-    }
-
-    public void inAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAAtribuicaoMatrizComando(AAtribuicaoMatrizComando node)
-    {
-        inAAtribuicaoMatrizComando(node);
-        if(node.getValor() != null)
-        {
-            node.getValor().apply(this);
-        }
-        if(node.getIndice() != null)
-        {
-            node.getIndice().apply(this);
-        }
-        if(node.getNome() != null)
-        {
-            node.getNome().apply(this);
-        }
-        outAAtribuicaoMatrizComando(node);
-    }
-
-    public void inAFuncaoComando(AFuncaoComando node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAFuncaoComando(AFuncaoComando node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAFuncaoComando(AFuncaoComando node)
-    {
-        inAFuncaoComando(node);
-        {
-            List<PExp> copy = new ArrayList<PExp>(node.getArgs());
-            Collections.reverse(copy);
-            for(PExp e : copy)
-            {
-                e.apply(this);
-            }
-        }
-        if(node.getNome() != null)
-        {
-            node.getNome().apply(this);
-        }
-        outAFuncaoComando(node);
+        outAAtribuicaoComando(node);
     }
 
     public void inARetornoComando(ARetornoComando node)
@@ -654,6 +592,60 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getTeste().apply(this);
         }
         outACondicaoComando(node);
+    }
+
+    public void inAAtribuicaoVarExp(AAtribuicaoVarExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtribuicaoVarExp(AAtribuicaoVarExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoVarExp(AAtribuicaoVarExp node)
+    {
+        inAAtribuicaoVarExp(node);
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAAtribuicaoVarExp(node);
+    }
+
+    public void inAAtribuicaoMatrizExp(AAtribuicaoMatrizExp node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtribuicaoMatrizExp(AAtribuicaoMatrizExp node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtribuicaoMatrizExp(AAtribuicaoMatrizExp node)
+    {
+        inAAtribuicaoMatrizExp(node);
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        if(node.getIndice() != null)
+        {
+            node.getIndice().apply(this);
+        }
+        if(node.getNome() != null)
+        {
+            node.getNome().apply(this);
+        }
+        outAAtribuicaoMatrizExp(node);
     }
 
     public void inAMaiorQueExp(AMaiorQueExp node)
